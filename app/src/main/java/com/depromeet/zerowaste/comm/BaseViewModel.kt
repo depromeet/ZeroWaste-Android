@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-open class BaseViewModel: ViewModel() {
+abstract class BaseViewModel: ViewModel() {
 
     private val _error = MutableLiveData<Exception>()
     val error: LiveData<Exception> get() = _error

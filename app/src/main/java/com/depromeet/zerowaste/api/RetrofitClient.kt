@@ -1,14 +1,14 @@
 package com.depromeet.zerowaste.api
 
 import com.depromeet.zerowaste.BuildConfig
+import com.depromeet.zerowaste.comm.data.Constants
+import com.depromeet.zerowaste.comm.data.Share
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private const val API_SERVER = "서버 주소"
-
     private val okHttpBuilder = OkHttpClient.Builder()
         .addInterceptor({
             val loggingInterceptor = HttpLoggingInterceptor()
@@ -20,7 +20,7 @@ object RetrofitClient {
         }.invoke())
 
     private fun createOkHttpClient(): OkHttpClient {
-        val token = "토큰"
+        val token = Share.token
         if (token.isNotEmpty()) {
             okHttpBuilder.addInterceptor { chain ->
                 return@addInterceptor chain.proceed(chain.request().newBuilder().let {
@@ -41,7 +41,7 @@ object RetrofitClient {
     }
 
     private fun defaultRetrofit(): Retrofit {
-        return getRetrofit(API_SERVER)
+        return getRetrofit(Constants.API_SERVER)
     }
 
     fun <T> create(service: Class<T>): T {
