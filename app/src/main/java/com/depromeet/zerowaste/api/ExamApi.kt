@@ -1,6 +1,5 @@
-package com.depromeet.zerowaste.api.exam
+package com.depromeet.zerowaste.api
 
-import com.depromeet.zerowaste.api.RetrofitClient
 import com.depromeet.zerowaste.data.exam.Data1
 import com.depromeet.zerowaste.data.exam.Data4
 import retrofit2.http.Body

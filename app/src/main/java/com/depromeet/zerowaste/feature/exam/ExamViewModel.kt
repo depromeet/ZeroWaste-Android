@@ -2,7 +2,7 @@ package com.depromeet.zerowaste.feature.exam
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.depromeet.zerowaste.api.exam.ExamApi
+import com.depromeet.zerowaste.api.ExamApi
 import com.depromeet.zerowaste.data.exam.Data4
 import com.depromeet.zerowaste.comm.BaseViewModel
 import com.depromeet.zerowaste.data.exam.Data1
