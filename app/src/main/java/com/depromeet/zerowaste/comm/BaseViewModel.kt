@@ -14,7 +14,7 @@ abstract class BaseViewModel: ViewModel() {
     private val _error = MutableLiveData<Exception>()
     val error: LiveData<Exception> get() = _error
 
-    protected fun <T> execute(job: suspend CoroutineScope.() -> T, dispatcher: CoroutineDispatcher = Dispatchers.IO, res: ((T) -> Unit))  {
+    protected fun <T> execute(job: suspend CoroutineScope.() -> T, dispatcher: CoroutineDispatcher = Dispatchers.IO, res: (T) -> Unit)  {
         viewModelScope.launch(dispatcher) {
             try {
                 val result = job()
