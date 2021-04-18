@@ -7,6 +7,9 @@ plugins {
     id 'com.google.firebase.crashlytics'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -19,6 +22,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "KAKAO_API_KEY", properties['kakao_api_key']
     }
 
     signingConfigs {
