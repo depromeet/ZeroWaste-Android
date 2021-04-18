@@ -92,6 +92,9 @@ dependencies {
     // Firebase
     implementation 'com.google.firebase:firebase-analytics-ktx:18.0.2'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:17.4.1'
+    // kakao login
+    implementation "com.kakao.sdk:v2-user:2.4.2"
+    implementation "com.kakao.sdk:v2-user-rx:2.4.2"
 
 
     testImplementation 'junit:junit:4.13.2'

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "778615077560",
+    "project_id": "zerowaste-cbf14",
+    "storage_bucket": "zerowaste-cbf14.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778615077560:android:49b2232c6be0ecd918924d",
+        "android_client_info": {
+          "package_name": "com.depromeet.zerowaste"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "778615077560-2fsflr1t7oieno8kp85304m9i0sos72c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFpgNfynDtHtPJx7dJmJLaq9qLFfIYrKM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "778615077560-2fsflr1t7oieno8kp85304m9i0sos72c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
