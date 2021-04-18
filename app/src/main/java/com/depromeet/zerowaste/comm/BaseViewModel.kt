@@ -8,14 +8,15 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 abstract class BaseViewModel: ViewModel() {
 
     private val _error = MutableLiveData<Exception>()
     val error: LiveData<Exception> get() = _error
 
-    protected fun <T> execute(job: suspend CoroutineScope.() -> T, dispatcher: CoroutineDispatcher = Dispatchers.IO, res: (T) -> Unit)  {
-        viewModelScope.launch(dispatcher) {
+    protected fun <T> execute(job: suspend CoroutineScope.() -> T, context: CoroutineContext = Dispatchers.IO, res: (T) -> Unit)  {
+        viewModelScope.launch(context) {
             try {
                 val result = job()
                 launch(Dispatchers.Main) {
@@ -28,8 +29,8 @@ abstract class BaseViewModel: ViewModel() {
         }
     }
 
-    protected fun <T> execute(job: suspend CoroutineScope.() -> T, resData: MutableLiveData<T>, dispatcher: CoroutineDispatcher = Dispatchers.IO)  {
-        viewModelScope.launch(dispatcher) {
+    protected fun <T> execute(job: suspend CoroutineScope.() -> T, resData: MutableLiveData<T>, context: CoroutineContext = Dispatchers.IO)  {
+        viewModelScope.launch(context) {
             try {
                 val result = job()
                 resData.postValue(result)
