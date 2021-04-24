@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ZeroWaste</string>
+    <string name="bottom_nav1_text">HOME</string>
+    <string name="bottom_nav2_text">MISSION</string>
+    <string name="bottom_nav3_text">COMMUNITY</string>
+    <string name="bottom_nav4_text">PROFILE</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

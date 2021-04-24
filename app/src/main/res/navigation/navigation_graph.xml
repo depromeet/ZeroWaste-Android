@@ -1,17 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph.xml"
-    app:startDestination="@id/nav_splash_fragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
-        android:id="@+id/nav_splash_fragment"
+        android:id="@+id/splashFragment"
         android:name="com.depromeet.zerowaste.feature.main.SplashFragment"
-        android:label="Splash"
+        android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
 
+        <action
+            android:id="@+id/action_splashFragment_to_mainHomeFragment"
+            app:destination="@id/mainHomeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/mainHomeFragment"
+        android:name="com.depromeet.zerowaste.feature.main_home.MainHomeFragment"
+        android:label="fragment_main_home"
+        tools:layout="@layout/fragment_main_home" />
+    <fragment
+        android:id="@+id/mainCommunityFragment"
+        android:name="com.depromeet.zerowaste.feature.main_community.MainCommunityFragment"
+        android:label="fragment_main_community"
+        tools:layout="@layout/fragment_main_community" />
+    <fragment
+        android:id="@+id/mainMissionFragment"
+        android:name="com.depromeet.zerowaste.feature.main_mission.MainMissionFragment"
+        android:label="fragment_main_mission"
+        tools:layout="@layout/fragment_main_mission" />
+    <fragment
+        android:id="@+id/mainProfileFragment"
+        android:name="com.depromeet.zerowaste.feature.main_profile.MainProfileFragment"
+        android:label="fragment_main_profile"
+        tools:layout="@layout/fragment_main_profile" />
 
 </navigation>
