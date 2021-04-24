@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bottom_nav1_text">HOME</string>
+    <string name="bottom_nav2_text">MISSION</string>
+    <string name="bottom_nav4_text">PROFILE</string>
+</resources>
