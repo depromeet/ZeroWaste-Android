@@ -3,11 +3,13 @@ package com.depromeet.zerowaste.feature.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.depromeet.zerowaste.comm.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class MainViewModel: BaseViewModel() {
+@HiltViewModel
+class MainViewModel : BaseViewModel() {
 
     private val _test = MutableLiveData<String>()
-    val test : LiveData<String> get() = _test
+    val test: LiveData<String> get() = _test
 
     fun setTestValue(text: String) {
         _test.value = text

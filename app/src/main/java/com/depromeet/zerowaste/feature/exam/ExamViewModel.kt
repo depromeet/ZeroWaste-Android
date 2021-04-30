@@ -6,7 +6,9 @@ import com.depromeet.zerowaste.api.ExamApi
 import com.depromeet.zerowaste.data.exam.Data4
 import com.depromeet.zerowaste.comm.BaseViewModel
 import com.depromeet.zerowaste.data.exam.Data1
+import dagger.hilt.android.lifecycle.HiltViewModel
 
+@HiltViewModel
 class ExamViewModel: BaseViewModel() {
 
     private val _examData = MutableLiveData<Data4>()
