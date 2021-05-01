@@ -1,18 +1,20 @@
 package com.depromeet.zerowaste.comm
 
+import android.provider.ContactsContract
 import android.view.ViewGroup
 import androidx.annotation.IntRange
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 
-open class BaseRecycleAdapter<T, V: ViewBinding>(private val viewBinding: V, private val onDataBind: (T?, V) -> Unit): RecyclerView.Adapter<BaseViewHolder<T, V>>() {
+open class BaseRecycleAdapter<T, V : ViewDataBinding>(@LayoutRes private val layoutId: Int, private val onDataBind: (T, V, Int) -> Unit): RecyclerView.Adapter<BaseViewHolder<T, V>>() {
 
     private val items = mutableListOf<T>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
-    = BaseViewHolder<T, V>(viewBinding, onDataBind)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BaseViewHolder(DataBindingUtil.inflate(parent.inflater(), layoutId, parent, false), onDataBind)
 
-    override fun onBindViewHolder(holder: BaseViewHolder<T, V>, position: Int) = holder.bindData(items[position])
+    override fun onBindViewHolder(holder: BaseViewHolder<T, V>, position: Int) = holder.bindData(items[position], position)
 
     override fun getItemCount() = items.size
 
@@ -62,7 +64,6 @@ open class BaseRecycleAdapter<T, V: ViewBinding>(private val viewBinding: V, pri
     open fun getItemPosition(item: T?): Int {
         return if (item != null && items.isNotEmpty()) items.indexOf(item) else -1
     }
-
 
     private fun compatibilityDataSizeChanged(size: Int) {
         if (this.items.size == size) {

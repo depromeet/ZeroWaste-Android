@@ -4,13 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.viewbinding.ViewBinding
 
-fun genLayoutManager(context: Context, isVertical: Boolean = true, isReverse: Boolean = false, spanCount: Int = 1, isStaggered: Boolean = false): RecyclerView.LayoutManager {
+fun genLayoutManager(context: Context, isVertical: Boolean = true, isReverse: Boolean = false, @IntRange(from = 1) spanCount: Int = 1, isStaggered: Boolean = false): RecyclerView.LayoutManager {
     val orientation: Int = if(isVertical) RecyclerView.VERTICAL else RecyclerView.HORIZONTAL
     return if(spanCount <= 1) {
         LinearLayoutManager(context, orientation, isReverse)
