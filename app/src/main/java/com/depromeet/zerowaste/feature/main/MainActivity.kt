@@ -10,8 +10,9 @@ import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseActivity
 import com.depromeet.zerowaste.databinding.ActivityMainBinding
 import com.google.firebase.analytics.FirebaseAnalytics
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val viewModel: MainViewModel by viewModels()
