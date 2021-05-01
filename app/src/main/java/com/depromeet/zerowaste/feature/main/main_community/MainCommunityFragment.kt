@@ -1,4 +1,4 @@
-package com.depromeet.zerowaste.feature.main_community
+package com.depromeet.zerowaste.feature.main.main_community
 
 import androidx.fragment.app.viewModels
 import com.depromeet.zerowaste.R

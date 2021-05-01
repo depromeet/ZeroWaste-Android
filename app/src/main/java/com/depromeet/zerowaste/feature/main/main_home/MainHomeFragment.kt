@@ -1,10 +1,9 @@
-package com.depromeet.zerowaste.feature.main_home
+package com.depromeet.zerowaste.feature.main.main_home
 
 import androidx.fragment.app.viewModels
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.databinding.FragmentMainHomeBinding
-import com.depromeet.zerowaste.feature.main_community.MainCommunityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -5,7 +5,7 @@
 
         <variable
             name="vm"
-            type="com.depromeet.zerowaste.feature.main_home.MainHomeViewModel" />
+            type="com.depromeet.zerowaste.feature.main.main_home.MainHomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

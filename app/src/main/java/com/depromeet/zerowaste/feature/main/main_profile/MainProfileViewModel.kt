@@ -1,8 +1,8 @@
-package com.depromeet.zerowaste.feature.main_mission
+package com.depromeet.zerowaste.feature.main.main_profile
 
 import com.depromeet.zerowaste.comm.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainMissionViewModel @Inject constructor() : BaseViewModel()
+class MainProfileViewModel @Inject constructor() : BaseViewModel()

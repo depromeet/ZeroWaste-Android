@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
-            type="com.depromeet.zerowaste.feature.main_community.MainCommunityViewModel" />
+            type="com.depromeet.zerowaste.feature.main.main_community.MainCommunityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

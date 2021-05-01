@@ -5,7 +5,7 @@
 
         <variable
             name="vm"
-            type="com.depromeet.zerowaste.feature.main_mission.MainMissionViewModel" />
+            type="com.depromeet.zerowaste.feature.main.main_mission.MainMissionViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
