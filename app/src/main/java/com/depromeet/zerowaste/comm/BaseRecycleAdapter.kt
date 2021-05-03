@@ -1,6 +1,5 @@
 package com.depromeet.zerowaste.comm
 
-import android.provider.ContactsContract
 import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
@@ -11,12 +10,40 @@ import androidx.recyclerview.widget.RecyclerView
 open class BaseRecycleAdapter<T, V : ViewDataBinding>(@LayoutRes private val layoutId: Int, private val onDataBind: (T, V, Int) -> Unit): RecyclerView.Adapter<BaseViewHolder<T, V>>() {
 
     private val items = mutableListOf<T>()
+    var attachedRecyclerView: RecyclerView? = null
+
+    private var needLoadMore: (() -> Unit)? = null
+    private val scrollListener: RecyclerView.OnScrollListener = object: RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            if((attachedRecyclerView?.layoutManager?.layoutDirection == RecyclerView.VERTICAL && attachedRecyclerView?.canScrollVertically(1) == false) ||
+                (attachedRecyclerView?.layoutManager?.layoutDirection == RecyclerView.HORIZONTAL && attachedRecyclerView?.canScrollHorizontally(1) == false)) {
+                needLoadMore?.also { it() }
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BaseViewHolder(DataBindingUtil.inflate(parent.inflater(), layoutId, parent, false), onDataBind)
 
     override fun onBindViewHolder(holder: BaseViewHolder<T, V>, position: Int) = holder.bindData(items[position], position)
 
     override fun getItemCount() = items.size
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        attachedRecyclerView = recyclerView
+        recyclerView.addOnScrollListener(scrollListener)
+    }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        attachedRecyclerView = null
+    }
+
+    open fun onNeedLoadMore(event: () -> Unit) {
+        if(attachedRecyclerView?.isAttachedToWindow == false) return
+        needLoadMore = event
+    }
 
     open fun setData(data: Collection<T>) {
         if (data !== this.items) {
