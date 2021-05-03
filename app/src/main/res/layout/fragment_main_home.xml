@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -12,10 +14,92 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="home" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/home_tv_welcome_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="47dp"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="안녕하세요,\nOOO님" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/home_tv_mission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:text="수행중인 미션"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@id/home_tv_welcome_user"
+            app:layout_constraintTop_toBottomOf="@id/home_tv_welcome_user" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/home_iv_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_sample_24dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/home_iv_bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toStartOf="@id/home_iv_alarm"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_sample_24dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_rv_missions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:clipToPadding="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_tv_mission" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/home_tv_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="37dp"
+            android:text="카테고리"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@id/home_tv_welcome_user"
+            app:layout_constraintTop_toBottomOf="@id/home_rv_missions" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/home_iv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="21dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_tv_category"
+            tools:src="@drawable/ic_sample_24dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_rv_new_missions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="18dp"
+            android:layout_marginTop="22dp"
+            android:clipToPadding="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_iv_category" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
