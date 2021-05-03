@@ -3,13 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph.xml"
-    app:startDestination="@id/examFragment">
-
-    <fragment
-        android:id="@+id/examFragment"
-        android:name="com.depromeet.zerowaste.feature.exam.ExamFragment"
-        android:label="recycler_sample"
-        tools:layout="@layout/fragment_recycler_sample" />
+    app:startDestination="@id/mainCommunityFragment">
 
     <fragment
         android:id="@+id/splashFragment"
