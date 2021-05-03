@@ -59,8 +59,10 @@
             android:id="@+id/main_community_card_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:spanCount="@{3}"
             app:layout_constraintTop_toBottomOf="@id/main_community_tag_list"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/item_main_community_card"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_community_list_view"

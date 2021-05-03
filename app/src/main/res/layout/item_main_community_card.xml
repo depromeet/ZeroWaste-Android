@@ -6,22 +6,24 @@
     <data>
         <variable
             name="item"
-            type="com.depromeet.zerowaste.data.community.Tag" />
+            type="com.depromeet.zerowaste.data.community.Post" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="100dp">
 
-        <TextView
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/main_community_card_item_img"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item.title}"
-            android:gravity="center"
+            android:adjustViewBounds="true"
+            app:loadImage="@{item.photos.get(0)}"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="재활용"/>
+            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
