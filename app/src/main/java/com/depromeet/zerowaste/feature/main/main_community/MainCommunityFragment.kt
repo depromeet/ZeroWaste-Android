@@ -26,13 +26,12 @@ class MainCommunityFragment :
     override fun init() {
         binding.vm = viewModel
         binding.fragment = this
-        viewModel.initTagList()
-        viewModel.initPostList()
         initTagList()
         initPostList()
     }
 
     private fun initTagList() {
+        viewModel.initTagList()
         val data = viewModel.tagList.value ?: return
         val adapter = BaseRecycleAdapter(R.layout.item_main_community_tag)
         { item: Tag, vBind: ItemMainCommunityTagBinding, _: Int ->
@@ -43,29 +42,27 @@ class MainCommunityFragment :
     }
 
     private fun initPostList() {
-        val data = viewModel.postList.value ?: return
-        cardAdapter.onNeedLoadMore {
-            cardAdapter.addData(viewModel.genNewPostList())
-            viewModel.setPostList(cardAdapter.getItems())
+        viewModel.getPostList.observe(this) { data ->
+            cardAdapter.addData(data)
+            listAdapter.addData(data)
         }
-        cardAdapter.setData(data)
-        binding.mainCommunityCardView.adapter = cardAdapter
+        val onNeelLoadMore = {
+            viewModel.getNewPostList()
+        }
+        cardAdapter.onNeedLoadMore(onNeelLoadMore)
+        listAdapter.onNeedLoadMore(onNeelLoadMore)
 
-        listAdapter.onNeedLoadMore {
-            listAdapter.addData(viewModel.genNewPostList())
-            viewModel.setPostList(cardAdapter.getItems())
-        }
+        binding.mainCommunityCardView.adapter = cardAdapter
         binding.mainCommunityListView.adapter = listAdapter
+
+        viewModel.getNewPostList()
     }
 
     fun changeListType(isCard: Boolean) {
-        val data = viewModel.postList.value ?: return
         if(isCard) {
-            cardAdapter.setData(data)
             binding.mainCommunityCardView.visibility = View.VISIBLE
             binding.mainCommunityListView.visibility = View.GONE
         } else {
-            listAdapter.setData(data)
             binding.mainCommunityCardView.visibility = View.GONE
             binding.mainCommunityListView.visibility = View.VISIBLE
         }
