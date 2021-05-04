@@ -80,6 +80,10 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>(@LayoutRes private val lay
         compatibilityDataSizeChanged(newData.size)
     }
 
+    open fun getItems(): List<T> {
+        return items
+    }
+
     open fun getItem(@IntRange(from = 0) position: Int): T {
         return items[position]
     }
