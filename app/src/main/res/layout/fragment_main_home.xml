@@ -87,9 +87,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="22dp"
                         android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/home_tv_mission" />
+                        app:layout_constraintTop_toBottomOf="@id/home_tv_mission"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_mission" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -144,9 +148,13 @@
                     android:layout_marginHorizontal="18dp"
                     android:layout_marginTop="22dp"
                     android:clipToPadding="false"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_new_mission" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
