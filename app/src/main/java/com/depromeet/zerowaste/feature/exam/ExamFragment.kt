@@ -23,7 +23,7 @@ class ExamFragment: BaseFragment<FragmentRecyclerSampleBinding>(R.layout.fragmen
 //        binding.recyclerSample.layoutManager = genLayoutManager(requireContext(), isReverse = true)
         binding.recyclerSample.layoutManager = genLayoutManager(requireContext(), spanCount = 2)
         binding.recyclerSample.adapter = adapter
-        adapter.onNeedLoadMore {
+        adapter.needLoadMore = {
             // 스크롤이 가장 마지막 데이터 위치까지 이동했을 때
         }
     }

@@ -37,10 +37,7 @@ class MainCommunityFragment :
     private fun initTagList() {
         viewModel.initTagList()
         val data = viewModel.tagList.value ?: return
-        val adapter = BaseRecycleAdapter(R.layout.item_main_community_tag)
-        { item: Tag, vBind: ItemMainCommunityTagBinding, _: Int ->
-            vBind.item = item
-        }
+        val adapter = BaseRecycleAdapter(R.layout.item_main_community_tag) { item: Tag, bind: ItemMainCommunityTagBinding, _: Int -> bind.item = item }
         adapter.setData(data)
         binding.mainCommunityTagList.adapter = adapter
     }
@@ -53,8 +50,8 @@ class MainCommunityFragment :
         val onNeelLoadMore = {
             viewModel.getNewPostList()
         }
-        cardAdapter.onNeedLoadMore(onNeelLoadMore)
-        listAdapter.onNeedLoadMore(onNeelLoadMore)
+        cardAdapter.needLoadMore = onNeelLoadMore
+        listAdapter.needLoadMore = onNeelLoadMore
 
         binding.mainCommunityCardView.adapter = cardAdapter
         binding.mainCommunityListView.adapter = listAdapter

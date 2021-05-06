@@ -1,6 +1,5 @@
 package com.depromeet.zerowaste.comm
 
-import android.util.Log
 import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
@@ -14,8 +13,8 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>(@LayoutRes private val lay
 
     private val items = mutableListOf<T>()
     var attachedRecyclerView: RecyclerView? = null
+    var needLoadMore: (() -> Unit)? = null
 
-    private var needLoadMore: (() -> Unit)? = null
     private val scrollListener: RecyclerView.OnScrollListener = object: RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
@@ -48,25 +47,15 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>(@LayoutRes private val lay
         attachedRecyclerView = null
     }
 
-    open fun onNeedLoadMore(event: () -> Unit) {
-        if(attachedRecyclerView?.isAttachedToWindow == false) return
-        needLoadMore = event
-    }
-
     open fun setData(data: Collection<T>) {
+        this.items.clear()
         if (data !== this.items) {
-            this.items.clear()
             if (!data.isNullOrEmpty()) {
                 this.items.addAll(data)
             }
-        } else {
-            if (!data.isNullOrEmpty()) {
-                val newList = ArrayList(data)
-                this.items.clear()
-                this.items.addAll(newList)
-            } else {
-                this.items.clear()
-            }
+        } else if (!data.isNullOrEmpty()) {
+            val newList = ArrayList(data)
+            this.items.addAll(newList)
         }
     }
 
