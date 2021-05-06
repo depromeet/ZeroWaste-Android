@@ -1,11 +1,14 @@
 package com.depromeet.zerowaste.comm
 
+import android.util.Log
 import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 open class BaseRecycleAdapter<T, V : ViewDataBinding>(@LayoutRes private val layoutId: Int, private val onDataBind: (T, V, Int) -> Unit): RecyclerView.Adapter<BaseViewHolder<T, V>>() {
 
@@ -16,9 +19,14 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>(@LayoutRes private val lay
     private val scrollListener: RecyclerView.OnScrollListener = object: RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
-            if((attachedRecyclerView?.layoutManager?.layoutDirection == RecyclerView.VERTICAL && attachedRecyclerView?.canScrollVertically(1) == false) ||
-                (attachedRecyclerView?.layoutManager?.layoutDirection == RecyclerView.HORIZONTAL && attachedRecyclerView?.canScrollHorizontally(1) == false)) {
-                needLoadMore?.also { it() }
+            val orientation = when(attachedRecyclerView?.layoutManager) {
+                is LinearLayoutManager -> (attachedRecyclerView?.layoutManager as LinearLayoutManager).orientation
+                is StaggeredGridLayoutManager -> (attachedRecyclerView?.layoutManager as StaggeredGridLayoutManager).orientation
+                else -> -1
+            }
+            if((orientation == RecyclerView.VERTICAL && attachedRecyclerView?.canScrollVertically(1) == false) ||
+                (orientation == RecyclerView.HORIZONTAL && attachedRecyclerView?.canScrollHorizontally(1) == false)) {
+                attachedRecyclerView?.post { needLoadMore?.also { it() } }
             }
         }
     }

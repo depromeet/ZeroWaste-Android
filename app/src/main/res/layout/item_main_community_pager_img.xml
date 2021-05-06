@@ -5,24 +5,20 @@
 
     <data>
         <variable
-            name="item"
-            type="com.depromeet.zerowaste.data.community.Post" />
+            name="url"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/main_community_card_item_img"
+            android:id="@+id/main_community_list_pager_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
-            app:loadImage="@{item.photos.get(0)}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:loadImage="@{url}"
             tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
