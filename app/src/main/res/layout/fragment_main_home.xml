@@ -88,10 +88,12 @@
                         android:layout_marginTop="22dp"
                         android:clipToPadding="false"
                         android:orientation="horizontal"
+                        app:isVertical="@{false}"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/home_tv_mission"
+                        app:spanCount="@{1}"
                         tools:itemCount="3"
                         tools:listitem="@layout/item_main_home_mission" />
 
@@ -148,11 +150,10 @@
                     android:layout_marginHorizontal="18dp"
                     android:layout_marginTop="22dp"
                     android:clipToPadding="false"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:spanCount="@{1}"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_main_home_new_mission" />
 
