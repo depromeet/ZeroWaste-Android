@@ -93,7 +93,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/home_tv_mission"
                         tools:itemCount="3"
-                        tools:listitem="@layout/item_mission" />
+                        tools:listitem="@layout/item_main_home_mission" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -154,7 +154,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:itemCount="3"
-                    tools:listitem="@layout/item_new_mission" />
+                    tools:listitem="@layout/item_main_home_new_mission" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
