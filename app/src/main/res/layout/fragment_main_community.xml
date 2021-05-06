@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="vm"
             type="com.depromeet.zerowaste.feature.main.main_community.MainCommunityViewModel" />
+        <variable
+            name="fragment"
+            type="com.depromeet.zerowaste.feature.main.main_community.MainCommunityFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,9 +18,65 @@
         tools:context=".MainCommunityFragment">
 
         <TextView
+            android:id="@+id/main_community_title"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:text="@string/main_community_title"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageButton
+            android:id="@+id/main_community_list_view_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_launcher_background"
+            android:layout_marginEnd="18dp"
+            android:onClick="@{() -> fragment.changeListType(false)}"
+            app:layout_constraintTop_toTopOf="@id/main_community_title"
+            app:layout_constraintBottom_toBottomOf="@id/main_community_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/main_community_card_view_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_launcher_background"
+            android:layout_marginEnd="3dp"
+            android:onClick="@{() -> fragment.changeListType(true)}"
+            app:layout_constraintTop_toTopOf="@id/main_community_title"
+            app:layout_constraintBottom_toBottomOf="@id/main_community_title"
+            app:layout_constraintEnd_toStartOf="@id/main_community_list_view_btn"
+            tools:ignore="ContentDescription" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_community_tag_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="community" />
+            android:layout_height="60dp"
+            android:overScrollMode="never"
+            app:spanCount="@{vm.tagList.size()}"
+            app:layout_constraintTop_toBottomOf="@id/main_community_title"
+            tools:listitem="@layout/item_main_community_tag"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_community_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:spanCount="@{3}"
+            app:layout_constraintTop_toBottomOf="@id/main_community_tag_list"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/item_main_community_card"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_community_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:spanCount="@{1}"
+            app:layout_constraintTop_toBottomOf="@id/main_community_tag_list"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

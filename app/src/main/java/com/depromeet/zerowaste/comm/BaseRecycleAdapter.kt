@@ -1,16 +1,34 @@
 package com.depromeet.zerowaste.comm
 
-import android.provider.ContactsContract
 import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 open class BaseRecycleAdapter<T, V : ViewDataBinding>(@LayoutRes private val layoutId: Int, private val onDataBind: (T, V, Int) -> Unit): RecyclerView.Adapter<BaseViewHolder<T, V>>() {
 
     private val items = mutableListOf<T>()
+    var attachedRecyclerView: RecyclerView? = null
+    var needLoadMore: (() -> Unit)? = null
+
+    private val scrollListener: RecyclerView.OnScrollListener = object: RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            val orientation = when(attachedRecyclerView?.layoutManager) {
+                is LinearLayoutManager -> (attachedRecyclerView?.layoutManager as LinearLayoutManager).orientation
+                is StaggeredGridLayoutManager -> (attachedRecyclerView?.layoutManager as StaggeredGridLayoutManager).orientation
+                else -> -1
+            }
+            if((orientation == RecyclerView.VERTICAL && attachedRecyclerView?.canScrollVertically(1) == false) ||
+                (orientation == RecyclerView.HORIZONTAL && attachedRecyclerView?.canScrollHorizontally(1) == false)) {
+                attachedRecyclerView?.post { needLoadMore?.also { it() } }
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BaseViewHolder(DataBindingUtil.inflate(parent.inflater(), layoutId, parent, false), onDataBind)
 
@@ -18,20 +36,26 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>(@LayoutRes private val lay
 
     override fun getItemCount() = items.size
 
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        attachedRecyclerView = recyclerView
+        recyclerView.addOnScrollListener(scrollListener)
+    }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        attachedRecyclerView = null
+    }
+
     open fun setData(data: Collection<T>) {
+        this.items.clear()
         if (data !== this.items) {
-            this.items.clear()
             if (!data.isNullOrEmpty()) {
                 this.items.addAll(data)
             }
-        } else {
-            if (!data.isNullOrEmpty()) {
-                val newList = ArrayList(data)
-                this.items.clear()
-                this.items.addAll(newList)
-            } else {
-                this.items.clear()
-            }
+        } else if (!data.isNullOrEmpty()) {
+            val newList = ArrayList(data)
+            this.items.addAll(newList)
         }
     }
 
@@ -51,6 +75,10 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>(@LayoutRes private val lay
         this.items.addAll(newData)
         notifyItemRangeInserted(this.items.size - newData.size, newData.size)
         compatibilityDataSizeChanged(newData.size)
+    }
+
+    open fun getItems(): List<T> {
+        return items
     }
 
     open fun getItem(@IntRange(from = 0) position: Int): T {
