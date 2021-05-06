@@ -35,23 +35,14 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
         viewModel.missionList.observe(this) { data ->
             missionAdapter.addData(data)
         }
-        val onNeelLoadMore = {
-            viewModel.getMissionList()
-        }
-        missionAdapter.needLoadMore = onNeelLoadMore
         binding.homeRvMissions.adapter = missionAdapter
         viewModel.getMissionList()
     }
 
     private fun initNewMissionList() {
         viewModel.newMissionList.observe(this) { data ->
-            Log.d("AAAAAA", "OBSERVE DATA _> $data")
             newMissionAdapter.addData(data)
         }
-        val onNeelLoadMore = {
-            viewModel.getNewMissionList()
-        }
-        newMissionAdapter.needLoadMore = onNeelLoadMore
         binding.homeRvNewMissions.adapter = newMissionAdapter
         viewModel.getNewMissionList()
     }
