@@ -8,7 +8,7 @@ data class Post(
 
     val user: String = "",
     val userName: String = "",
-    val userBadge: Any = "",
+    val userBadge: String = "",
     val userMissionCount: Int = 0,
 
     val likeCount: Int,

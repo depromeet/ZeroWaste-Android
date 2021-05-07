@@ -40,6 +40,7 @@ class MainCommunityViewModel @Inject constructor() : BaseViewModel() {
             posts.add(
                 Post(
                     userName = "재활용해요",
+                    userMissionCount = 10,
                     likeCount = i,
                     isMyLike = i%2 == 0,
                     tag = Tag("","","장보기"),

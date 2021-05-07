@@ -18,14 +18,7 @@ class MainCommunityFragment :
     private val viewModel: MainCommunityViewModel by viewModels()
 
     private val cardAdapter = BaseRecycleAdapter(R.layout.item_main_community_card) { item: Post, bind: ItemMainCommunityCardBinding, _: Int -> bind.item = item }
-    private val listAdapter = BaseRecycleAdapter(R.layout.item_main_community_list)
-    { item: Post, bind: ItemMainCommunityListBinding, _: Int ->
-        bind.item = item
-        val pagerAdapter = BaseRecycleAdapter(R.layout.item_main_community_pager_img)
-        { pagerItem: String, pagerBind: ItemMainCommunityPagerImgBinding, _: Int -> pagerBind.url = pagerItem }
-        pagerAdapter.addData(item.photos)
-        bind.mainCommunityListPager.adapter = pagerAdapter
-    }
+    private val listAdapter = MainCommunityListAdapter()
 
     override fun init() {
         binding.vm = viewModel
@@ -47,11 +40,11 @@ class MainCommunityFragment :
             cardAdapter.addData(data)
             listAdapter.addData(data)
         }
-        val onNeelLoadMore = {
+        val onNeedLoadMore = {
             viewModel.getNewPostList()
         }
-        cardAdapter.needLoadMore = onNeelLoadMore
-        listAdapter.needLoadMore = onNeelLoadMore
+        cardAdapter.needLoadMore = onNeedLoadMore
+        listAdapter.needLoadMore = onNeedLoadMore
 
         binding.mainCommunityCardView.adapter = cardAdapter
         binding.mainCommunityListView.adapter = listAdapter
