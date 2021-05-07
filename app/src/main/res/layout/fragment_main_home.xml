@@ -54,7 +54,7 @@
                         android:id="@+id/home_tv_mission"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="34dp"
+                        android:layout_marginTop="37dp"
                         android:text="수행중인 미션"
                         android:textColor="@color/black"
                         android:textSize="18sp"
@@ -107,20 +107,33 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="17dp"
-                    android:layout_marginTop="37dp"
-                    android:text="카테고리"
+                    android:layout_marginTop="32dp"
+                    android:text="미션 카테고리"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/home_tv_view_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="25dp"
+                    android:text="전체보기 >"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/home_tv_category"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/home_tv_category" />
+
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/home_iv_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
-                    android:layout_marginTop="21.49dp"
-                    android:layout_marginBottom="22dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginBottom="20.49dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/home_tv_category"
@@ -141,16 +154,27 @@
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true">
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/home_tv_recommend_mission"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17dp"
+                    android:text="추천 미션"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/home_rv_new_missions"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="18dp"
-                    android:layout_marginTop="22dp"
+                    android:layout_marginTop="21dp"
                     android:clipToPadding="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_tv_recommend_mission"
                     app:spanCount="@{1}"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_main_home_new_mission" />
