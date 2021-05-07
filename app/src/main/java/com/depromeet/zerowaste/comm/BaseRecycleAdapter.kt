@@ -9,7 +9,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
-open class BaseRecycleAdapter<T, V : ViewDataBinding>(@LayoutRes private val layoutId: Int, private val onDataBind: (T, V, Int) -> Unit): RecyclerView.Adapter<BaseViewHolder<T, V>>() {
+open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<BaseViewHolder<T, V>> {
+
+    constructor(@LayoutRes layoutId: Int, onDataBind: (T, V, Int) -> Unit) {
+        this.layoutId = layoutId
+        this.onDataBind = onDataBind
+    }
+
+    protected constructor(@LayoutRes layoutId: Int) {
+        this.layoutId = layoutId
+        this.onDataBind = null
+    }
+
+    private val layoutId: Int
+    private val onDataBind: ((T, V, Int) -> Unit)?
 
     private val items = mutableListOf<T>()
     var attachedRecyclerView: RecyclerView? = null
@@ -29,6 +42,8 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>(@LayoutRes private val lay
             }
         }
     }
+
+    open fun onDataBind(item: T, bind: V, position: Int) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BaseViewHolder(DataBindingUtil.inflate(parent.inflater(), layoutId, parent, false), onDataBind)
 
