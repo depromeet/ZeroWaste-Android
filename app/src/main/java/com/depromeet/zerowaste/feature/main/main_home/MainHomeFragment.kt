@@ -1,6 +1,5 @@
 package com.depromeet.zerowaste.feature.main.main_home
 
-import android.util.Log
 import androidx.fragment.app.viewModels
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment

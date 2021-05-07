@@ -1,6 +1,5 @@
 package com.depromeet.zerowaste.feature.main.main_home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.depromeet.zerowaste.comm.BaseViewModel
@@ -49,6 +48,5 @@ class MainHomeViewModel @Inject constructor() : BaseViewModel() {
             )
         }
         _newMissionList.value = missions
-        Log.d("AAAAA", missions.toString())
     }
 }
