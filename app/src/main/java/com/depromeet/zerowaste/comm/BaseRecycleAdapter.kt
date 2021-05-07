@@ -1,5 +1,6 @@
 package com.depromeet.zerowaste.comm
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
@@ -31,13 +32,15 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
     private val scrollListener: RecyclerView.OnScrollListener = object: RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
-            val orientation = when(attachedRecyclerView?.layoutManager) {
-                is LinearLayoutManager -> (attachedRecyclerView?.layoutManager as LinearLayoutManager).orientation
-                is StaggeredGridLayoutManager -> (attachedRecyclerView?.layoutManager as StaggeredGridLayoutManager).orientation
+            val orientation = when(val manager = attachedRecyclerView?.layoutManager) {
+                is LinearLayoutManager -> manager.orientation
+                is StaggeredGridLayoutManager -> manager.orientation
                 else -> -1
             }
             if((orientation == RecyclerView.VERTICAL && attachedRecyclerView?.canScrollVertically(1) == false) ||
-                (orientation == RecyclerView.HORIZONTAL && attachedRecyclerView?.canScrollHorizontally(1) == false)) {
+                (orientation == RecyclerView.HORIZONTAL &&
+                        ((attachedRecyclerView?.canScrollHorizontally(1) == false) && recyclerView.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_LTR) ||
+                        (attachedRecyclerView?.canScrollHorizontally(-1) == false) && recyclerView.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL)) {
                 attachedRecyclerView?.post { needLoadMore?.also { it() } }
             }
         }
@@ -63,12 +66,13 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
     }
 
     open fun setData(data: Collection<T>) {
-        this.items.clear()
         if (data !== this.items) {
             if (!data.isNullOrEmpty()) {
+                this.items.clear()
                 this.items.addAll(data)
             }
         } else if (!data.isNullOrEmpty()) {
+            this.items.clear()
             val newList = ArrayList(data)
             this.items.addAll(newList)
         }
