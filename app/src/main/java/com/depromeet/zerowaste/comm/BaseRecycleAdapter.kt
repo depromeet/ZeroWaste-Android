@@ -5,23 +5,45 @@ import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
-open class BaseRecycleAdapter<T, V : ViewDataBinding>(@LayoutRes private val layoutId: Int, private val onDataBind: (T, V, Int) -> Unit): RecyclerView.Adapter<BaseViewHolder<T, V>>() {
+open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<BaseViewHolder<T, V>> {
+
+    constructor(@LayoutRes layoutId: Int, onDataBind: (T, V, Int) -> Unit) {
+        this.layoutId = layoutId
+        this.onDataBind = onDataBind
+    }
+
+    protected constructor(@LayoutRes layoutId: Int) {
+        this.layoutId = layoutId
+        this.onDataBind = null
+    }
+
+    private val layoutId: Int
+    private val onDataBind: ((T, V, Int) -> Unit)?
 
     private val items = mutableListOf<T>()
     var attachedRecyclerView: RecyclerView? = null
+    var needLoadMore: (() -> Unit)? = null
 
-    private var needLoadMore: (() -> Unit)? = null
     private val scrollListener: RecyclerView.OnScrollListener = object: RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
-            if((attachedRecyclerView?.layoutManager?.layoutDirection == RecyclerView.VERTICAL && attachedRecyclerView?.canScrollVertically(1) == false) ||
-                (attachedRecyclerView?.layoutManager?.layoutDirection == RecyclerView.HORIZONTAL && attachedRecyclerView?.canScrollHorizontally(1) == false)) {
-                needLoadMore?.also { it() }
+            val orientation = when(attachedRecyclerView?.layoutManager) {
+                is LinearLayoutManager -> (attachedRecyclerView?.layoutManager as LinearLayoutManager).orientation
+                is StaggeredGridLayoutManager -> (attachedRecyclerView?.layoutManager as StaggeredGridLayoutManager).orientation
+                else -> -1
+            }
+            if((orientation == RecyclerView.VERTICAL && attachedRecyclerView?.canScrollVertically(1) == false) ||
+                (orientation == RecyclerView.HORIZONTAL && attachedRecyclerView?.canScrollHorizontally(1) == false)) {
+                attachedRecyclerView?.post { needLoadMore?.also { it() } }
             }
         }
     }
+
+    open fun onDataBind(item: T, bind: V, position: Int) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BaseViewHolder(DataBindingUtil.inflate(parent.inflater(), layoutId, parent, false), onDataBind)
 
@@ -40,25 +62,15 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>(@LayoutRes private val lay
         attachedRecyclerView = null
     }
 
-    open fun onNeedLoadMore(event: () -> Unit) {
-        if(attachedRecyclerView?.isAttachedToWindow == false) return
-        needLoadMore = event
-    }
-
     open fun setData(data: Collection<T>) {
+        this.items.clear()
         if (data !== this.items) {
-            this.items.clear()
             if (!data.isNullOrEmpty()) {
                 this.items.addAll(data)
             }
-        } else {
-            if (!data.isNullOrEmpty()) {
-                val newList = ArrayList(data)
-                this.items.clear()
-                this.items.addAll(newList)
-            } else {
-                this.items.clear()
-            }
+        } else if (!data.isNullOrEmpty()) {
+            val newList = ArrayList(data)
+            this.items.addAll(newList)
         }
     }
 

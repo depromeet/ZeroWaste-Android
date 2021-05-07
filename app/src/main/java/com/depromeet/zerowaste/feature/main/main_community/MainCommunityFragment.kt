@@ -8,10 +8,7 @@ import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
 import com.depromeet.zerowaste.data.community.Post
 import com.depromeet.zerowaste.data.community.Tag
-import com.depromeet.zerowaste.databinding.FragmentMainCommunityBinding
-import com.depromeet.zerowaste.databinding.ItemMainCommunityCardBinding
-import com.depromeet.zerowaste.databinding.ItemMainCommunityListBinding
-import com.depromeet.zerowaste.databinding.ItemMainCommunityTagBinding
+import com.depromeet.zerowaste.databinding.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,8 +17,8 @@ class MainCommunityFragment :
 
     private val viewModel: MainCommunityViewModel by viewModels()
 
-    private val cardAdapter = BaseRecycleAdapter(R.layout.item_main_community_card) { item: Post, vBind: ItemMainCommunityCardBinding, _: Int -> vBind.item = item }
-    private val listAdapter = BaseRecycleAdapter(R.layout.item_main_community_list) { item: Post, vBind: ItemMainCommunityListBinding, _: Int -> vBind.item = item }
+    private val cardAdapter = BaseRecycleAdapter(R.layout.item_main_community_card) { item: Post, bind: ItemMainCommunityCardBinding, _: Int -> bind.item = item }
+    private val listAdapter = MainCommunityListAdapter()
 
     override fun init() {
         binding.vm = viewModel
@@ -33,10 +30,7 @@ class MainCommunityFragment :
     private fun initTagList() {
         viewModel.initTagList()
         val data = viewModel.tagList.value ?: return
-        val adapter = BaseRecycleAdapter(R.layout.item_main_community_tag)
-        { item: Tag, vBind: ItemMainCommunityTagBinding, _: Int ->
-            vBind.item = item
-        }
+        val adapter = BaseRecycleAdapter(R.layout.item_main_community_tag) { item: Tag, bind: ItemMainCommunityTagBinding, _: Int -> bind.item = item }
         adapter.setData(data)
         binding.mainCommunityTagList.adapter = adapter
     }
@@ -46,11 +40,11 @@ class MainCommunityFragment :
             cardAdapter.addData(data)
             listAdapter.addData(data)
         }
-        val onNeelLoadMore = {
+        val onNeedLoadMore = {
             viewModel.getNewPostList()
         }
-        cardAdapter.onNeedLoadMore(onNeelLoadMore)
-        listAdapter.onNeedLoadMore(onNeelLoadMore)
+        cardAdapter.needLoadMore = onNeedLoadMore
+        listAdapter.needLoadMore = onNeedLoadMore
 
         binding.mainCommunityCardView.adapter = cardAdapter
         binding.mainCommunityListView.adapter = listAdapter
