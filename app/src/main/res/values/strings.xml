@@ -11,4 +11,7 @@
     <string name="main_community_title">커뮤니티</string>
     <string name="main_community_list_experienced_difficulty">체감난이도</string>
     <string name="main_community_list_mission_complete_cnt">번 인증완료</string>
+    <string name="main_home_category_5r">카테고리 (5R)</string>
+    <string name="main_home_recommend_mission">추천 미션</string>
+    <string name="main_home_mission_category">미션 카테고리</string>
 </resources>
