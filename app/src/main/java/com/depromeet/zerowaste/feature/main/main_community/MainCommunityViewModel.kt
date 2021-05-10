@@ -17,8 +17,20 @@ class MainCommunityViewModel @Inject constructor() : BaseViewModel() {
     private val _tagList = MutableLiveData<List<Tag>>()
     val tagList: LiveData<List<Tag>> get() = _tagList
 
+    private val _postList = MutableLiveData<ArrayList<Post>>()
+    val postList: LiveData<ArrayList<Post>> get() = _postList
+
     private val _getPostList = MutableLiveData<List<Post>>()
     val getPostList: LiveData<List<Post>> get() = _getPostList
+
+    private val _cardState = MutableLiveData<Pair<Int,Int>>()
+    val cardState: LiveData<Pair<Int,Int>> get() = _cardState
+
+    private val _listState = MutableLiveData<Pair<Int,Int>>()
+    val listState: LiveData<Pair<Int,Int>> get() = _listState
+
+    private val _isSelectCard = MutableLiveData<Boolean>()
+    val isSelectCard: LiveData<Boolean> get() = _isSelectCard
 
     fun initTagList() {
         val tags = ArrayList<Tag>()
@@ -52,6 +64,21 @@ class MainCommunityViewModel @Inject constructor() : BaseViewModel() {
             )
         }
         _getPostList.value = posts
+        posts.addAll(0, _postList.value ?: ArrayList())
+        _postList.value = posts
     }
+
+    fun isSelectCard(isCard: Boolean) {
+        _isSelectCard.value = isCard
+    }
+
+    fun setCardState(x: Int, y: Int) {
+        _cardState.value = Pair(x,y)
+    }
+
+    fun setListState(x: Int, y: Int) {
+        _listState.value = Pair(x,y)
+    }
+
 
 }

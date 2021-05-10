@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.depromeet.zerowaste.R
@@ -32,12 +33,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             supportFragmentManager.findFragmentById(R.id.main_navigation_view) as NavHostFragment
         val navController = navHostFragment.navController
         binding.mainBottomNavigation.setupWithNavController(navController)
-        binding.mainBottomNavigation.itemIconTintList = null
 
         // 해당 ID 만 바텀네비게이션 VISIBLE
         navController.addOnDestinationChangedListener { _, destination, _ ->
             Log.d(null, "id = ${destination.id}, label = ${destination.label}")
-            if (destination.id == R.id.mainHomeFragment || destination.id == R.id.mainCommunityFragment || destination.id == R.id.mainMissionFragment || destination.id == R.id.mainProfileFragment) {
+            if (destination.id == R.id.mainHomeFragment || destination.id == R.id.mainCommunityFragment || destination.id == R.id.mainMissionFragment) {
                 binding.mainBottomNavigation.visibility = View.VISIBLE
             } else {
                 binding.mainBottomNavigation.visibility = View.GONE
