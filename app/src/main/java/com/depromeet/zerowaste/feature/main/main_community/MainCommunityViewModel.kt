@@ -1,5 +1,6 @@
 package com.depromeet.zerowaste.feature.main.main_community
 
+import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.depromeet.zerowaste.comm.BaseViewModel
@@ -17,8 +18,21 @@ class MainCommunityViewModel @Inject constructor() : BaseViewModel() {
     private val _tagList = MutableLiveData<List<Tag>>()
     val tagList: LiveData<List<Tag>> get() = _tagList
 
+    private val _postList = MutableLiveData<ArrayList<Post>>()
+    val postList: LiveData<ArrayList<Post>> get() = _postList
+
     private val _getPostList = MutableLiveData<List<Post>>()
     val getPostList: LiveData<List<Post>> get() = _getPostList
+
+    private val _cardState = MutableLiveData<Parcelable>()
+    val cardState: LiveData<Parcelable> get() = _cardState
+
+    private val _listState = MutableLiveData<Parcelable>()
+    val listState: LiveData<Parcelable> get() = _listState
+
+    private val _isSelectCard = MutableLiveData<Boolean>()
+    val isSelectCard: LiveData<Boolean> get() = _isSelectCard
+
 
     fun initTagList() {
         val tags = ArrayList<Tag>()
@@ -52,6 +66,20 @@ class MainCommunityViewModel @Inject constructor() : BaseViewModel() {
             )
         }
         _getPostList.value = posts
+        posts.addAll(0, _postList.value ?: ArrayList())
+        _postList.value = posts
+    }
+
+    fun setCardState(state: Parcelable) {
+        _cardState.value = state
+    }
+
+    fun setListState(state: Parcelable) {
+        _listState.value = state
+    }
+
+    fun isSelectCard(value: Boolean) {
+        _isSelectCard.value = value
     }
 
 }

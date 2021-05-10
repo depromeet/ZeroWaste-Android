@@ -1,8 +1,9 @@
 package com.depromeet.zerowaste.feature.main.main_community
 
-import android.util.Log
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
@@ -15,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainCommunityFragment :
     BaseFragment<FragmentMainCommunityBinding>(R.layout.fragment_main_community) {
 
-    private val viewModel: MainCommunityViewModel by viewModels()
+    private val viewModel: MainCommunityViewModel by activityViewModels()
 
     private val cardAdapter = BaseRecycleAdapter(R.layout.item_main_community_card) { item: Post, bind: ItemMainCommunityCardBinding, _: Int -> bind.item = item }
     private val listAdapter = MainCommunityListAdapter()
@@ -24,7 +25,6 @@ class MainCommunityFragment :
         binding.vm = viewModel
         binding.fragment = this
         initTagList()
-        initPostList()
     }
 
     private fun initTagList() {
@@ -35,7 +35,7 @@ class MainCommunityFragment :
         binding.mainCommunityTagList.adapter = adapter
     }
 
-    private fun initPostList() {
+    private fun onResumePostList() {
         viewModel.getPostList.observe(this) { data ->
             cardAdapter.addData(data)
             listAdapter.addData(data)
@@ -49,16 +49,57 @@ class MainCommunityFragment :
         binding.mainCommunityCardView.adapter = cardAdapter
         binding.mainCommunityListView.adapter = listAdapter
 
-        viewModel.getNewPostList()
+        viewModel.isSelectCard.value?.also {
+            changeListType(it)
+        }
+
+        if(viewModel.postList.value == null || viewModel.postList.value?.size == 0) {
+            viewModel.getNewPostList()
+        } else {
+            cardAdapter.setData(viewModel.postList.value)
+            listAdapter.setData(viewModel.postList.value)
+        }
+
+        viewModel.cardState.value?.also {
+            binding.mainCommunityCardView.layoutManager?.onRestoreInstanceState(it)
+        }
+
+        viewModel.listState.value?.also {
+            binding.mainCommunityListView.layoutManager?.onRestoreInstanceState(it)
+        }
+    }
+
+
+    private fun onPausePostList() {
+        binding.mainCommunityCardView.layoutManager?.onSaveInstanceState()?.also {
+            viewModel.setCardState(it)
+        }
+        binding.mainCommunityListView.layoutManager?.onSaveInstanceState()?.also {
+            viewModel.setListState(it)
+        }
+        viewModel.getPostList.removeObservers(this)
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        onResumePostList()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        onPausePostList()
     }
 
     fun changeListType(isCard: Boolean) {
         if(isCard) {
             binding.mainCommunityCardView.visibility = View.VISIBLE
             binding.mainCommunityListView.visibility = View.GONE
+            viewModel.isSelectCard(true)
         } else {
             binding.mainCommunityCardView.visibility = View.GONE
             binding.mainCommunityListView.visibility = View.VISIBLE
+            viewModel.isSelectCard(false)
         }
     }
 

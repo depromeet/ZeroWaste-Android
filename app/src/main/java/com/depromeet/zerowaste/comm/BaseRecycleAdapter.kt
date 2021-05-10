@@ -65,7 +65,8 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
         attachedRecyclerView = null
     }
 
-    open fun setData(data: Collection<T>) {
+    open fun setData(data: Collection<T>?) {
+        if(data == null) return
         if (data !== this.items) {
             if (!data.isNullOrEmpty()) {
                 this.items.clear()
@@ -78,19 +79,22 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
         }
     }
 
-    open fun addData(data: T) {
+    open fun addData(data: T?) {
+        if(data == null) return
         this.items.add(data)
         notifyItemInserted(this.items.size)
         compatibilityDataSizeChanged(1)
     }
 
-    open fun addData(@IntRange(from = 0) position: Int, newData: Collection<T>) {
+    open fun addData(@IntRange(from = 0) position: Int, newData: Collection<T>?) {
+        if(newData == null) return
         this.items.addAll(position, newData)
         notifyItemRangeInserted(position, newData.size)
         compatibilityDataSizeChanged(newData.size)
     }
 
-    open fun addData(newData: Collection<T>) {
+    open fun addData(newData: Collection<T>?) {
+        if(newData == null) return
         this.items.addAll(newData)
         notifyItemRangeInserted(this.items.size - newData.size, newData.size)
         compatibilityDataSizeChanged(newData.size)
