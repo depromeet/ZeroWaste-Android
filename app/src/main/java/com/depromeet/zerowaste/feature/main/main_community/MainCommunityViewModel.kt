@@ -33,7 +33,6 @@ class MainCommunityViewModel @Inject constructor() : BaseViewModel() {
     private val _isSelectCard = MutableLiveData<Boolean>()
     val isSelectCard: LiveData<Boolean> get() = _isSelectCard
 
-
     fun initTagList() {
         val tags = ArrayList<Tag>()
         tags.add(Tag("", "", "페트병"))
