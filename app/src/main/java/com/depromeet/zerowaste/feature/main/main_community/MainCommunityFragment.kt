@@ -1,7 +1,7 @@
 package com.depromeet.zerowaste.feature.main.main_community
 
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainCommunityFragment :
     BaseFragment<FragmentMainCommunityBinding>(R.layout.fragment_main_community) {
 
-    private val viewModel: MainCommunityViewModel by activityViewModels()
+    private val viewModel: MainCommunityViewModel by viewModels()
 
     private val cardAdapter = BaseRecycleAdapter(R.layout.item_main_community_card) { item: Post, bind: ItemMainCommunityCardBinding, _: Int -> bind.item = item }
     private val listAdapter = MainCommunityListAdapter()

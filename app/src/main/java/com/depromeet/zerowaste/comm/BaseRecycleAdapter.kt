@@ -27,21 +27,22 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
 
     private val items = mutableListOf<T>()
     var attachedRecyclerView: RecyclerView? = null
+        private set
     var needLoadMore: (() -> Unit)? = null
 
     private val scrollListener: RecyclerView.OnScrollListener = object: RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
-            val orientation = when(val manager = attachedRecyclerView?.layoutManager) {
+            val orientation = when(val manager = recyclerView.layoutManager) {
                 is LinearLayoutManager -> manager.orientation
                 is StaggeredGridLayoutManager -> manager.orientation
-                else -> -1
+                else -> null
             }
-            if((orientation == RecyclerView.VERTICAL && attachedRecyclerView?.canScrollVertically(1) == false) ||
-                (orientation == RecyclerView.HORIZONTAL &&
-                        ((attachedRecyclerView?.canScrollHorizontally(1) == false) && recyclerView.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_LTR) ||
-                        (attachedRecyclerView?.canScrollHorizontally(-1) == false) && recyclerView.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL)) {
-                attachedRecyclerView?.post { needLoadMore?.also { it() } }
+            if((orientation == RecyclerView.VERTICAL && !recyclerView.canScrollVertically(1)) ||
+                (orientation == RecyclerView.HORIZONTAL
+                        && (!recyclerView.canScrollHorizontally(1) && recyclerView.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_LTR) ||
+                        !recyclerView.canScrollHorizontally(-1) && recyclerView.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL)) {
+                recyclerView.post { needLoadMore?.also { it() } }
             }
         }
     }

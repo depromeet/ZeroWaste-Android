@@ -1,7 +1,6 @@
 package com.depromeet.zerowaste.comm
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import androidx.fragment.app.Fragment
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes val layoutId: Int
 ) : Fragment() {
-    lateinit var binding: B
+    protected lateinit var binding: B
     private var isInitialized = false
 
     override fun onCreateView(
