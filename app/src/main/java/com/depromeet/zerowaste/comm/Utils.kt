@@ -15,15 +15,14 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 
 
-fun genLayoutManager(context: Context, isVertical: Boolean = true, isReverse: Boolean = false, @IntRange(from = 1) spanCount: Int = 1, isStaggered: Boolean = false): RecyclerView.LayoutManager {
+fun genLayoutManager(context: Context, isVertical: Boolean = true, @IntRange(from = 1) spanCount: Int = 1, isStaggered: Boolean = false): RecyclerView.LayoutManager {
     val orientation: Int = if(isVertical) RecyclerView.VERTICAL else RecyclerView.HORIZONTAL
     return if(spanCount <= 1) {
-        LinearLayoutManager(context, orientation, isReverse)
+        LinearLayoutManager(context, orientation, false)
     } else if(!isStaggered){
-        GridLayoutManager(context, spanCount, orientation, isReverse)
+        GridLayoutManager(context, spanCount, orientation, false)
     } else {
         val manager = StaggeredGridLayoutManager(spanCount, orientation)
-        manager.reverseLayout = isReverse
         manager
     }
 }
@@ -40,9 +39,9 @@ fun ViewGroup.inflater(): LayoutInflater {
 /*
 * viewpager
 * */
-@BindingAdapter("isVertical", "isReverse", "spanCount", "isStaggered", requireAll = false)
-fun genLayoutManagerInXml(view: RecyclerView, isVertical: Boolean?, isReverse: Boolean?, spanCount: Int?, isStaggered: Boolean?) {
-    view.layoutManager = genLayoutManager(view.context, isVertical ?: true, isReverse ?: false, spanCount ?: 1, isStaggered ?: false)
+@BindingAdapter("isVertical", "spanCount", "isStaggered", requireAll = false)
+fun genLayoutManagerInXml(view: RecyclerView, isVertical: Boolean?, spanCount: Int?, isStaggered: Boolean?) {
+    view.layoutManager = genLayoutManager(view.context, isVertical ?: true, spanCount ?: 1, isStaggered ?: false)
 }
 
 /*

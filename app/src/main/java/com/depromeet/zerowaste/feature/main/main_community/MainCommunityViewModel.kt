@@ -40,6 +40,7 @@ class MainCommunityViewModel @Inject constructor() : BaseViewModel() {
             posts.add(
                 Post(
                     userName = "재활용해요",
+                    userBadge = "https://live.staticflickr.com/7841/33492970008_d7c8040ca7_n.jpg",
                     userMissionCount = 10,
                     likeCount = i,
                     isMyLike = i%2 == 0,
@@ -52,5 +53,4 @@ class MainCommunityViewModel @Inject constructor() : BaseViewModel() {
         }
         _getPostList.value = posts
     }
-
 }

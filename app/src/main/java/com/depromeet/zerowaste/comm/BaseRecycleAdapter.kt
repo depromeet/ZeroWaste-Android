@@ -1,5 +1,6 @@
 package com.depromeet.zerowaste.comm
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
@@ -26,19 +27,22 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
 
     private val items = mutableListOf<T>()
     var attachedRecyclerView: RecyclerView? = null
+        private set
     var needLoadMore: (() -> Unit)? = null
 
     private val scrollListener: RecyclerView.OnScrollListener = object: RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
-            val orientation = when(attachedRecyclerView?.layoutManager) {
-                is LinearLayoutManager -> (attachedRecyclerView?.layoutManager as LinearLayoutManager).orientation
-                is StaggeredGridLayoutManager -> (attachedRecyclerView?.layoutManager as StaggeredGridLayoutManager).orientation
-                else -> -1
+            val orientation = when(val manager = recyclerView.layoutManager) {
+                is LinearLayoutManager -> manager.orientation
+                is StaggeredGridLayoutManager -> manager.orientation
+                else -> null
             }
-            if((orientation == RecyclerView.VERTICAL && attachedRecyclerView?.canScrollVertically(1) == false) ||
-                (orientation == RecyclerView.HORIZONTAL && attachedRecyclerView?.canScrollHorizontally(1) == false)) {
-                attachedRecyclerView?.post { needLoadMore?.also { it() } }
+            if((orientation == RecyclerView.VERTICAL && !recyclerView.canScrollVertically(1)) ||
+                (orientation == RecyclerView.HORIZONTAL
+                        && (!recyclerView.canScrollHorizontally(1) && recyclerView.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_LTR) ||
+                        !recyclerView.canScrollHorizontally(-1) && recyclerView.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL)) {
+                recyclerView.post { needLoadMore?.also { it() } }
             }
         }
     }
@@ -62,31 +66,36 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
         attachedRecyclerView = null
     }
 
-    open fun setData(data: Collection<T>) {
-        this.items.clear()
+    open fun setData(data: Collection<T>?) {
+        if(data == null) return
         if (data !== this.items) {
             if (!data.isNullOrEmpty()) {
+                this.items.clear()
                 this.items.addAll(data)
             }
         } else if (!data.isNullOrEmpty()) {
+            this.items.clear()
             val newList = ArrayList(data)
             this.items.addAll(newList)
         }
     }
 
-    open fun addData(data: T) {
+    open fun addData(data: T?) {
+        if(data == null) return
         this.items.add(data)
         notifyItemInserted(this.items.size)
         compatibilityDataSizeChanged(1)
     }
 
-    open fun addData(@IntRange(from = 0) position: Int, newData: Collection<T>) {
+    open fun addData(@IntRange(from = 0) position: Int, newData: Collection<T>?) {
+        if(newData == null) return
         this.items.addAll(position, newData)
         notifyItemRangeInserted(position, newData.size)
         compatibilityDataSizeChanged(newData.size)
     }
 
-    open fun addData(newData: Collection<T>) {
+    open fun addData(newData: Collection<T>?) {
+        if(newData == null) return
         this.items.addAll(newData)
         notifyItemRangeInserted(this.items.size - newData.size, newData.size)
         compatibilityDataSizeChanged(newData.size)

@@ -13,21 +13,27 @@ import androidx.fragment.app.Fragment
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes val layoutId: Int
 ) : Fragment() {
-    lateinit var binding: B
+    protected lateinit var binding: B
+    private var isInitialized = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        if(!this::binding.isInitialized){
+            binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
-        init()
+        if(!isInitialized) {
+            init()
+            isInitialized = true
+        }
     }
 
     abstract fun init()

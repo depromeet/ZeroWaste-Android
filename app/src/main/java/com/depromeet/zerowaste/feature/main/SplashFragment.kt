@@ -8,21 +8,29 @@ import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.databinding.FragmentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_splash) {
 
-    private val viewModel: MainViewModel by activityViewModels()
-
     override fun init() {
-        viewModel.setTestValue("splash success!!")
         goMain()
     }
 
     private fun goMain() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainHomeFragment())
-        }, 1000)
+        // 코루틴케이스
+        CoroutineScope(Dispatchers.IO).launch {
+            delay(1000)
+            binding.root.post {
+                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainFragment())
+            }
+        }
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainHomeFragment())
+//        }, 1000)
     }
 
 }

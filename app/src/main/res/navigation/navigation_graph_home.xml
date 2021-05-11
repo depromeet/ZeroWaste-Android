@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph_home.xml"
+    app:startDestination="@id/mainHomeFragment">
+
+    <keep_state_fragment
+        android:id="@+id/mainHomeFragment"
+        android:name="com.depromeet.zerowaste.feature.main.main_home.MainHomeFragment"
+        android:label="fragment_main_home"
+        tools:layout="@layout/fragment_main_home" />
+    <keep_state_fragment
+        android:id="@+id/mainCommunityFragment"
+        android:name="com.depromeet.zerowaste.feature.main.main_community.MainCommunityFragment"
+        android:label="fragment_main_community"
+        tools:layout="@layout/fragment_main_community" />
+    <keep_state_fragment
+        android:id="@+id/mainMissionFragment"
+        android:name="com.depromeet.zerowaste.feature.main.main_mission.MainMissionFragment"
+        android:label="fragment_main_mission"
+        tools:layout="@layout/fragment_main_mission" />
+
+</navigation>
