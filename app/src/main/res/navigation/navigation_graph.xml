@@ -10,33 +10,18 @@
         android:name="com.depromeet.zerowaste.feature.main.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
-
         <action
-            android:id="@+id/action_splashFragment_to_mainHomeFragment"
-            app:destination="@id/mainHomeFragment"
+            android:id="@+id/action_splashFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
     </fragment>
-    <fragment
-        android:id="@+id/mainHomeFragment"
-        android:name="com.depromeet.zerowaste.feature.main.main_home.MainHomeFragment"
-        android:label="fragment_main_home"
-        tools:layout="@layout/fragment_main_home" />
-    <fragment
-        android:id="@+id/mainCommunityFragment"
-        android:name="com.depromeet.zerowaste.feature.main.main_community.MainCommunityFragment"
-        android:label="fragment_main_community"
-        tools:layout="@layout/fragment_main_community" />
-    <fragment
-        android:id="@+id/mainMissionFragment"
-        android:name="com.depromeet.zerowaste.feature.main.main_mission.MainMissionFragment"
-        android:label="fragment_main_mission"
-        tools:layout="@layout/fragment_main_mission" />
-    <fragment
-        android:id="@+id/mainProfileFragment"
-        android:name="com.depromeet.zerowaste.feature.main.main_profile.MainProfileFragment"
-        android:label="fragment_main_profile"
-        tools:layout="@layout/fragment_main_profile" />
+
+    <keep_state_fragment
+        android:id="@+id/mainFragment"
+        android:name="com.depromeet.zerowaste.feature.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main"/>
 
 </navigation>
