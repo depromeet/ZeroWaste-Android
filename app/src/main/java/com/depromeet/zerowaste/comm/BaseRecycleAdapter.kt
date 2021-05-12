@@ -30,7 +30,7 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
         private set
     var needLoadMore: (() -> Unit)? = null
 
-    private val scrollListener: RecyclerView.OnScrollListener = object: RecyclerView.OnScrollListener() {
+    private val scrollListener = object: RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
             val orientation = when(val manager = recyclerView.layoutManager) {
@@ -106,16 +106,12 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
         return items
     }
 
-    open fun getItem(@IntRange(from = 0) position: Int): T {
-        return items[position]
-    }
-
-    open fun getItemOrNull(@IntRange(from = 0) position: Int): T? {
+    open fun getItem(@IntRange(from = 0) position: Int): T? {
         return items.getOrNull(position)
     }
 
-    open fun getItemPosition(item: T?): Int {
-        return if (item != null && items.isNotEmpty()) items.indexOf(item) else -1
+    open fun getItemPosition(item: T): Int {
+        return if (items.isNotEmpty()) items.indexOf(item) else -1
     }
 
     private fun compatibilityDataSizeChanged(size: Int) {
