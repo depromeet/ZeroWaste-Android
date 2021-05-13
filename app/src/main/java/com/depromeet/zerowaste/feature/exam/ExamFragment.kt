@@ -28,7 +28,7 @@ class ExamFragment: BaseFragment<FragmentRecyclerSampleBinding>(R.layout.fragmen
         }
     }
 
-    private val holder = { data: RecycleSampleData, vBind: FragmentRecyclerSampleItemBinding, position: Int ->
+    private val holder = { data: RecycleSampleData, vBind: FragmentRecyclerSampleItemBinding, _: Int ->
         vBind.text1.text = data.text1
         vBind.text2.text = data.text2
     }
