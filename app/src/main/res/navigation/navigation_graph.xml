@@ -18,10 +18,20 @@
             app:popUpToInclusive="true" />
     </fragment>
 
-    <keep_state_fragment
+    <fragment
         android:id="@+id/mainFragment"
         android:name="com.depromeet.zerowaste.feature.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main"/>
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.depromeet.zerowaste.feature.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile"/>
 
 </navigation>

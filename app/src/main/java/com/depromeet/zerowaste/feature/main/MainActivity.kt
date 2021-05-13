@@ -25,9 +25,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.main_navigation_view) as NavHostFragment
         val navController = navHostFragment.navController
-        val keepStateNavigator = KeepStateNavigator(this, navHostFragment.childFragmentManager, R.id.main_navigation_view)
-        navController.navigatorProvider.addNavigator(keepStateNavigator)
-        navController.setGraph(R.navigation.navigation_graph)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             Log.d(null, "id = ${destination.id}, label = ${destination.label}")

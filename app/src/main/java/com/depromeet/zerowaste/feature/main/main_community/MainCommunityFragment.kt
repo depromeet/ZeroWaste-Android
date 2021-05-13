@@ -1,13 +1,17 @@
 package com.depromeet.zerowaste.feature.main.main_community
 
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
 import com.depromeet.zerowaste.data.community.Post
 import com.depromeet.zerowaste.data.community.Tag
 import com.depromeet.zerowaste.databinding.*
+import com.depromeet.zerowaste.feature.main.MainFragmentDirections
+import com.depromeet.zerowaste.feature.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,6 +19,7 @@ class MainCommunityFragment :
     BaseFragment<FragmentMainCommunityBinding>(R.layout.fragment_main_community) {
 
     private val viewModel: MainCommunityViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     private val cardAdapter = BaseRecycleAdapter(R.layout.item_main_community_card) { item: Post, bind: ItemMainCommunityCardBinding, _: Int -> bind.item = item }
     private val listAdapter = MainCommunityListAdapter()
@@ -24,6 +29,9 @@ class MainCommunityFragment :
         binding.fragment = this
         initTagList()
         initPostList()
+        binding.mainCommunityTitle.setOnClickListener {
+            mainViewModel.navigate(MainFragmentDirections.actionMainFragmentToProfileFragment())
+        }
     }
 
     private fun initTagList() {
