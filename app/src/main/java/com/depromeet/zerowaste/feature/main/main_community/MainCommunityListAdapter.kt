@@ -5,8 +5,10 @@ import com.depromeet.zerowaste.comm.BaseRecycleAdapter
 import com.depromeet.zerowaste.data.community.Post
 import com.depromeet.zerowaste.databinding.ItemMainCommunityListBinding
 import com.depromeet.zerowaste.databinding.ItemMainCommunityPagerImgBinding
+import javax.inject.Inject
 
-class MainCommunityListAdapter: BaseRecycleAdapter<Post, ItemMainCommunityListBinding>(R.layout.item_main_community_list) {
+class MainCommunityListAdapter @Inject constructor() :
+    BaseRecycleAdapter<Post, ItemMainCommunityListBinding>(R.layout.item_main_community_list) {
 
     override fun onDataBind(item: Post, bind: ItemMainCommunityListBinding, position: Int) {
         bind.item = item
