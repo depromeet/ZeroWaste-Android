@@ -1,5 +1,6 @@
 package com.depromeet.zerowaste.comm
 
+import android.animation.Animator
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IntRange
@@ -26,6 +27,10 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
     private val onDataBind: ((T, V, Int) -> Unit)?
 
     private val items = mutableListOf<T>()
+    private var mLastPosition = -1
+    var isLoadAnimFirstOnly = true
+    var loadAnimation : (View) -> Array<Animator> = { arrayOf() }
+
     var attachedRecyclerView: RecyclerView? = null
         private set
     var needLoadMore: (() -> Unit)? = null
@@ -67,17 +72,29 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
         attachedRecyclerView = null
     }
 
+    override fun onViewAttachedToWindow(holder: BaseViewHolder<T, V>) {
+        super.onViewAttachedToWindow(holder)
+        if(!isLoadAnimFirstOnly || holder.layoutPosition > mLastPosition) {
+            loadAnimation(holder.itemView).forEach {
+                it.start()
+            }
+        }
+        if(mLastPosition < holder.layoutPosition) mLastPosition = holder.layoutPosition
+    }
+
     open fun setData(data: Collection<T>?) {
         if(data == null) return
         if (data !== this.items) {
             if (!data.isNullOrEmpty()) {
                 this.items.clear()
                 this.items.addAll(data)
+                mLastPosition = -1
             }
         } else if (!data.isNullOrEmpty()) {
             this.items.clear()
             val newList = ArrayList(data)
             this.items.addAll(newList)
+            mLastPosition = -1
         }
     }
 
@@ -119,5 +136,6 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
             notifyDataSetChanged()
         }
     }
-
 }
+
+fun recycleAnimation(lambda: (View) -> Array<Animator>): (View) -> Array<Animator> = lambda
