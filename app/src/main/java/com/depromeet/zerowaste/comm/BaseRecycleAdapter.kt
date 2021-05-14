@@ -1,6 +1,6 @@
 package com.depromeet.zerowaste.comm
 
-import android.animation.Animator
+import android.animation.AnimatorSet
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IntRange
@@ -29,7 +29,7 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
     private val items = mutableListOf<T>()
     private var mLastPosition = -1
     var isLoadAnimFirstOnly = true
-    var loadAnimation : (View) -> Array<Animator> = { arrayOf() }
+    var loadAnimation : ((View) -> AnimatorSet)? = { AnimatorSet() }
 
     var attachedRecyclerView: RecyclerView? = null
         private set
@@ -75,9 +75,7 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
     override fun onViewAttachedToWindow(holder: BaseViewHolder<T, V>) {
         super.onViewAttachedToWindow(holder)
         if(!isLoadAnimFirstOnly || holder.layoutPosition > mLastPosition) {
-            loadAnimation(holder.itemView).forEach {
-                it.start()
-            }
+            loadAnimation?.let { it(holder.itemView) }?.start()
         }
         if(mLastPosition < holder.layoutPosition) mLastPosition = holder.layoutPosition
     }
@@ -138,4 +136,4 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
     }
 }
 
-fun recycleAnimation(lambda: (View) -> Array<Animator>): (View) -> Array<Animator> = lambda
+fun recycleAnimation(lambda: (View) -> AnimatorSet): (View) -> AnimatorSet = lambda

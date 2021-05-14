@@ -1,5 +1,6 @@
 package com.depromeet.zerowaste.feature.main.main_community
 
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.view.View
 import android.view.animation.LinearInterpolator
@@ -57,7 +58,9 @@ class MainCommunityFragment :
                 duration = 300L
                 interpolator = LinearInterpolator()
             }
-            arrayOf(animator)
+            AnimatorSet().apply {
+                play(animator)
+            }
         }
         cardAdapter.needLoadMore = onNeedLoadMore
         listAdapter.needLoadMore = onNeedLoadMore
