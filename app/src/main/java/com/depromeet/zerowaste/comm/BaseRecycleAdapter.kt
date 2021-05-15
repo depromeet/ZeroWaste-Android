@@ -1,5 +1,6 @@
 package com.depromeet.zerowaste.comm
 
+import android.animation.AnimatorSet
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IntRange
@@ -26,11 +27,15 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
     private val onDataBind: ((T, V, Int) -> Unit)?
 
     private val items = mutableListOf<T>()
+    private var mLastPosition = -1
+    var isLoadAnimFirstOnly = true
+    var loadAnimation : ((View) -> AnimatorSet)? = { AnimatorSet() }
+
     var attachedRecyclerView: RecyclerView? = null
         private set
     var needLoadMore: (() -> Unit)? = null
 
-    private val scrollListener: RecyclerView.OnScrollListener = object: RecyclerView.OnScrollListener() {
+    private val scrollListener = object: RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
             val orientation = when(val manager = recyclerView.layoutManager) {
@@ -63,7 +68,16 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
+        recyclerView.removeOnScrollListener(scrollListener)
         attachedRecyclerView = null
+    }
+
+    override fun onViewAttachedToWindow(holder: BaseViewHolder<T, V>) {
+        super.onViewAttachedToWindow(holder)
+        if(!isLoadAnimFirstOnly || holder.layoutPosition > mLastPosition) {
+            loadAnimation?.let { it(holder.itemView) }?.start()
+        }
+        if(mLastPosition < holder.layoutPosition) mLastPosition = holder.layoutPosition
     }
 
     open fun setData(data: Collection<T>?) {
@@ -72,11 +86,13 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
             if (!data.isNullOrEmpty()) {
                 this.items.clear()
                 this.items.addAll(data)
+                mLastPosition = -1
             }
         } else if (!data.isNullOrEmpty()) {
             this.items.clear()
             val newList = ArrayList(data)
             this.items.addAll(newList)
+            mLastPosition = -1
         }
     }
 
@@ -105,16 +121,12 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
         return items
     }
 
-    open fun getItem(@IntRange(from = 0) position: Int): T {
-        return items[position]
-    }
-
-    open fun getItemOrNull(@IntRange(from = 0) position: Int): T? {
+    open fun getItem(@IntRange(from = 0) position: Int): T? {
         return items.getOrNull(position)
     }
 
-    open fun getItemPosition(item: T?): Int {
-        return if (item != null && items.isNotEmpty()) items.indexOf(item) else -1
+    open fun getItemPosition(item: T): Int {
+        return if (items.isNotEmpty()) items.indexOf(item) else -1
     }
 
     private fun compatibilityDataSizeChanged(size: Int) {
@@ -122,5 +134,6 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
             notifyDataSetChanged()
         }
     }
-
 }
+
+fun recycleAnimation(lambda: (View) -> AnimatorSet): (View) -> AnimatorSet = lambda

@@ -1,6 +1,8 @@
 package com.depromeet.zerowaste.feature.main
 
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
@@ -8,6 +10,8 @@ import com.depromeet.zerowaste.comm.KeepStateNavigator
 import com.depromeet.zerowaste.databinding.FragmentMainBinding
 
 class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
+
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun init() {
         val navHostFragment =
@@ -17,6 +21,10 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         navController.navigatorProvider.addNavigator(keepStateNavigator)
         navController.setGraph(R.navigation.navigation_graph_home)
         binding.mainBottomNavigation.setupWithNavController(navController)
+
+        viewModel.navDirection.observe(this) {
+            findNavController().navigate(it)
+        }
     }
 
 }

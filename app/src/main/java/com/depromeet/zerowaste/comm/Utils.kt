@@ -22,13 +22,12 @@ fun genLayoutManager(context: Context, isVertical: Boolean = true, @IntRange(fro
     } else if(!isStaggered){
         GridLayoutManager(context, spanCount, orientation, false)
     } else {
-        val manager = StaggeredGridLayoutManager(spanCount, orientation)
-        manager
+        StaggeredGridLayoutManager(spanCount, orientation)
     }
 }
 
 fun ViewGroup.inflate(@LayoutRes resource: Int, attachToRoot: Boolean = true): View {
-    return LayoutInflater.from(context).inflate(resource, this, attachToRoot)
+    return inflater().inflate(resource, this, attachToRoot)
 }
 
 fun ViewGroup.inflater(): LayoutInflater {
