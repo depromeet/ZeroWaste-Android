@@ -96,8 +96,8 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:4.8.1"
     implementation "com.squareup.okhttp3:logging-interceptor:4.8.1"
     // Firebase
-    implementation 'com.google.firebase:firebase-analytics-ktx:18.0.3'
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:17.4.1'
+    implementation 'com.google.firebase:firebase-analytics-ktx:19.0.0'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.0.0'
     // kakao login
     implementation "com.kakao.sdk:v2-user:2.4.2"
     implementation "com.kakao.sdk:v2-user-rx:2.4.2"
