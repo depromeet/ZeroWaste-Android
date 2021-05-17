@@ -6,7 +6,7 @@
         motion:constraintSetEnd="@+id/end"
         motion:duration="1000"
         motion:motionInterpolator="linear">
-        <OnSwipe motion:touchAnchorId="@id/main_mission_list_nested" />
+        <OnSwipe/>
     </Transition>
     <ConstraintSet android:id="@+id/start">
         <Constraint
