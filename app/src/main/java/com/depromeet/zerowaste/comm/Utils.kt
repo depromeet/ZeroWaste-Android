@@ -1,6 +1,8 @@
 package com.depromeet.zerowaste.comm
 
 import android.content.Context
+import android.util.DisplayMetrics
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +36,37 @@ fun ViewGroup.inflater(): LayoutInflater {
     return LayoutInflater.from(context)
 }
 
+fun dpToPx(context: Context, dp: Float): Float {
+    return TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        dp,
+        context.resources.displayMetrics
+    )
+}
+
+fun spToPx(context: Context, sp: Float): Float {
+    return TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_SP,
+        sp,
+        context.resources.displayMetrics
+    )
+}
+
+fun pxToDp(context: Context, px: Float): Float {
+    return px / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+}
+
+fun pxToSp(context: Context, px: Float): Float {
+    return px / context.resources.displayMetrics.scaledDensity
+}
+
+fun dpToSp(context: Context, dp: Float): Float {
+    return pxToSp(context, dpToPx(context, dp))
+}
+
+fun spToDp(context: Context, sp: Float): Float {
+    return pxToDp(context, spToPx(context, sp))
+}
 
 /*
 * viewpager

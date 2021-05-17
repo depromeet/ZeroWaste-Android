@@ -10,14 +10,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
     private val okHttpBuilder = OkHttpClient.Builder()
-        .addInterceptor({
+        .addInterceptor(run {
             val loggingInterceptor = HttpLoggingInterceptor()
             if (BuildConfig.DEBUG)
                 loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
             else
                 loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
             loggingInterceptor
-        }.invoke())
+        })
 
     private fun createOkHttpClient(): OkHttpClient {
         val token = Share.token
