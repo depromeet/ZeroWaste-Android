@@ -16,6 +16,7 @@ import com.depromeet.zerowaste.databinding.*
 import com.depromeet.zerowaste.feature.main.MainFragmentDirections
 import com.depromeet.zerowaste.feature.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainCommunityFragment :
@@ -25,7 +26,7 @@ class MainCommunityFragment :
     private val mainViewModel: MainViewModel by activityViewModels()
 
     private val cardAdapter = BaseRecycleAdapter(R.layout.item_main_community_card) { item: Post, bind: ItemMainCommunityCardBinding, _: Int -> bind.item = item }
-    private val listAdapter = MainCommunityListAdapter()
+    @Inject lateinit var listAdapter: MainCommunityListAdapter
 
     override fun init() {
         binding.vm = viewModel
