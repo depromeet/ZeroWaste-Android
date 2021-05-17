@@ -12,5 +12,6 @@
     <string name="main_community_list_experienced_difficulty">체감난이도</string>
     <string name="main_community_list_mission_complete_cnt">번 인증완료</string>
 
-    <string name="main_mission_suggest">에서 할 수 있는\n제로 웨이스트를 알려 드릴께요!</string>
+    <string name="main_mission_suggest">에서 할 수 있는\n제로 웨이스트를 알려 드릴게요!</string>
+    <string name="main_mission_list">미션 리스트</string>
 </resources>

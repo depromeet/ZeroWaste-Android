@@ -88,3 +88,8 @@ fun loadImage(view: ImageView, loadImage: String) {
 fun loadImageCircle(view: ImageView, loadImage: String) {
     Glide.with(view).load(loadImage).circleCrop().into(view)
 }
+
+@BindingAdapter("loadImageCenterCrop")
+fun loadImageCenterCrop(view: ImageView, loadImage: String) {
+    Glide.with(view).load(loadImage).centerCrop().into(view)
+}

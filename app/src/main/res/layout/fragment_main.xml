@@ -17,7 +17,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/main_bottom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_80dp"
+            android:layout_height="50dp"
             android:theme="@style/Theme.ZeroWaste.BottomNav"
             android:visibility="visible"
             app:itemIconSize="32dp"

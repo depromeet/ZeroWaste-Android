@@ -1,5 +1,6 @@
 package com.depromeet.zerowaste.data.community
 
+import com.depromeet.zerowaste.data.mission.Tag
 import java.util.*
 
 data class Post(

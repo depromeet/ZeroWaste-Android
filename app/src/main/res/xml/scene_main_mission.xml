@@ -6,9 +6,7 @@
         motion:constraintSetEnd="@+id/end"
         motion:duration="1000"
         motion:motionInterpolator="linear">
-        <OnSwipe
-            motion:touchAnchorId="@id/main_mission_list_parent"
-            motion:dragDirection="dragUp"/>
+        <OnSwipe motion:touchAnchorId="@id/main_mission_list_nested" />
     </Transition>
     <ConstraintSet android:id="@+id/start">
         <Constraint
@@ -21,7 +19,7 @@
             android:alpha="1"
             motion:layout_constraintTop_toBottomOf="@id/main_mission_tab"/>
         <Constraint
-            android:id="@+id/main_mission_txt"
+            android:id="@+id/main_mission_suggest_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -33,12 +31,14 @@
             android:id="@+id/main_mission_ranker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:alpha="1"
-            motion:layout_constraintTop_toBottomOf="@id/main_mission_txt" />
+            motion:layout_constraintTop_toBottomOf="@id/main_mission_suggest_txt" />
         <Constraint
-            android:id="@+id/main_mission_list_parent"
+            android:id="@+id/main_mission_list_back"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="28dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/main_mission_ranker"/>
     </ConstraintSet>
@@ -53,7 +53,7 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintBottom_toTopOf="@id/main_mission_tab"/>
         <Constraint
-            android:id="@+id/main_mission_txt"
+            android:id="@+id/main_mission_suggest_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
@@ -66,11 +66,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0"
+            android:layout_marginTop="0dp"
             motion:layout_constraintBottom_toTopOf="@id/main_mission_tab" />
         <Constraint
-            android:id="@+id/main_mission_list_parent"
+            android:id="@+id/main_mission_list_back"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="10dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/main_mission_tab"/>
     </ConstraintSet>

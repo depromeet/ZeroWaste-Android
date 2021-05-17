@@ -1,4 +1,4 @@
-package com.depromeet.zerowaste.data.community
+package com.depromeet.zerowaste.data.mission
 
 data class Tag(
     val id: String,
