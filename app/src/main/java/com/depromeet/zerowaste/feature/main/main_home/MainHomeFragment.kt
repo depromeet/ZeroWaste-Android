@@ -2,6 +2,7 @@ package com.depromeet.zerowaste.feature.main.main_home
 
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
@@ -19,7 +20,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
     private val viewModel: MainHomeViewModel by viewModels()
 
     private val missionAdapter =
-        BaseRecycleAdapter(R.layout.item_main_home_mission) { item: Mission, bind: ItemMainHomeMissionBinding, _: Int ->
+        BaseRecycleAdapter(R.layout.item_main_home_my_mission) { item: Mission, bind: ItemMainHomeMissionBinding, _: Int ->
             bind.item = item
         }
     private val newMissionAdapter =
@@ -51,17 +52,17 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
 
 
     private fun initMissionList() {
-        viewModel.missionList.observe(this) { data ->
+        viewModel.missionList.observe(this, Observer { data ->
             missionAdapter.addData(data)
-        }
+        })
         binding.mainHomeRvMissions.adapter = missionAdapter
         viewModel.getMissionList()
     }
 
     private fun initNewMissionList() {
-        viewModel.newMissionList.observe(this) { data ->
+        viewModel.newMissionList.observe(this, Observer { data ->
             newMissionAdapter.addData(data)
-        }
+        })
         binding.mainHomeRvNewMissions.adapter = newMissionAdapter
         viewModel.getNewMissionList()
     }
