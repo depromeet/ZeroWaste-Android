@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_bg_image"
+                    android:id="@+id/main_home_my_mission_iv_bg_image"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:alpha="0.5"
@@ -40,7 +40,7 @@
                     tools:src="@tools:sample/backgrounds/scenic" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_icon"
+                    android:id="@+id/main_home_my_mission_iv_icon"
                     android:layout_width="41.16dp"
                     android:layout_height="41dp"
                     android:layout_marginStart="22.09dp"
@@ -70,12 +70,12 @@
                     android:text="@{item.difficulty}"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/iv_icon"
-                    app:layout_constraintTop_toBottomOf="@id/iv_icon"
+                    app:layout_constraintStart_toStartOf="@id/main_home_my_mission_iv_icon"
+                    app:layout_constraintTop_toBottomOf="@id/main_home_my_mission_iv_icon"
                     tools:text="Lv.3" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_title"
+                    android:id="@+id/main_home_my_mission_tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{item.name}"
@@ -97,7 +97,7 @@
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/iv_icon"
+                    app:layout_constraintStart_toStartOf="@id/main_home_my_mission_iv_icon"
                     app:layout_constraintTop_toBottomOf="@id/tv_level"
                     tools:text="텀블러 쓰면 할인도 받을 걸?" />
 
