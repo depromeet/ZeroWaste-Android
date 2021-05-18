@@ -1,6 +1,8 @@
 package com.depromeet.zerowaste.feature.main.main_mission
 
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.coroutineScope
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
@@ -11,6 +13,9 @@ import com.depromeet.zerowaste.data.mission.TempMissionTag
 import com.depromeet.zerowaste.databinding.*
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainMissionFragment :
@@ -44,17 +49,18 @@ class MainMissionFragment :
     private fun initTags() {
         viewModel.tagList.observe(this) { list ->
             binding.mainMissionTab.removeAllTabs()
+            binding.mainMissionTab.clearOnTabSelectedListeners()
             list.forEach { tag ->
                 val tab = binding.mainMissionTab.newTab()
                 tab.text = tag.title
                 binding.mainMissionTab.addTab(tab)
             }
+            binding.mainMissionTab.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab) { tabSelected(tab.position) }
+                override fun onTabUnselected(tab: TabLayout.Tab) {}
+                override fun onTabReselected(tab: TabLayout.Tab) {}
+            })
         }
-        binding.mainMissionTab.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) { tabSelected(tab.position) }
-            override fun onTabUnselected(tab: TabLayout.Tab) {}
-            override fun onTabReselected(tab: TabLayout.Tab) {}
-        })
         viewModel.initTagList()
     }
 
@@ -73,7 +79,6 @@ class MainMissionFragment :
         binding.mainMissionChips.adapter = chipAdapter
         viewModel.missionList.observe(this) {
             missionAdapter.setData(it)
-            binding.mainMissionList.smoothScrollToPosition(0)
         }
         binding.mainMissionList.adapter = missionAdapter
         viewModel.getMission()
@@ -84,6 +89,7 @@ class MainMissionFragment :
             item.selected = if(position == i) !item.selected else false
         }
         chipAdapter.notifyDataSetChanged()
+        binding.mainMissionMotion.transitionToEnd()
     }
 
     private fun tabSelected(position: Int) {
@@ -93,8 +99,9 @@ class MainMissionFragment :
                 .add(requireContext().resources.getString(R.string.main_mission_suggest))
                 .build()
         }
-        binding.mainMissionMotion.transitionToStart()
         viewModel.getMission()
+        binding.mainMissionMotion.transitionToStart()
+        binding.mainMissionListNested.smoothScrollTo(0,0)
     }
 
 }
