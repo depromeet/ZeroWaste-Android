@@ -10,6 +10,8 @@ import android.text.TextPaint
 import android.text.style.*
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
+import androidx.annotation.FontRes
+import androidx.core.content.res.ResourcesCompat
 
 class SpanStrBuilder(private val context: Context) {
 
@@ -24,9 +26,9 @@ class SpanStrBuilder(private val context: Context) {
     private val underLines: HashSet<Int> = HashSet()
     private val backColors: HashMap<Int, Int?> = HashMap()
 
-    @Suppress("DEPRECATION")
     fun add(
         text: String,
+        @FontRes fontRes: Int? = null,
         typeface: Typeface? = null,
         @ColorRes colorRes: Int? = null,
         @ColorInt color: Int? = null,
@@ -36,26 +38,18 @@ class SpanStrBuilder(private val context: Context) {
         @ColorInt backColor: Int? = null,
     ): SpanStrBuilder {
         lengths[index] = Pair(lastLength, lastLength + text.length)
-        typeface?.also {
-            typefaces[index] = it
-        }
+        fontRes?.also {
+            typefaces[index] = ResourcesCompat.getFont(context, it)
+        } ?: typeface?.also { typefaces[index] = it }
         colorRes?.also {
-            colors[index] = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                context.resources.getColor(it, null)
-            } else {
-                context.resources.getColor(it)
-            }
+            colors[index] = ResourcesCompat.getColor(context.resources, it, null)
         } ?: color?.also { colors[index] = it }
         sp?.also {
             sizes[index] = it
         }
         if(isUnderLine) underLines.add(index)
         backColorRes?.also {
-            backColors[index] = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                context.resources.getColor(it, null)
-            } else {
-                context.resources.getColor(it)
-            }
+            backColors[index] = ResourcesCompat.getColor(context.resources, it, null)
         } ?: backColor?.also { backColors[index] = it }
         lastLength += text.length
         targetStr += text
@@ -105,7 +99,6 @@ class SpanStrBuilder(private val context: Context) {
         override fun updateDrawState(ds: TextPaint) {
             applyCustomTypeFace(ds, newType)
         }
-
         override fun updateMeasureState(paint: TextPaint) {
             applyCustomTypeFace(paint, newType)
         }

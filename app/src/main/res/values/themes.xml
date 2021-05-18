@@ -15,6 +15,12 @@
     </style>
 
     <style name="Theme.ZeroWaste.BottomNav">
-        <item name="colorPrimary">@color/main</item>
+        <item name="colorPrimary">@color/sub1</item>
+        <item name="colorOnSurface">@color/gray_2</item>
+    </style>
+
+    <style name="main_mission_tab_text_style">
+        <item name="android:fontFamily">@font/apple_sd_gothic_neo_r</item>
+        <item name="android:textSize">18sp</item>
     </style>
 </resources>

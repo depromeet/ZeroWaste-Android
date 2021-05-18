@@ -11,7 +11,7 @@ import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
 import com.depromeet.zerowaste.comm.recycleAnimation
 import com.depromeet.zerowaste.data.community.Post
-import com.depromeet.zerowaste.data.community.Tag
+import com.depromeet.zerowaste.data.mission.Tag
 import com.depromeet.zerowaste.databinding.*
 import com.depromeet.zerowaste.feature.main.MainFragmentDirections
 import com.depromeet.zerowaste.feature.main.MainViewModel

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.depromeet.zerowaste.data.mission.TempMissionTag" />
+    </data>
+
+    <TextView
+        android:id="@+id/item_main_mission_list_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{item.title}"
+        android:background="@drawable/rect_round_chip_4dp"
+        android:gravity="center"
+        android:fontFamily="@font/apple_sd_gothic_neo_b"
+        android:textSize="13sp"
+        android:textColor="#18234E"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="1.5dp"
+        android:paddingBottom="1.5dp"
+        tools:text="재활용"/>
+
+</layout>
