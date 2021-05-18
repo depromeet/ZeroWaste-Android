@@ -86,12 +86,14 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
             if (!data.isNullOrEmpty()) {
                 this.items.clear()
                 this.items.addAll(data)
+                notifyDataSetChanged()
                 mLastPosition = -1
             }
         } else if (!data.isNullOrEmpty()) {
             this.items.clear()
             val newList = ArrayList(data)
             this.items.addAll(newList)
+            notifyDataSetChanged()
             mLastPosition = -1
         }
     }
