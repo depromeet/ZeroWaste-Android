@@ -39,7 +39,7 @@
             android:text="@{item.title}"
             android:textSize="18sp"
             android:textColor="#283237"
-            android:fontFamily="@font/apple_sd_gothic_neo_b"
+            android:fontFamily="@font/apple_sd_gothic_neo_eb"
             android:layout_marginStart="9dp"
             app:layout_constraintStart_toEndOf="@id/item_main_mission_list_star"
             app:layout_constraintTop_toTopOf="@id/item_main_mission_list_star"
