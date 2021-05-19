@@ -42,5 +42,10 @@
         android:name="com.depromeet.zerowaste.feature.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/pledgeFragment"
+        android:name="com.depromeet.zerowaste.feature.pledge.PledgeFragment"
+        android:label="fragment_pledge"
+        tools:layout="@layout/fragment_pledge" />
 
 </navigation>
