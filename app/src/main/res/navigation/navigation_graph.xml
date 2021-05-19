@@ -37,5 +37,10 @@
         android:name="com.depromeet.zerowaste.feature.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.depromeet.zerowaste.feature.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 
 </navigation>

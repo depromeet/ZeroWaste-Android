@@ -104,6 +104,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     // glide

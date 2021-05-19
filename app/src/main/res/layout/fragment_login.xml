@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0F1469"
+        tools:context=".feature.login.LoginFragment">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/login_tv_app_introduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="237dp"
+            android:gravity="center"
+            android:text="제로웨이스트 습관 형성 앱"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/login_tv_app_left_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/kotra_bold"
+            android:text="제로"
+            android:textColor="@color/white"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toStartOf="@id/login_tv_app_right_title"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_tv_app_introduce" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/login_tv_app_right_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kotra_bold"
+            android:text="우쥬"
+            android:textColor="@color/sub2"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/login_tv_app_left_title"
+            app:layout_constraintTop_toTopOf="@id/login_tv_app_left_title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
