@@ -1,6 +1,6 @@
 package com.depromeet.zerowaste.feature.login
 
-import android.util.Log
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
@@ -12,33 +12,43 @@ import com.kakao.sdk.user.UserApiClient
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
+    private val viewModel: LoginViewModel by viewModels()
+
     override fun init() {
+        viewModel.error.observe(this) {
+            // 에러처리
+        }
         binding.fragment = this
     }
 
     fun kakaoLoginClick() {
         if(UserApiClient.instance.isKakaoTalkLoginAvailable(requireContext())) {
             UserApiClient.instance.loginWithKakaoTalk(requireContext()) { token, error ->
-                Log.e("tttt", token?.accessToken.toString())
-                error?.printStackTrace()
                 token?.accessToken?.also {
-                    Share.authToken = it
-                    getPreference(requireContext()).edit().putString(Constants.AUTH_TOKEN, it).apply()
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
+                    getServerToken(it)
                 }
             }
         } else {
+            UserApiClient.instance.me { user, error ->
+                user?.kakaoAccount?.email
+            }
             UserApiClient.instance.loginWithKakaoAccount(requireContext()) { token, error ->
-                Log.e("tttt", token?.accessToken.toString())
-                error?.printStackTrace()
                 token?.accessToken?.also {
-                    Share.authToken = it
-                    getPreference(requireContext()).edit().putString(Constants.AUTH_TOKEN, it).apply()
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
+                    getServerToken(it)
                 }
             }
         }
+    }
 
+    private fun getServerToken(kakaoToken: String) {
+        viewModel.loginResult.observe(this) { res ->
+            res.data?.also { user ->
+                Share.authToken = user.token
+                getPreference(requireContext()).edit().putString(Constants.AUTH_TOKEN, user.token).apply()
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
+            }
+        }
+        viewModel.getServerTokenWithKakao(kakaoToken)
     }
 
 }
