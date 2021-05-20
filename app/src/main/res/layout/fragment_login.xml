@@ -4,53 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="fragment"
+            type="com.depromeet.zerowaste.feature.login.LoginFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#0F1469"
-        tools:context=".feature.login.LoginFragment">
+        android:background="@color/white">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/login_tv_app_introduce"
+        <ImageView
+            android:id="@+id/login_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="237dp"
+            android:background="@drawable/ic_splash_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.4"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/login_kakao_btn"
+            android:layout_width="324dp"
+            android:layout_height="59dp"
+            android:background="@drawable/rect_round_kakao_16"
+            android:layout_marginTop="39dp"
+            android:fontFamily="@font/apple_sd_gothic_neo_b"
             android:gravity="center"
-            android:text="제로웨이스트 습관 형성 앱"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="16sp"
+            android:textColor="@color/real_black"
+            android:text="카카오 로그인"
+            android:onClick="@{() -> fragment.kakaoLoginClick()}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/login_tv_app_left_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:fontFamily="@font/kotra_bold"
-            android:text="제로"
-            android:textColor="@color/white"
-            android:textSize="36sp"
-            app:layout_constraintEnd_toStartOf="@id/login_tv_app_right_title"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/login_tv_app_introduce" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/login_tv_app_right_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/kotra_bold"
-            android:text="우쥬"
-            android:textColor="@color/sub2"
-            android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/login_tv_app_left_title"
-            app:layout_constraintTop_toTopOf="@id/login_tv_app_left_title" />
+            app:layout_constraintTop_toBottomOf="@id/login_logo"
+            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

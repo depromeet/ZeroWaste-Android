@@ -20,7 +20,7 @@ object RetrofitClient {
         })
 
     private fun createOkHttpClient(): OkHttpClient {
-        val token = Share.token
+        val token = Share.authToken
         if (token.isNotEmpty()) {
             okHttpBuilder.addInterceptor { chain ->
                 return@addInterceptor chain.proceed(chain.request().newBuilder().let {

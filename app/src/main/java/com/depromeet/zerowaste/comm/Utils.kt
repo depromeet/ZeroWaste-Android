@@ -1,6 +1,7 @@
 package com.depromeet.zerowaste.comm
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -14,8 +15,21 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
 import com.bumptech.glide.Glide
+import com.depromeet.zerowaste.BuildConfig
 
+
+fun getPreference(context: Context): SharedPreferences {
+    return EncryptedSharedPreferences.create(
+        BuildConfig.SECURE_KEY,
+        MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC),
+        context,
+        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+    )
+}
 
 fun genLayoutManager(context: Context, isVertical: Boolean = true, @IntRange(from = 1) spanCount: Int = 1, isStaggered: Boolean = false): RecyclerView.LayoutManager {
     val orientation: Int = if(isVertical) RecyclerView.VERTICAL else RecyclerView.HORIZONTAL

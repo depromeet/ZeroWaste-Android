@@ -138,4 +138,4 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
     }
 }
 
-fun recycleAnimation(lambda: (View) -> AnimatorSet): (View) -> AnimatorSet = lambda
+fun recycleAnimation(lambda: (View) -> AnimatorSet) = lambda

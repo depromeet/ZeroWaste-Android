@@ -7,12 +7,18 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.depromeet.zerowaste.feature.main.SplashFragment"
+        android:name="com.depromeet.zerowaste.feature.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_mainFragment"
             app:destination="@id/mainFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
@@ -36,12 +42,19 @@
         android:id="@+id/profileFragment"
         android:name="com.depromeet.zerowaste.feature.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile"/>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.depromeet.zerowaste.feature.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/pledgeFragment"
         android:name="com.depromeet.zerowaste.feature.pledge.PledgeFragment"
