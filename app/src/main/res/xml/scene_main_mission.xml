@@ -11,13 +11,21 @@
     </Transition>
     <ConstraintSet android:id="@+id/start">
         <Constraint
+            android:id="@+id/main_mission_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:alpha="1"
+            motion:layout_constraintTop_toBottomOf="@id/main_mission_title"
+            motion:layout_constraintStart_toStartOf="@id/main_mission_title"/>
+        <Constraint
             android:id="@+id/main_mission_icon"
             android:layout_width="98dp"
             android:layout_height="89dp"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="26dp"
             android:alpha="1"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/main_mission_tab"/>
         <Constraint
             android:id="@+id/main_mission_suggest_txt"
@@ -44,6 +52,14 @@
             motion:layout_constraintTop_toBottomOf="@id/main_mission_ranker"/>
     </ConstraintSet>
     <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/main_mission_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="@id/main_mission_title"
+            motion:layout_constraintStart_toStartOf="@id/main_mission_title"/>
         <Constraint
             android:id="@+id/main_mission_icon"
             android:layout_width="98dp"
