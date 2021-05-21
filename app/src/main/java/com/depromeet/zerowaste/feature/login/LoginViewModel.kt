@@ -6,10 +6,9 @@ import com.depromeet.zerowaste.api.AuthApi
 import com.depromeet.zerowaste.comm.BaseViewModel
 import com.depromeet.zerowaste.comm.data.Share
 import com.depromeet.zerowaste.data.Res
-import com.depromeet.zerowaste.data.auth.req.KakaoAuth
-import com.depromeet.zerowaste.data.auth.req.Refresh
-import com.depromeet.zerowaste.data.auth.res.User
-import com.google.gson.JsonObject
+import com.depromeet.zerowaste.data.auth.KakaoAuth
+import com.depromeet.zerowaste.data.auth.Refresh
+import com.depromeet.zerowaste.data.auth.User
 
 class LoginViewModel: BaseViewModel() {
 

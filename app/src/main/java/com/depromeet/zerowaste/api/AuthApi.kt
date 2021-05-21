@@ -1,11 +1,9 @@
 package com.depromeet.zerowaste.api
 
-
 import com.depromeet.zerowaste.data.Res
-import com.depromeet.zerowaste.data.auth.req.KakaoAuth
-import com.depromeet.zerowaste.data.auth.req.Refresh
-import com.depromeet.zerowaste.data.auth.res.User
-import com.google.gson.JsonObject
+import com.depromeet.zerowaste.data.auth.KakaoAuth
+import com.depromeet.zerowaste.data.auth.Refresh
+import com.depromeet.zerowaste.data.auth.User
 import retrofit2.http.Body
 import retrofit2.http.POST
 

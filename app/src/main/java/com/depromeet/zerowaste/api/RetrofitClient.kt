@@ -24,7 +24,7 @@ object RetrofitClient {
         if (token.isNotEmpty()) {
             okHttpBuilder.addInterceptor { chain ->
                 return@addInterceptor chain.proceed(chain.request().newBuilder().let {
-                    it.header("Authorization", "Bearer $token")
+                    it.header("Authorization", "jwt $token")
                     it.build()
                 })
             }

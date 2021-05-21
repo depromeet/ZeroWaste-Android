@@ -1,4 +1,4 @@
-package com.depromeet.zerowaste.data.auth.res
+package com.depromeet.zerowaste.data.auth
 
 import java.util.*
 

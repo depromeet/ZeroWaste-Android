@@ -23,7 +23,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     }
 
     fun kakaoLoginClick() {
-        val kakaoAuthLambda: (token: OAuthToken?, error: Throwable?) -> Unit = { token: OAuthToken?, e: Throwable? ->
+        val kakaoAuthLambda: (token: OAuthToken?, error: Throwable?) -> Unit = { token, e ->
             e?.printStackTrace()
             token?.accessToken?.also {
                 getServerToken(it)
