@@ -86,7 +86,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            app:isVertical="@{false}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/item_main_mission_list_like"
             app:layout_constraintTop_toTopOf="@id/item_main_mission_list_like"

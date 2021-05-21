@@ -2,7 +2,7 @@ package com.depromeet.zerowaste.data.auth
 
 import java.util.*
 
-data class User(
+data class UserAuthInfo(
     val id: Int,
     val identifier: String,
     val email: String?,

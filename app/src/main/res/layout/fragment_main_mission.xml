@@ -89,6 +89,7 @@
             android:id="@+id/main_mission_list_nested"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_constraintHeight_min="1dp"
             app:layout_constraintTop_toBottomOf="@id/main_mission_chips"
             app:layout_constraintBottom_toBottomOf="parent">
             <androidx.recyclerview.widget.RecyclerView
@@ -109,8 +110,8 @@
             app:tabMode="scrollable"
             app:tabTextAppearance="@style/main_mission_tab_text_style"
             app:tabTextColor="@color/gray_2"
-            app:tabSelectedTextColor="@color/gray_2"
-            app:tabIndicatorColor="@color/gray_2"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorColor="@color/white"
             app:tabIndicatorFullWidth="false"
             app:layout_constraintTop_toBottomOf="@id/main_mission_sub_title"/>
 

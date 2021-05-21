@@ -3,31 +3,38 @@ package com.depromeet.zerowaste.feature.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.depromeet.zerowaste.api.AuthApi
+import com.depromeet.zerowaste.api.UserApi
 import com.depromeet.zerowaste.comm.BaseViewModel
 import com.depromeet.zerowaste.comm.data.Share
 import com.depromeet.zerowaste.data.Res
 import com.depromeet.zerowaste.data.auth.KakaoAuth
 import com.depromeet.zerowaste.data.auth.Refresh
-import com.depromeet.zerowaste.data.auth.User
+import com.depromeet.zerowaste.data.auth.UserAuthInfo
+import com.depromeet.zerowaste.data.user.User
 
 class LoginViewModel: BaseViewModel() {
 
-    private val _loginResult = MutableLiveData<Res<User>>()
-    val loginResult: LiveData<Res<User>> get() = _loginResult
-
-    private val _refresh = MutableLiveData<Res<User>>()
-    val refresh: LiveData<Res<User>> get() = _refresh
+    private val _isSuccess = MutableLiveData<Boolean>()
+    val isSuccess: LiveData<Boolean> get() = _isSuccess
 
     fun refreshToken() {
         execute({
-            AuthApi.refreshServerToken(Refresh(Share.authToken))
-        }, _refresh)
+            val userAuth = AuthApi.refreshServerToken(Refresh(Share.authToken)).data ?: return@execute false
+            Share.authToken = userAuth.token
+            val user = UserApi.getUserInfo(userAuth.id).data ?: return@execute false
+            Share.user = user
+            return@execute true
+        }, _isSuccess)
     }
 
-    fun getServerTokenWithKakao(kakaoToken: String) {
+    fun getUserWithKakaoToken(kakaoToken: String) {
         execute({
-            AuthApi.getServerTokenWithKakao(KakaoAuth(kakaoToken))
-        }, _loginResult)
+            val userAuth = AuthApi.getServerTokenWithKakao(KakaoAuth(kakaoToken)).data ?: return@execute false
+            Share.authToken = userAuth.token
+            val user = UserApi.getUserInfo(userAuth.id).data ?: return@execute false
+            Share.user = user
+            return@execute true
+        }, _isSuccess)
     }
 
 }

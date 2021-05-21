@@ -4,8 +4,8 @@
     <Transition
         motion:constraintSetStart="@+id/start"
         motion:constraintSetEnd="@+id/end"
-        motion:duration="200"
-        motion:motionInterpolator="linear">
+        motion:duration="500"
+        motion:motionInterpolator="easeInOut">
         <OnSwipe
             motion:touchAnchorId="@id/main_mission_list_back" />
     </Transition>

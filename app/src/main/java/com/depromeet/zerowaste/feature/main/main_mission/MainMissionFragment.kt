@@ -7,6 +7,7 @@ import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
 import com.depromeet.zerowaste.comm.SpanStrBuilder
+import com.depromeet.zerowaste.comm.genLayoutManager
 import com.depromeet.zerowaste.data.mission.Rank
 import com.depromeet.zerowaste.data.mission.TempMission
 import com.depromeet.zerowaste.data.mission.TempMissionTag
@@ -33,10 +34,11 @@ class MainMissionFragment :
     }
     private val missionAdapter = BaseRecycleAdapter(R.layout.item_main_mission_list)
     { item: TempMission, bind: ItemMainMissionListBinding, _ ->
-        bind.item = item
         val tagAdapter = BaseRecycleAdapter(R.layout.item_main_mission_list_tag){ i: TempMissionTag, b: ItemMainMissionListTagBinding, _ -> b.item = i }
         tagAdapter.setData(item.tagList)
+        bind.itemMainMissionListTags.layoutManager = genLayoutManager(requireContext(), isVertical = false)
         bind.itemMainMissionListTags.adapter = tagAdapter
+        bind.item = item
     }
 
     override fun init() {
@@ -74,22 +76,26 @@ class MainMissionFragment :
 
     private fun initMissions() {
         viewModel.missionTagList.observe(this) {
-            chipAdapter.setData(it)
+            binding.mainMissionChips.post {
+                chipAdapter.setData(it)
+            }
         }
         binding.mainMissionChips.adapter = chipAdapter
         viewModel.missionList.observe(this) {
-            missionAdapter.setData(it)
+            binding.mainMissionList.post {
+                missionAdapter.setData(it)
+            }
         }
         binding.mainMissionList.adapter = missionAdapter
         viewModel.getMission()
     }
 
     private fun missionChipClick(position: Int) {
+        if(binding.mainMissionMotion.progress != 1f) binding.mainMissionMotion.transitionToEnd()
         chipAdapter.getItems().forEachIndexed { i, item ->
             item.selected = if(position == i) !item.selected else false
         }
         chipAdapter.notifyDataSetChanged()
-        binding.mainMissionMotion.transitionToEnd()
     }
 
     private fun tabSelected(position: Int) {
@@ -100,7 +106,7 @@ class MainMissionFragment :
                 .build()
         }
         viewModel.getMission()
-        binding.mainMissionMotion.transitionToStart()
+        if(binding.mainMissionMotion.progress != 0f) binding.mainMissionMotion.transitionToStart()
         binding.mainMissionListNested.smoothScrollTo(0,0)
     }
 
