@@ -17,7 +17,7 @@ class AuthApi {
         suspend fun getServerTokenWithKakao(@Body req: KakaoAuth): Res<User>
 
         @POST("/api/jwt-auth/refresh/")
-        suspend fun refreshServerToken(@Body req: Refresh): Res<JsonObject>
+        suspend fun refreshServerToken(@Body req: Refresh): Res<User>
     }
 
     companion object {

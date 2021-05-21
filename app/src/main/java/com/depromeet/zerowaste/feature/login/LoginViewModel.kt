@@ -16,8 +16,8 @@ class LoginViewModel: BaseViewModel() {
     private val _loginResult = MutableLiveData<Res<User>>()
     val loginResult: LiveData<Res<User>> get() = _loginResult
 
-    private val _refresh = MutableLiveData<Res<JsonObject>>()
-    val refresh: LiveData<Res<JsonObject>> get() = _refresh
+    private val _refresh = MutableLiveData<Res<User>>()
+    val refresh: LiveData<Res<User>> get() = _refresh
 
     fun refreshToken() {
         execute({

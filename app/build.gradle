@@ -23,8 +23,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "KAKAO_API_KEY", properties['kakao_api_key']
-        buildConfigField "String", "SECURE_KEY", properties['secure_key']
+        buildConfigField "String", "KAKAO_API_KEY", "\"${properties['kakao_api_key']}\""
+        buildConfigField "String", "SECURE_KEY", "\"${properties['secure_key']}\""
         manifestPlaceholders = [KAKAO_API_KEY: properties['kakao_api_key']]
     }
 

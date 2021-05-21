@@ -7,6 +7,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="exception_default">오류가 발생하였습니다\n%s</string>
+
+    <string name="kakao_login_fail">카카오 로그인에 실패하였습니다</string>
+    <string name="server_login_fail">제로웨이스트 서버 로그인에 실패하였습니다</string>
+
     <string name="show_more">더보기</string>
     <string name="main_community_title">커뮤니티</string>
     <string name="main_community_list_experienced_difficulty">체감난이도</string>

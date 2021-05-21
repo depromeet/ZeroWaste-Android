@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,9 +19,9 @@ abstract class BaseViewModel: ViewModel() {
             try {
                 val result = job()
                 launch(Dispatchers.Main) {
-                    res.invoke(result)
+                    res(result)
                 }
-            } catch (e: java.lang.Exception){
+            } catch (e: Exception){
                 e.printStackTrace()
                 _error.postValue(e)
             }
@@ -34,7 +33,7 @@ abstract class BaseViewModel: ViewModel() {
             try {
                 val result = job()
                 resData.postValue(result)
-            } catch (e: java.lang.Exception){
+            } catch (e: Exception){
                 e.printStackTrace()
                 _error.postValue(e)
             }
