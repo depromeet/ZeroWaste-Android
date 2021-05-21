@@ -5,7 +5,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
+import com.depromeet.zerowaste.comm.data.Constants
 import com.depromeet.zerowaste.comm.data.Share
+import com.depromeet.zerowaste.comm.getPreference
 import com.depromeet.zerowaste.databinding.FragmentLoginBinding
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
@@ -37,6 +39,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     private fun getServerToken(kakaoToken: String) {
         viewModel.isSuccess.observe(this) { res ->
+            getPreference(requireContext()).edit().putString(Constants.AUTH_TOKEN, Share.authToken).apply()
             if(res) findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
             else showToast(resources.getString(R.string.server_login_fail))
         }

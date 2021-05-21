@@ -8,6 +8,18 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="exception_default">오류가 발생하였습니다\n%s</string>
+    <string name="nick_name">닉네임</string>
+
+    <string name="pledge">서약서</string>
+    <string name="pledge_start">시작하기</string>
+    <string name="pledge_page1_title">미션을 수행하며\n제로웨이스트 습관 찾기</string>
+    <string name="pledge_page1_content">자신에게 맞는 레벨에서 요이 - 땅!\n각 레벨에 맞는 미션으로 습관을 바꿀 수 있어요 :)</string>
+    <string name="pledge_page2_title">내가 만들어가는\n제로웨이스트 미션</string>
+    <string name="pledge_page2_content">제로웨이스트를 실천하는 사람들을 위해\n좋은 미션 아이디어를 공유해주세요</string>
+    <string name="pledge_page3_content">선서, 나는 꾸준히 미션을 진행하면서\n멋진 제로웨이스터가 될 것을 선서합니다!</string>
+    <string name="pledge_sign">사인하기</string>
+    <string name="pledge_nickname_duplicated">중복된 닉네임입니다</string>
+    <string name="pledge_fail">실패하였습니다</string>
 
     <string name="kakao_login_fail">카카오 로그인에 실패하였습니다</string>
     <string name="server_login_fail">제로웨이스트 서버 로그인에 실패하였습니다</string>

@@ -34,7 +34,7 @@ class MainCommunityFragment :
         initTagList()
         initPostList()
         binding.mainCommunityTitle.setOnClickListener {
-            mainViewModel.navigate(MainFragmentDirections.actionMainFragmentToProfileFragment())
+            mainViewModel.navigate(MainFragmentDirections.actionMainFragmentToPledgeFragment())
         }
     }
 

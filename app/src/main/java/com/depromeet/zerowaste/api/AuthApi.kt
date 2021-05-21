@@ -19,7 +19,7 @@ class AuthApi {
     }
 
     companion object {
-        private val client = RetrofitClient.create(Api::class.java)
+        private val client get() = RetrofitClient.createNoAuth(service = Api::class.java)
         suspend fun getServerTokenWithKakao(req: KakaoAuth) = client.getServerTokenWithKakao(req)
         suspend fun refreshServerToken(req: Refresh) = client.refreshServerToken(req)
     }

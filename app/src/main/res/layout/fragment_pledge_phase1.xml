@@ -19,8 +19,9 @@
             android:layout_marginStart="21dp"
             android:layout_marginTop="78dp"
             android:fontFamily="@font/apple_sd_gothic_neo_b"
-            android:text="미션을 수행하며\n제로웨이스트 습관 찾기"
+            android:text="@string/pledge_page1_title"
             android:textColor="@color/black"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,9 +31,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginTop="17dp"
-            android:text="자신에게 맞는 레벨에서 요이 - 땅!\n각 레벨에 맞는 미션으로 습관을 바꿀 수 있어요 :)"
+            android:text="@string/pledge_page1_content"
             android:textColor="#8A8A8A"
             android:textSize="12sp"
+            android:fontFamily="@font/apple_sd_gothic_neo_r"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/pledge_phase1_tv_title" />
 
