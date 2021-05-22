@@ -1,5 +1,6 @@
 package com.depromeet.zerowaste.feature.main.main_mission
 
+import android.graphics.Color
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
@@ -22,6 +23,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainMissionFragment :
     BaseFragment<FragmentMainMissionBinding>(R.layout.fragment_main_mission) {
+    override var statusBarBackGroundColorString = "#18234E"
+    override var isLightStatusBar = false
 
     private val viewModel: MainMissionViewModel by viewModels()
 
@@ -110,5 +113,4 @@ class MainMissionFragment :
         if(binding.mainMissionMotion.progress != 0f) binding.mainMissionMotion.transitionToStart()
         binding.mainMissionListNested.smoothScrollTo(0,0)
     }
-
 }

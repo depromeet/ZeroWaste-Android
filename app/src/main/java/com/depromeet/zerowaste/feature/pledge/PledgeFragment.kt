@@ -1,6 +1,12 @@
 package com.depromeet.zerowaste.feature.pledge
 
 import android.graphics.Color
+import android.os.Build
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowInsetsController
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -14,6 +20,8 @@ import com.depromeet.zerowaste.comm.getPreference
 import com.depromeet.zerowaste.databinding.FragmentPledgeBinding
 
 class PledgeFragment : BaseFragment<FragmentPledgeBinding>(R.layout.fragment_pledge) {
+    override var statusBarBackGroundColorRes = R.color.white
+    override var isLightStatusBar = true
 
     private val viewModel: PledgeViewModel by viewModels()
     private var isCanStart = false

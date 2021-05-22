@@ -12,6 +12,8 @@ import java.util.regex.Pattern
 
 class PledgePhase3Fragment :
     BaseFragment<FragmentPledgePhase3Binding>(R.layout.fragment_pledge_phase3) {
+    override var statusBarBackGroundColorRes = R.color.white
+    override var isLightStatusBar = true
 
     private val viewModel: PledgeViewModel by viewModels({requireParentFragment()})
 
