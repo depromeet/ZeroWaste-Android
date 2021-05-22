@@ -4,6 +4,7 @@ import android.text.InputFilter
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.databinding.FragmentPledgePhase3Binding
@@ -12,7 +13,7 @@ import java.util.regex.Pattern
 class PledgePhase3Fragment :
     BaseFragment<FragmentPledgePhase3Binding>(R.layout.fragment_pledge_phase3) {
 
-    private val viewModel: PledgeViewModel by activityViewModels()
+    private val viewModel: PledgeViewModel by viewModels({requireParentFragment()})
 
     override fun init() {
         binding.pledgePhase3EtPledge.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->

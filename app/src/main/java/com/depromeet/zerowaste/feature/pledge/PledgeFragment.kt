@@ -3,15 +3,19 @@ package com.depromeet.zerowaste.feature.pledge
 import android.graphics.Color
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
+import com.depromeet.zerowaste.comm.data.Constants
+import com.depromeet.zerowaste.comm.data.Share
+import com.depromeet.zerowaste.comm.getPreference
 import com.depromeet.zerowaste.databinding.FragmentPledgeBinding
 
 class PledgeFragment : BaseFragment<FragmentPledgeBinding>(R.layout.fragment_pledge) {
 
-    private val viewModel: PledgeViewModel by activityViewModels()
+    private val viewModel: PledgeViewModel by viewModels()
     private var isCanStart = false
 
     override fun init() {
@@ -47,9 +51,16 @@ class PledgeFragment : BaseFragment<FragmentPledgeBinding>(R.layout.fragment_ple
 
     fun onClickPledge() {
         if(!isCanStart) return
+        if(viewModel.editNickname.value == Share.user?.nickname) {
+            showToast(resources.getString(R.string.pledge_nickname_duplicated))
+            return
+        }
         viewModel.updatePledgeCode.observe(this) {
             when(it) {
-                0 -> findNavController().popBackStack()
+                0 -> {
+                    getPreference(requireContext()).edit().putString(Constants.AUTH_TOKEN, Share.authToken).apply()
+                    findNavController().popBackStack()
+                }
                 40001 -> showToast(resources.getString(R.string.pledge_nickname_duplicated))
                 else -> showToast(resources.getString(R.string.pledge_fail))
             }
