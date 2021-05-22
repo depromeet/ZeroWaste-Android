@@ -2,13 +2,11 @@ package com.depromeet.zerowaste.feature.main.main_home
 
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
 import com.depromeet.zerowaste.data.home.Mission
 import com.depromeet.zerowaste.databinding.FragmentMainHomeBinding
-import com.depromeet.zerowaste.databinding.ItemMainHomeMissionBinding
 import com.depromeet.zerowaste.databinding.ItemMainHomeMyMissionBinding
 import com.depromeet.zerowaste.databinding.ItemMainHomeNewMissionBinding
 import com.google.android.material.appbar.AppBarLayout
@@ -40,12 +38,9 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
         binding.run {
             mainHomeLayoutAppbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
                 if (abs(verticalOffset) - appBarLayout.totalScrollRange == 0) { // 접혔을때
-                    mainHomeTvViewAll.visibility = View.GONE
-                    mainHomeTvCategory.text = getString(R.string.main_home_category_5r)
+                    mainHomeTvHome.visibility = View.VISIBLE
                 } else {// 펴졌을때
-                    mainHomeTvViewAll.visibility = View.VISIBLE
-                    mainHomeTvCategory.text =
-                        getString(R.string.main_home_mission_category)
+                    mainHomeTvHome.visibility = View.GONE
                 }
             })
         }
@@ -53,18 +48,18 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
 
 
     private fun initMissionList() {
-        viewModel.missionList.observe(this, Observer { data ->
+        viewModel.missionList.observe(this, { data ->
             missionAdapter.addData(data)
         })
-        binding.mainHomeRvMissions.adapter = missionAdapter
+        binding.mainHomeRvRecommendMissions.adapter = missionAdapter
         viewModel.getMissionList()
     }
 
-    private fun initNewMissionList() {
-        viewModel.newMissionList.observe(this, Observer { data ->
+    private fun initMyMissionList() {
+        viewModel.myMissionList.observe(this, { data ->
             newMissionAdapter.addData(data)
         })
-        binding.mainHomeRvNewMissions.adapter = newMissionAdapter
+        binding.mainHomeRvMyMissions.adapter = newMissionAdapter
         viewModel.getNewMissionList()
     }
 }

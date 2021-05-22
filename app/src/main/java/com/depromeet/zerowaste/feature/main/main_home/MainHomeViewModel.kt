@@ -18,35 +18,35 @@ class MainHomeViewModel @Inject constructor() : BaseViewModel() {
     private val _missionList = MutableLiveData<List<Mission>>()
     val missionList: LiveData<List<Mission>> get() = _missionList
 
-    private val _newMissionList = MutableLiveData<List<Mission>>()
-    val newMissionList: LiveData<List<Mission>> get() = _newMissionList
+    private val _myMissionList = MutableLiveData<List<Mission>>()
+    val myMissionList: LiveData<List<Mission>> get() = _myMissionList
 
 
     fun getMissionList() {
         val missions = ArrayList<Mission>()
-        for (i in 0..29) {
-            missions.add(
-                Mission(
-                    iconImg = photosUrls[0],
-                    logo = photosUrls[1],
-                    content = "디프만 화이팅 $i"
-                )
-            )
-        }
+//        for (i in 0..10) {
+//            missions.add(
+//                Mission(
+//                    iconImg = photosUrls[0],
+//                    logo = photosUrls[1],
+//                    content = "디프만 화이팅 $i"
+//                )
+//            )
+//        }
         _missionList.value = missions
     }
 
     fun getNewMissionList() {
         val missions = ArrayList<Mission>()
-        for (i in 0..29) {
-            missions.add(
-                Mission(
-                    iconImg = photosUrls[2],
-                    logo = photosUrls[1],
-                    content = "디프만 화이팅 $i"
-                )
-            )
-        }
-        _newMissionList.value = missions
+//        for (i in 0..10) {
+//            missions.add(
+//                Mission(
+//                    iconImg = photosUrls[2],
+//                    logo = photosUrls[1],
+//                    content = "디프만 화이팅 $i"
+//                )
+//            )
+//        }
+        _myMissionList.value = missions
     }
 }
