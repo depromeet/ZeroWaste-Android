@@ -41,7 +41,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             requireActivity().window.insetsController?.setSystemBarsAppearance(
                 if(isLightStatusBar) WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS else 0 ,
-                if(isLightStatusBar) WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS else 0)
+               WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requireActivity().window.decorView.systemUiVisibility = if(isLightStatusBar) View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR else 0
         }
