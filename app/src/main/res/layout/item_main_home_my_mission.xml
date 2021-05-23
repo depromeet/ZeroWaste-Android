@@ -5,9 +5,6 @@
 
     <data>
 
-        <variable
-            name="item"
-            type="com.depromeet.zerowaste.data.home.Mission" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,12 +41,10 @@
                     android:layout_width="41dp"
                     android:layout_height="41dp"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="17.5dp"
+                    android:layout_marginTop="19dp"
                     android:layout_marginBottom="26dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:loadImage="@{item.iconImg}"
                     tools:src="@drawable/ic_sample_24dp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -58,7 +53,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
                     android:fontFamily="@font/apple_sd_gothic_neo_eb"
-                    android:text="@{item.name}"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -71,7 +65,7 @@
                     android:id="@+id/main_home_my_mission_tv_content_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/apple_sd_gothic_neo_eb"
+                    android:fontFamily="@font/apple_sd_gothic_neo_r"
                     android:text="미션인증까지 "
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -98,7 +92,7 @@
                     android:id="@+id/main_home_my_mission_tv_content_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/apple_sd_gothic_neo_eb"
+                    android:fontFamily="@font/apple_sd_gothic_neo_r"
                     android:text=" 남았어요"
                     android:textColor="@color/white"
                     android:textSize="13sp"

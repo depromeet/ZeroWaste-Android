@@ -5,9 +5,6 @@
 
     <data>
 
-        <variable
-            name="item"
-            type="com.depromeet.zerowaste.data.home.Mission" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,12 +38,11 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/main_home_mission_iv_icon"
-                    android:layout_width="41dp"
-                    android:layout_height="41dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="17.5dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="19dp"
                     android:layout_marginBottom="26dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@drawable/ic_sample_24dp" />
@@ -56,7 +52,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
-                    android:text="@{item.data.name}"
                     android:textColor="#0F1469"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -67,41 +62,37 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/main_home_mission_tv_profile_logo"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:scaleType="fitXY"
                     app:layout_constraintBottom_toBottomOf="@id/main_home_mission_iv_icon"
                     app:layout_constraintStart_toStartOf="@id/main_home_mission_tv_title"
                     app:layout_constraintTop_toBottomOf="@id/main_home_mission_tv_title"
                     app:srcCompat="@drawable/ic_sample_24dp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/main_home_mission_tv_profile_id"
+                    android:id="@+id/main_home_mission_tv_num"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/apple_sd_gothic_neo_r"
                     android:textColor="@color/black"
+                    android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="@id/main_home_mission_tv_profile_logo"
                     app:layout_constraintStart_toEndOf="@id/main_home_mission_tv_profile_logo"
                     app:layout_constraintTop_toTopOf="@id/main_home_mission_tv_profile_logo"
-                    tools:text="푸른지구" />
+                    tools:text="230" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/main_home_mission_tv_text"
+                    android:id="@+id/main_home_mission_tv_num_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:text=" l "
-                    android:textColor="@color/gray_2"
-                    app:layout_constraintBottom_toBottomOf="@id/main_home_mission_tv_profile_id"
-                    app:layout_constraintStart_toEndOf="@id/main_home_mission_tv_profile_id"
-                    app:layout_constraintTop_toTopOf="@id/main_home_mission_tv_profile_id" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/main_home_mission_tv_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/apple_sd_gothic_neo_r"
                     android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="@id/main_home_mission_tv_profile_id"
-                    app:layout_constraintStart_toEndOf="@id/main_home_mission_tv_text"
-                    app:layout_constraintTop_toTopOf="@id/main_home_mission_tv_profile_id"
-                    tools:text="2,431명" />
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="@id/main_home_mission_tv_profile_logo"
+                    app:layout_constraintStart_toEndOf="@id/main_home_mission_tv_num"
+                    app:layout_constraintTop_toTopOf="@id/main_home_mission_tv_profile_logo"
+                    tools:text="명 참여중" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/main_home_mission_iv_recommend"
@@ -127,7 +118,6 @@
                     app:layout_constraintTop_toTopOf="@id/main_home_mission_iv_recommend">
 
                     <com.google.android.material.chip.Chip
-                        style="@style/Widget.MaterialComponents.Chip.Action"
                         android:layout_width="50dp"
                         android:layout_height="20dp"
                         android:background="#FFE5EAFF"
