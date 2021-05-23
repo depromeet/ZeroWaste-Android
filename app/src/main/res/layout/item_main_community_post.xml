@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/item_main_community_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17.42dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_sample_24dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_main_community_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7.08dp"
+        android:fontFamily="@font/apple_sd_gothic_neo_b"
+        android:text="방유진"
+        android:textColor="@color/real_black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/item_main_community_logo"
+        app:layout_constraintStart_toEndOf="@id/item_main_community_logo"
+        app:layout_constraintTop_toTopOf="@id/item_main_community_logo"
+        tools:text="방유진" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_main_community_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:fontFamily="@font/apple_sd_gothic_neo_b"
+        android:gravity="end"
+        android:text="업사이클링 제품 만들기 >"
+        android:textColor="@color/main"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/item_main_community_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_main_community_name" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/item_main_community_vp_pager"
+        android:layout_width="0dp"
+        android:layout_height="324dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="17.42dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_main_community_logo" />
+
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/item_main_community_pager_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        app:dotsColor="@color/gray_2"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="6dp"
+        app:dotsSpacing="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_main_community_vp_pager"
+        app:progressMode="true"
+        app:selectedDotColor="#0F1469" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_main_community_tv_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="18dp"
+        android:fontFamily="@font/apple_sd_gothic_neo_b"
+        android:text="혼자 자취를 하다보니 생수병을 매번 사먹었는데, 지금은 열심히 끓여 먹고 있어요~ 처음엔 어려웠는데  하다보니 사먹는 것 보다 좋아요! 여러분도 꼭 성공하세요!"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_main_community_pager_indicator" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_main_community_tv_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/apple_sd_gothic_neo_b"
+        android:textColor="#ACACAC"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_main_community_tv_content"
+        tools:text="2021.5.1" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="19dp"
+        android:background="#FAFAFA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_main_community_tv_date" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
