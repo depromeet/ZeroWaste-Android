@@ -1,16 +1,26 @@
 package com.depromeet.zerowaste.data.user
 
+import com.google.gson.annotations.SerializedName
+
 data class UpdatedUserData(
+    @SerializedName("id")
     val id: Int,
-    var nickname: String,
-    var level: Int,
-    var is_notify: Boolean,
-    var description: String,
-    var completed_mission_counts: Int,
-    var progressing_mission_counts: Int,
+    @SerializedName("nickname")
+    val nickname: String,
+    @SerializedName("level")
+    val level: Int,
+    @SerializedName("is_notify")
+    val isNotify: Boolean,
+    @SerializedName("description")
+    val description: String,
+    @SerializedName("completed_mission_counts")
+    val completedMissionCounts: Int,
+    @SerializedName("progressing_mission_counts")
+    val progressingMissionCounts: Int,
+    @SerializedName("token")
     val token: String
 ) {
     fun getUser(): User {
-        return User(id, nickname, level, is_notify, description, completed_mission_counts, progressing_mission_counts)
+        return User(id, nickname, level, isNotify, description, completedMissionCounts, progressingMissionCounts)
     }
 }
