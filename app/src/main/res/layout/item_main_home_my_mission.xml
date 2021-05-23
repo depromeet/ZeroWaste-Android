@@ -127,7 +127,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="18dp"
                     android:layout_marginBottom="14dp"
-                    android:background="@drawable/rect_round_sub2_radius_8dp"
+                    android:background="@drawable/rect_round_sub2_radius_26dp"
                     android:fontFamily="@font/apple_sd_gothic_neo_eb"
                     android:stateListAnimator="@null"
                     android:text="인증하기"
