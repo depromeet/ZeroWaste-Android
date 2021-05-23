@@ -69,6 +69,39 @@
         app:progressMode="true"
         app:selectedDotColor="#0F1469" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/item_main_community_iv_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="21dp"
+        app:layout_constraintBottom_toBottomOf="@id/item_main_community_pager_indicator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_main_community_pager_indicator"
+        app:srcCompat="@drawable/ic_sample_24dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_main_community_tv_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:textColor="@color/sub2"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/item_main_community_iv_like"
+        app:layout_constraintEnd_toStartOf="@id/item_main_community_iv_like"
+        app:layout_constraintTop_toTopOf="@id/item_main_community_iv_like"
+        tools:text="10" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_main_community_tv_like_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/sub2"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/item_main_community_iv_like"
+        app:layout_constraintEnd_toStartOf="@id/item_main_community_tv_like"
+        app:layout_constraintTop_toTopOf="@id/item_main_community_iv_like"
+        tools:text="공감 " />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/item_main_community_tv_content"
         android:layout_width="0dp"
