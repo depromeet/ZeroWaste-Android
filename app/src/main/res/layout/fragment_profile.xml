@@ -1,18 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.depromeet.zerowaste.feature.profile.ProfileViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="profile" />
+            android:layout_height="wrap_content">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_profile_iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_sample_24dp" />
+
+            <TextView
+                android:id="@+id/main_profile_tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kotra_bold"
+                android:text="프로필"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/main_profile_iv_back"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/main_profile_iv_back" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_profile_iv_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="21.22dp"
+                app:layout_constraintBottom_toBottomOf="@id/main_profile_iv_back"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/main_profile_iv_back"
+                app:srcCompat="@drawable/ic_sample_24dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/main_profile_cv_profile"
+                android:layout_width="0dp"
+                android:layout_height="143dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="18dp"
+                app:cardBackgroundColor="#18234E"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_profile_tv_title">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/main_profile_iv_image"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_marginStart="23.08dp"
+                        android:layout_marginTop="23dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_sample_24dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/main_profile_tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8.42dp"
+                        android:fontFamily="@font/kotra_bold"
+                        android:text="김지구"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toEndOf="@id/main_profile_iv_image"
+                        app:layout_constraintTop_toTopOf="@id/main_profile_iv_image" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/main_profile_tv_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/apple_sd_gothic_neo_r"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@id/main_profile_tv_name"
+                        app:layout_constraintTop_toBottomOf="@id/main_profile_tv_name"
+                        tools:text="지구를 이제 막 지키기 시작한" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/main_home_my_mission_btn_auth"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="9.42dp"
+                        android:layout_marginEnd="18dp"
+                        android:layout_marginBottom="14dp"
+                        android:background="@drawable/rect_round_sub2_radius_8dp"
+                        android:stateListAnimator="@null"
+                        android:text="인증하기"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/main_profile_iv_image"
+                        app:layout_goneMarginBottom="14dp" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/main_home_my_mission_tv_mission_status_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="37dp"
+                android:fontFamily="@font/kotra_bold"
+                android:text="미션현황"
+                android:textColor="#18234E"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/main_profile_cv_profile" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/main_home_create_mission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="23dp"
+                android:text="개설한 미션"
+                android:textColor="#18234E"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/main_home_my_mission_tv_mission_status_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/main_home_my_mission_tv_mission_status_text" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/main_profile_cv_mission_list"
+                android:layout_width="0dp"
+                android:layout_height="96dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="18dp"
+                app:cardBackgroundColor="#F7F6FB"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_home_my_mission_tv_mission_status_text">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/main_profile_tv_completed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:text="1"
+                        android:textColor="@color/sub1"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/main_profile_tv_completed_below"
+                        app:layout_constraintEnd_toStartOf="@+id/main_profile_view_1"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/main_profile_tv_completed_below"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="수행 완료"
+                        android:textColor="@color/sub1"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/main_profile_tv_completed"
+                        app:layout_constraintStart_toStartOf="@id/main_profile_tv_completed"
+                        app:layout_constraintTop_toBottomOf="@id/main_profile_tv_completed" />
+
+                    <View
+                        android:id="@+id/main_profile_view_1"
+                        android:layout_width="1dp"
+                        android:layout_height="55dp"
+                        android:background="@color/gray_2"
+                        app:layout_constraintBottom_toBottomOf="@id/main_profile_tv_completed_below"
+                        app:layout_constraintEnd_toStartOf="@id/main_profile_tv_doing"
+                        app:layout_constraintStart_toEndOf="@+id/main_profile_tv_completed"
+                        app:layout_constraintTop_toTopOf="@id/main_profile_tv_completed" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/main_profile_tv_doing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="@color/sub1"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/main_profile_tv_completed"
+                        app:layout_constraintEnd_toStartOf="@id/main_profile_view_2"
+                        app:layout_constraintStart_toEndOf="@+id/main_profile_view_1"
+                        app:layout_constraintTop_toTopOf="@id/main_profile_tv_completed" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/main_profile_tv_doing_below"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="수행 중"
+                        android:textColor="@color/sub1"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="@id/main_profile_tv_doing"
+                        app:layout_constraintStart_toStartOf="@+id/main_profile_tv_doing"
+                        app:layout_constraintTop_toBottomOf="@id/main_profile_tv_doing" />
+
+                    <View
+                        android:id="@+id/main_profile_view_2"
+                        android:layout_width="1dp"
+                        android:layout_height="55dp"
+                        android:background="@color/gray_2"
+                        app:layout_constraintBottom_toBottomOf="@id/main_profile_tv_completed"
+                        app:layout_constraintEnd_toStartOf="@id/main_profile_tv_saved"
+                        app:layout_constraintStart_toEndOf="@+id/main_profile_tv_doing"
+                        app:layout_constraintTop_toTopOf="@id/main_profile_tv_completed" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/main_profile_tv_saved"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3"
+                        android:textColor="@color/sub1"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/main_profile_tv_completed"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/main_profile_view_2"
+                        app:layout_constraintTop_toTopOf="@id/main_profile_tv_completed" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/main_profile_tv_saved_below"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="저장"
+                        android:textColor="@color/sub1"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="@id/main_profile_tv_saved"
+                        app:layout_constraintStart_toStartOf="@+id/main_profile_tv_saved"
+                        app:layout_constraintTop_toBottomOf="@id/main_profile_tv_saved" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/main_profile_tv_mission_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:fontFamily="@font/kotra_bold"
+                android:text="미션 리스트"
+                android:textColor="#18234E"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/main_profile_cv_profile"
+                app:layout_constraintTop_toBottomOf="@id/main_profile_cv_mission_list" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/main_profile_tv_favorite_mission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:fontFamily="@font/kotra_bold"
+                android:text="좋아요한 미션"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/main_profile_tv_mission_list"
+                app:layout_constraintStart_toEndOf="@id/main_profile_tv_mission_list"
+                app:layout_constraintTop_toTopOf="@id/main_profile_tv_mission_list" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/main_profile_rv_missions"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/main_profile_tv_mission_list"
+                app:spanCount="@{2}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
