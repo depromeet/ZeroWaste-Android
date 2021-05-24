@@ -36,7 +36,6 @@
                     android:scaleType="fitXY"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:loadImage="@{item.logo}"
                     tools:src="@tools:sample/backgrounds/scenic" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -49,7 +48,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:loadImage="@{item.iconImg}"
                     tools:src="@drawable/ic_sample_24dp" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -67,7 +65,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14sp"
-                    android:text="@{item.difficulty}"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/main_home_my_mission_iv_icon"
@@ -78,7 +75,6 @@
                     android:id="@+id/main_home_my_mission_tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{item.name}"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_level"
@@ -93,7 +89,6 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="22dp"
                     android:layout_marginBottom="18dp"
-                    android:text="@{item.content}"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
