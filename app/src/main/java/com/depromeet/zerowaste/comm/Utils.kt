@@ -32,11 +32,16 @@ fun getPreference(context: Context): SharedPreferences {
     )
 }
 
-fun genLayoutManager(context: Context, isVertical: Boolean = true, @IntRange(from = 1) spanCount: Int = 1, isStaggered: Boolean = false): RecyclerView.LayoutManager {
-    val orientation: Int = if(isVertical) RecyclerView.VERTICAL else RecyclerView.HORIZONTAL
-    return if(spanCount <= 1) {
+fun genLayoutManager(
+    context: Context,
+    isVertical: Boolean = true,
+    @IntRange(from = 1) spanCount: Int = 1,
+    isStaggered: Boolean = false
+): RecyclerView.LayoutManager {
+    val orientation: Int = if (isVertical) RecyclerView.VERTICAL else RecyclerView.HORIZONTAL
+    return if (spanCount <= 1) {
         LinearLayoutManager(context, orientation, false)
-    } else if(!isStaggered){
+    } else if (!isStaggered) {
         GridLayoutManager(context, spanCount, orientation, false)
     } else {
         StaggeredGridLayoutManager(spanCount, orientation)
@@ -87,8 +92,14 @@ fun spToDp(context: Context, sp: Float): Float {
 * viewpager
 * */
 @BindingAdapter("isVertical", "spanCount", "isStaggered", requireAll = false)
-fun genLayoutManagerInXml(view: RecyclerView, isVertical: Boolean?, spanCount: Int?, isStaggered: Boolean?) {
-    view.layoutManager = genLayoutManager(view.context, isVertical ?: true, spanCount ?: 1, isStaggered ?: false)
+fun genLayoutManagerInXml(
+    view: RecyclerView,
+    isVertical: Boolean?,
+    spanCount: Int?,
+    isStaggered: Boolean?
+) {
+    view.layoutManager =
+        genLayoutManager(view.context, isVertical ?: true, spanCount ?: 1, isStaggered ?: false)
 }
 
 /*
@@ -107,4 +118,11 @@ fun loadImageCircle(view: ImageView, loadImage: String) {
 @BindingAdapter("loadImageCenterCrop")
 fun loadImageCenterCrop(view: ImageView, loadImage: String) {
     Glide.with(view).load(loadImage).centerCrop().into(view)
+}
+
+@BindingAdapter("loadImageMissionDifficulty")
+fun loadImageMissionDifficulty(view: ImageView, difficulty: String) {
+    when {
+//        difficulty ->  view.setImageResource()
+    }
 }
