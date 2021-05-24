@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="mission"
+            type="com.depromeet.zerowaste.data.home.Mission" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,16 +49,20 @@
                     android:layout_marginBottom="26dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    bind:loadImageMissionDifficulty="@{mission.difficulty}"
                     tools:src="@drawable/ic_sample_24dp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/main_home_mission_tv_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
+                    android:layout_marginEnd="37dp"
+                    android:text="@{mission.name}"
                     android:textColor="#0F1469"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/main_home_mission_iv_icon"
                     app:layout_constraintTop_toTopOf="@id/main_home_mission_iv_icon"
                     tools:text="수돗물 끓여 마시기" />
