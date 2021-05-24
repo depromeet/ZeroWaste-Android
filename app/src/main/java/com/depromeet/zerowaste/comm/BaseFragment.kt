@@ -1,5 +1,6 @@
 package com.depromeet.zerowaste.comm
 
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -27,11 +28,14 @@ abstract class BaseFragment<B : ViewDataBinding>(
     @ColorRes open var statusBarBackGroundColorRes: Int = -1
     open var isLightStatusBar: Boolean = false
 
+    protected lateinit var preference: SharedPreferences
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        preference = getPreference(requireContext())
         val color = when {
             statusBarBackGroundColorString != "" -> Color.parseColor(statusBarBackGroundColorString)
             statusBarBackGroundColorRes != -1 -> ResourcesCompat.getColor(resources, statusBarBackGroundColorRes, null)

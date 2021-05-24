@@ -39,11 +39,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     private fun getServerToken(kakaoToken: String) {
         viewModel.isSuccess.observe(this) { res ->
-            getPreference(requireContext()).edit().putString(Constants.AUTH_TOKEN, Share.authToken).apply()
-            if(res) findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
+            preference.edit().putString(Constants.AUTH_TOKEN, Share.authToken).apply()
+            if(res) goNextFragment()
             else showToast(resources.getString(R.string.server_login_fail))
         }
         viewModel.getUserWithKakaoToken(kakaoToken)
+    }
+
+    private fun goNextFragment() {
+        val isFirstAppOpen = preference.getBoolean(Constants.IS_FIRST_APP_OPEN, true)
+        if(isFirstAppOpen) {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToPledgeFragment())
+        } else {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
+        }
     }
 
 }

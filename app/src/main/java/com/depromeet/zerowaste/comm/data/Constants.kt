@@ -5,6 +5,5 @@ package com.depromeet.zerowaste.comm.data
 object Constants {
     const val API_SERVER = "http://18.218.186.160:8000"
     const val AUTH_TOKEN = "AUTH_TOKEN"
-
-
+    const val IS_FIRST_APP_OPEN = "IS_FIRST_APP_OPEN"
 }

@@ -3,7 +3,7 @@ package com.depromeet.zerowaste.feature.pledge
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class PledgeAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
+class PledgeAdapter(fragment: Fragment, private val isNeedPledge: Boolean): FragmentStateAdapter(fragment) {
 
     override fun createFragment(position: Int): Fragment {
         return when(position) {
@@ -14,5 +14,5 @@ class PledgeAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
         }
     }
 
-    override fun getItemCount(): Int = 3
+    override fun getItemCount(): Int = if(isNeedPledge) 3 else 2
 }

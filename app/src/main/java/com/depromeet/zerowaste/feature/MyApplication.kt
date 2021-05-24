@@ -26,7 +26,7 @@ class MyApplication : Application() {
 
 
     private fun init() {
-        Share.authToken = getPreference(this).getString(Constants.AUTH_TOKEN, null) ?: ""
+        Share.authToken = getPreference(this).getString(Constants.AUTH_TOKEN, "") ?: ""
     }
 
 
