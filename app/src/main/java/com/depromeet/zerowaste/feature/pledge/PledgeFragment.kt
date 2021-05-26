@@ -18,10 +18,7 @@ class PledgeFragment : BaseFragment<FragmentPledgeBinding>(R.layout.fragment_ple
 
     private val viewModel: PledgeViewModel by viewModels()
 
-    private val isNeedPledge: Boolean by lazy {
-        //TODO: 최초 등록 유저인 경우로 변경
-        preference.getBoolean(Constants.IS_FIRST_APP_OPEN, true)
-    }
+    private val isNeedPledge: Boolean = Share.isNewUser
     private var isCanStart = false
 
     override fun init() {
@@ -89,6 +86,7 @@ class PledgeFragment : BaseFragment<FragmentPledgeBinding>(R.layout.fragment_ple
         editor.putString(Constants.AUTH_TOKEN, Share.authToken)
         editor.putBoolean(Constants.IS_FIRST_APP_OPEN, false)
         editor.apply()
+        Share.isNewUser = false
         findNavController().navigate(PledgeFragmentDirections.actionPledgeFragmentToMainFragment())
     }
 }

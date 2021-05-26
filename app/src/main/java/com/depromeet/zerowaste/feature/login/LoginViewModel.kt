@@ -28,6 +28,7 @@ class LoginViewModel: BaseViewModel() {
         execute({
             val userAuth = AuthApi.getServerTokenWithKakao(KakaoAuth(kakaoToken)).data ?: return@execute false
             Share.authToken = userAuth.token
+            Share.isNewUser = userAuth.isNewUser ?: false
             val user = UserApi.getUserInfo(userAuth.id).data ?: return@execute false
             Share.user = user
             return@execute true
