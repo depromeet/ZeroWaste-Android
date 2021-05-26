@@ -15,6 +15,8 @@ data class UserAuthInfo(
     @SerializedName("token")
     val token: String,
     @SerializedName("user_id")
-    val userId: Int
+    val userId: Int,
+    @SerializedName("is_new_user")
+    val isNewUser: Boolean?
 )
 

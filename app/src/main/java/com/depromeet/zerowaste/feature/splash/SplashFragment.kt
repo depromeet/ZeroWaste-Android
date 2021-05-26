@@ -30,7 +30,10 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
         } else {
             viewModel.isSuccess.observe(this) { res ->
                 if(res) findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainFragment())
-                else showToast(resources.getString(R.string.server_login_fail))
+                else {
+                    showToast(resources.getString(R.string.server_login_fail))
+                    findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToLoginFragment())
+                }
             }
             viewModel.refreshToken()
         }

@@ -6,11 +6,8 @@ import com.depromeet.zerowaste.api.AuthApi
 import com.depromeet.zerowaste.api.UserApi
 import com.depromeet.zerowaste.comm.BaseViewModel
 import com.depromeet.zerowaste.comm.data.Share
-import com.depromeet.zerowaste.data.Res
 import com.depromeet.zerowaste.data.auth.KakaoAuth
 import com.depromeet.zerowaste.data.auth.Refresh
-import com.depromeet.zerowaste.data.auth.UserAuthInfo
-import com.depromeet.zerowaste.data.user.User
 
 class LoginViewModel: BaseViewModel() {
 
@@ -31,6 +28,7 @@ class LoginViewModel: BaseViewModel() {
         execute({
             val userAuth = AuthApi.getServerTokenWithKakao(KakaoAuth(kakaoToken)).data ?: return@execute false
             Share.authToken = userAuth.token
+            Share.isNewUser = userAuth.isNewUser ?: false
             val user = UserApi.getUserInfo(userAuth.id).data ?: return@execute false
             Share.user = user
             return@execute true
