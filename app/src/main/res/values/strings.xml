@@ -6,6 +6,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="login_kakao">카카오로 로그인</string>
+
     <string name="exception_default">오류가 발생하였습니다\n%s</string>
     <string name="nick_name">닉네임</string>
 

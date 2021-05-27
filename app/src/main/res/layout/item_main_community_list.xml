@@ -173,7 +173,7 @@
             android:id="@+id/main_community_list_like"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/ic_heart"
+            android:src="@drawable/ic_heart_on"
             android:background="@android:color/transparent"
             android:layout_marginEnd="14dp"
             android:layout_marginBottom="28dp"

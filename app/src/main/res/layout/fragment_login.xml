@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/sub1">
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/login_logo"
@@ -26,22 +26,42 @@
             app:layout_constraintVertical_bias="0.4"
             tools:ignore="ContentDescription" />
 
-        <TextView
-            android:id="@+id/login_kakao_btn"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="324dp"
             android:layout_height="59dp"
             android:background="@drawable/rect_round_kakao_16"
             android:layout_marginTop="39dp"
-            android:fontFamily="@font/apple_sd_gothic_neo_b"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/real_black"
-            android:text="카카오 로그인"
-            android:onClick="@{() -> fragment.kakaoLoginClick()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/login_logo"
-            tools:ignore="ContentDescription" />
+            app:layout_constraintTop_toBottomOf="@id/login_logo">
+            <ImageView
+                android:id="@+id/login_kakao_logo"
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:src="@drawable/kakao_logo"
+                android:layout_marginEnd="2dp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/login_kakao_btn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+            <TextView
+                android:id="@+id/login_kakao_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/apple_sd_gothic_neo_b"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/real_black"
+                android:text="@string/login_kakao"
+                android:onClick="@{() -> fragment.kakaoLoginClick()}"
+                app:layout_constraintStart_toEndOf="@id/login_kakao_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="ContentDescription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

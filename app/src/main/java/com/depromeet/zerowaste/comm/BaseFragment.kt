@@ -9,14 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsetsController
 import android.widget.Toast
-import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.depromeet.zerowaste.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes val layoutId: Int
@@ -26,7 +28,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     open var statusBarBackGroundColorString: String = ""
     @ColorRes open var statusBarBackGroundColorRes: Int = -1
-    open var isLightStatusBar: Boolean = false
+    open var isLightStatusBar: Boolean = true
 
     protected lateinit var preference: SharedPreferences
 
@@ -39,7 +41,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
         val color = when {
             statusBarBackGroundColorString != "" -> Color.parseColor(statusBarBackGroundColorString)
             statusBarBackGroundColorRes != -1 -> ResourcesCompat.getColor(resources, statusBarBackGroundColorRes, null)
-            else -> ResourcesCompat.getColor(resources, R.color.sub1, null)
+            else -> ResourcesCompat.getColor(resources, R.color.white, null)
         }
         requireActivity().window.statusBarColor = color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -49,6 +51,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requireActivity().window.decorView.systemUiVisibility = if(isLightStatusBar) View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR else 0
         }
+
         if(!this::binding.isInitialized){
             binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         }
@@ -66,6 +69,10 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     abstract fun init()
 
-    protected fun showToast(msg: String) =
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+    protected fun showToast(msg: String) {
+        lifecycleScope.launch(Dispatchers.Main) {
+            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }

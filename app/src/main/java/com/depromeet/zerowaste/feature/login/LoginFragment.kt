@@ -3,6 +3,7 @@ package com.depromeet.zerowaste.feature.login
 import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.depromeet.zerowaste.App
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.data.Constants
@@ -26,6 +27,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     fun kakaoLoginClick() {
         val kakaoAuthLambda: (token: OAuthToken?, error: Throwable?) -> Unit = { token, e ->
             e?.printStackTrace()
+            App.currentBaseActivity?.finishLoad()
             token?.accessToken?.also {
                 getServerToken(it)
             } ?: showToast(resources.getString(R.string.kakao_login_fail))
@@ -35,6 +37,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         } else {
             UserApiClient.instance.loginWithKakaoAccount(requireContext(), callback = kakaoAuthLambda)
         }
+        App.currentBaseActivity?.startLoad()
     }
 
     private fun getServerToken(kakaoToken: String) {
