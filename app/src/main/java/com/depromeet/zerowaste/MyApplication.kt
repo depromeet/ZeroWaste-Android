@@ -20,7 +20,6 @@ object App {
 @HiltAndroidApp
 class MyApplication : Application() {
 
-
     override fun onCreate() {
         super.onCreate()
         // 다른 초기화 코드들
@@ -37,23 +36,22 @@ class MyApplication : Application() {
     }
 
     inner class MyActivityLifecycleCallbacks : ActivityLifecycleCallbacks {
-
         override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
-            App.VM.setCurrentBaseActivity(if(activity is BaseActivity<*>) activity else null)
+            if(activity is BaseActivity<*>) App.VM.setCurrentBaseActivity(activity)
         }
         override fun onActivityStarted(activity: Activity) {
-            App.VM.setCurrentBaseActivity(if(activity is BaseActivity<*>) activity else null)
+            if(activity is BaseActivity<*>) App.VM.setCurrentBaseActivity(activity)
         }
         override fun onActivityResumed(activity: Activity) {
-            App.VM.setCurrentBaseActivity(if(activity is BaseActivity<*>) activity else null)
+            if(activity is BaseActivity<*>) App.VM.setCurrentBaseActivity(activity)
         }
         override fun onActivityPaused(activity: Activity) {
-            App.VM.setCurrentBaseActivity(null)
+            if(activity is BaseActivity<*>) App.VM.setCurrentBaseActivity(null)
         }
         override fun onActivityStopped(activity: Activity) {}
+        override fun onActivityDestroyed(activity: Activity) {}
 
         override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle) {}
-        override fun onActivityDestroyed(activity: Activity) {}
     }
 
 
