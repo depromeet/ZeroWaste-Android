@@ -17,15 +17,15 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/main_bottom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="62dp"
             android:theme="@style/Theme.ZeroWaste.BottomNav"
-            android:visibility="visible"
+            app:elevation="20dp"
             app:itemIconSize="32dp"
-            app:labelVisibilityMode="unlabeled"
+            app:itemRippleColor="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_home_navigation_view"
             app:menu="@menu/main_bottom_menu" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

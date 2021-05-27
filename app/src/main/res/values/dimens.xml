@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="height_56dp">56dp</dimen>
     <dimen name="height_80dp">80dp</dimen>
+
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">12sp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">12sp</dimen>
+    <dimen name="design_bottom_navigation_label_padding" tools:override="true">0dp</dimen>
+
 </resources>
