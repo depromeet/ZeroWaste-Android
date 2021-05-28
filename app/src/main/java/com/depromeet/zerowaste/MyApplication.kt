@@ -13,7 +13,10 @@ import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.HiltAndroidApp
 
 object App {
-    lateinit var VM: AppViewModel
+    private lateinit var appViewModel: AppViewModel
+    val VM get() = appViewModel
+    fun setAppViewModel(appViewModel: AppViewModel) { if(!this::appViewModel.isInitialized) this.appViewModel = appViewModel }
+
     val currentBaseActivity: BaseActivity<*>? get() = VM.currentBaseActivity.value
 }
 
@@ -30,9 +33,9 @@ class MyApplication : Application() {
     }
 
     private fun init() {
+        App.setAppViewModel(AppViewModel(this))
         Share.authToken = getPreference(this).getString(Constants.AUTH_TOKEN, "") ?: ""
         registerActivityLifecycleCallbacks(MyActivityLifecycleCallbacks())
-        App.VM = AppViewModel(this)
     }
 
     inner class MyActivityLifecycleCallbacks : ActivityLifecycleCallbacks {

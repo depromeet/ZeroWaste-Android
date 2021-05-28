@@ -56,6 +56,7 @@ abstract class BaseActivity<B : ViewDataBinding>(
             if(loadCount <= 0)  {
                 loadCount = 0
                 loadingView?.visibility = View.GONE
+                binding.root.bringToFront()
             }
         }
     }
