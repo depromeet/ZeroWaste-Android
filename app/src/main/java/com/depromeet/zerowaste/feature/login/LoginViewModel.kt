@@ -21,7 +21,7 @@ class LoginViewModel: BaseViewModel() {
             val user = UserApi.getUserInfo(userAuth.id).data ?: return@execute false
             Share.user = user
             return@execute true
-        }, _isSuccess)
+        }, _isSuccess, isShowLoad = false)
     }
 
     fun getUserWithKakaoToken(kakaoToken: String) {

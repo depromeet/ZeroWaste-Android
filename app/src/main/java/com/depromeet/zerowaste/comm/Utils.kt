@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide
 import com.depromeet.zerowaste.BuildConfig
 
 
+
 fun getPreference(context: Context): SharedPreferences {
     return EncryptedSharedPreferences.create(
         BuildConfig.SECURE_KEY,

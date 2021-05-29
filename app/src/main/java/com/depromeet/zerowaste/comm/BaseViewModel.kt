@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.depromeet.zerowaste.App
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,28 +15,40 @@ abstract class BaseViewModel: ViewModel() {
     private val _error = MutableLiveData<Exception>()
     val error: LiveData<Exception> get() = _error
 
-    protected fun <T> execute(job: suspend CoroutineScope.() -> T, context: CoroutineContext = Dispatchers.IO, res: (T) -> Unit)  {
+    protected fun <T> execute(job: suspend CoroutineScope.() -> T, context: CoroutineContext = Dispatchers.IO, isShowLoad: Boolean = true, res: (T) -> Unit) {
         viewModelScope.launch(context) {
+            launch(Dispatchers.Main) { if(isShowLoad) App.currentBaseActivity?.startLoad() }
             try {
                 val result = job()
                 launch(Dispatchers.Main) {
                     res(result)
+                    if(isShowLoad) App.currentBaseActivity?.finishLoad()
                 }
             } catch (e: Exception){
                 e.printStackTrace()
-                _error.postValue(e)
+                launch(Dispatchers.Main) {
+                    _error.value = e
+                    if(isShowLoad) App.currentBaseActivity?.finishLoad()
+                }
             }
         }
     }
 
-    protected fun <T> execute(job: suspend CoroutineScope.() -> T, resData: MutableLiveData<T>, context: CoroutineContext = Dispatchers.IO)  {
+    protected fun <T> execute(job: suspend CoroutineScope.() -> T, resData: MutableLiveData<T>, context: CoroutineContext = Dispatchers.IO, isShowLoad: Boolean = true)  {
         viewModelScope.launch(context) {
+            launch(Dispatchers.Main) { if(isShowLoad) App.currentBaseActivity?.startLoad() }
             try {
                 val result = job()
-                resData.postValue(result)
+                launch(Dispatchers.Main) {
+                    resData.value = result
+                    if(isShowLoad) App.currentBaseActivity?.finishLoad()
+                }
             } catch (e: Exception){
                 e.printStackTrace()
-                _error.postValue(e)
+                launch(Dispatchers.Main) {
+                    _error.value = e
+                    if(isShowLoad) App.currentBaseActivity?.finishLoad()
+                }
             }
         }
     }

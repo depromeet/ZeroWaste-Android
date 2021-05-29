@@ -13,9 +13,9 @@
     </style>
 
     <style name="Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:background">@color/sub1</item>
-        <item name="android:statusBarColor">@color/sub1</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
     <style name="Theme.ZeroWaste.BottomNav" parent="Widget.Design.BottomNavigationView">
