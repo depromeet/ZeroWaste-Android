@@ -8,7 +8,7 @@
 
         <variable
             name="mission"
-            type="com.depromeet.zerowaste.data.home.MyMission" />
+            type="com.depromeet.zerowaste.data.home.Mission" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

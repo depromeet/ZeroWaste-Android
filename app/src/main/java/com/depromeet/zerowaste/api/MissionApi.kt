@@ -1,11 +1,8 @@
 package com.depromeet.zerowaste.api
 
-import com.depromeet.zerowaste.data.Res
 import com.depromeet.zerowaste.data.home.Mission
-import com.depromeet.zerowaste.data.user.ReqUpdateUserData
-import com.depromeet.zerowaste.data.user.UpdatedUserData
-import com.depromeet.zerowaste.data.user.User
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 class MissionApi {
 
@@ -22,7 +19,7 @@ class MissionApi {
 
     companion object {
         private val client get() = RetrofitClient.create(Api::class.java)
-        suspend fun getUserInfo(place: String, difficulty: String, theme: String) =
+        suspend fun getMissions(place: String, difficulty: String, theme: String) =
             client.getMissions(place, difficulty, theme)
     }
 

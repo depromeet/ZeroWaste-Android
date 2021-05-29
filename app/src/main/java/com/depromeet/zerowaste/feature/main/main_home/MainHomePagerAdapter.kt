@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.zerowaste.R
-import com.depromeet.zerowaste.data.home.MyMission
+import com.depromeet.zerowaste.data.home.Mission
 import com.depromeet.zerowaste.databinding.ItemMainHomeMyMissionBinding
 
 
-class MainHomePagerAdapter(vm : MainHomeViewModel) :
+class MainHomePagerAdapter(vm: MainHomeViewModel) :
     RecyclerView.Adapter<MainHomePagerAdapter.ViewHolder>() {
-    private val items = ArrayList<MyMission>()
+    private val items = ArrayList<Mission>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemMainHomeMyMissionBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
@@ -37,7 +37,7 @@ class MainHomePagerAdapter(vm : MainHomeViewModel) :
 
     }
 
-    fun addItems(items: List<MyMission>) {
+    fun addItems(items: List<Mission>) {
         this.items.addAll(items)
         notifyDataSetChanged()
     }
@@ -50,7 +50,7 @@ class MainHomePagerAdapter(vm : MainHomeViewModel) :
     class ViewHolder(private val binding: ItemMainHomeMyMissionBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: MyMission) {
+        fun bind(item: Mission) {
             binding.mission = item
             binding.executePendingBindings()
         }

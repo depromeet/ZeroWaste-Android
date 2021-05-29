@@ -3,7 +3,6 @@ package com.depromeet.zerowaste.feature.main.main_home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.depromeet.zerowaste.comm.BaseViewModel
-import com.depromeet.zerowaste.data.home.Mission
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
