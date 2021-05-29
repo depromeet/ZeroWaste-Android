@@ -18,8 +18,8 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
-    <style name="Theme.ZeroWaste.BottomNav" parent="Widget.Design.BottomNavigationView">
-        <item name="fontFamily">@font/apple_sd_gothic_neo_b</item>
+    <style name="Theme.ZeroWaste.BottomNav">
+        <item name="fontFamily">@font/apple_sd_gothic_neo_r</item>
     </style>
 
     <style name="main_mission_tab_text_style">

@@ -10,21 +10,18 @@
             android:id="@+id/main_home_navigation_view"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/main_bottom_navigation"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/main_bottom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="62dp"
+            android:layout_height="@dimen/height_bottom_nav"
             android:theme="@style/Theme.ZeroWaste.BottomNav"
+            android:background="@drawable/rect_round_white_top_20"
             app:elevation="20dp"
             app:itemIconSize="32dp"
             app:itemRippleColor="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/main_bottom_menu" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
