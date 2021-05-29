@@ -64,6 +64,8 @@
             android:id="@+id/main_community_card_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:paddingBottom="@dimen/height_bottom_nav"
+            android:clipToPadding="false"
             app:spanCount="@{3}"
             app:layout_constraintTop_toBottomOf="@id/main_community_tag_list"
             app:layout_constraintBottom_toBottomOf="parent"
