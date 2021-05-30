@@ -8,7 +8,6 @@ import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.data.Constants
 import com.depromeet.zerowaste.comm.data.Share
-import com.depromeet.zerowaste.comm.getPreference
 import com.depromeet.zerowaste.databinding.FragmentLoginBinding
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
@@ -27,7 +26,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     fun kakaoLoginClick() {
         val kakaoAuthLambda: (token: OAuthToken?, error: Throwable?) -> Unit = { token, e ->
             e?.printStackTrace()
-            App.currentBaseActivity?.finishLoad()
+            App.finishLoad()
             token?.accessToken?.also {
                 getServerToken(it)
             } ?: showToast(resources.getString(R.string.kakao_login_fail))
@@ -37,7 +36,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         } else {
             UserApiClient.instance.loginWithKakaoAccount(requireContext(), callback = kakaoAuthLambda)
         }
-        App.currentBaseActivity?.startLoad()
+        App.startLoad()
     }
 
     private fun getServerToken(kakaoToken: String) {

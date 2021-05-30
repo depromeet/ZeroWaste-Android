@@ -23,7 +23,9 @@ import kotlinx.coroutines.launch
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes val layoutId: Int
 ) : Fragment() {
-    protected lateinit var binding: B
+    private lateinit var mBinding: B
+    protected val binding get() = mBinding
+
     private var isInitialized = false
 
     open var statusBarBackGroundColorString: String = ""
@@ -52,15 +54,15 @@ abstract class BaseFragment<B : ViewDataBinding>(
             requireActivity().window.decorView.systemUiVisibility = if(isLightStatusBar) View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR else 0
         }
 
-        if(!this::binding.isInitialized){
-            binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        if(!this::mBinding.isInitialized){
+            mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         }
-        return binding.root
+        return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = this
+        mBinding.lifecycleOwner = this
         if(!isInitialized) {
             init()
             isInitialized = true

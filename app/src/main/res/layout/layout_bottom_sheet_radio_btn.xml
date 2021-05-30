@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="54dp"
+    android:background="@drawable/selector_bottom_sheet_btn"
+    android:button="@null"
+    android:gravity="center"
+    android:textColor="@color/black"
+    android:fontFamily="@font/apple_sd_gothic_neo_r"
+    android:textSize="18sp"
+    tools:text="테스트" />
+

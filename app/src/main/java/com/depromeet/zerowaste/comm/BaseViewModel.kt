@@ -17,18 +17,18 @@ abstract class BaseViewModel: ViewModel() {
 
     protected fun <T> execute(job: suspend CoroutineScope.() -> T, context: CoroutineContext = Dispatchers.IO, isShowLoad: Boolean = true, res: (T) -> Unit) {
         viewModelScope.launch(context) {
-            launch(Dispatchers.Main) { if(isShowLoad) App.currentBaseActivity?.startLoad() }
+            launch(Dispatchers.Main) { if(isShowLoad) App.startLoad() }
             try {
                 val result = job()
                 launch(Dispatchers.Main) {
                     res(result)
-                    if(isShowLoad) App.currentBaseActivity?.finishLoad()
+                    if(isShowLoad) App.finishLoad()
                 }
             } catch (e: Exception){
                 e.printStackTrace()
                 launch(Dispatchers.Main) {
                     _error.value = e
-                    if(isShowLoad) App.currentBaseActivity?.finishLoad()
+                    if(isShowLoad) App.finishLoad()
                 }
             }
         }
@@ -36,18 +36,18 @@ abstract class BaseViewModel: ViewModel() {
 
     protected fun <T> execute(job: suspend CoroutineScope.() -> T, resData: MutableLiveData<T>, context: CoroutineContext = Dispatchers.IO, isShowLoad: Boolean = true)  {
         viewModelScope.launch(context) {
-            launch(Dispatchers.Main) { if(isShowLoad) App.currentBaseActivity?.startLoad() }
+            launch(Dispatchers.Main) { if(isShowLoad) App.startLoad() }
             try {
                 val result = job()
                 launch(Dispatchers.Main) {
                     resData.value = result
-                    if(isShowLoad) App.currentBaseActivity?.finishLoad()
+                    if(isShowLoad) App.finishLoad()
                 }
             } catch (e: Exception){
                 e.printStackTrace()
                 launch(Dispatchers.Main) {
                     _error.value = e
-                    if(isShowLoad) App.currentBaseActivity?.finishLoad()
+                    if(isShowLoad) App.finishLoad()
                 }
             }
         }
