@@ -26,4 +26,6 @@
     <color name="gray_2">#94A3AD</color>
     <color name="gray_1">#667D89</color>
 
+    <color name="not_impl_gray_1">#F8F8F8</color>
+
 </resources>

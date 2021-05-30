@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:background="@drawable/rect_round_top_white_32">
+        <TextView
+            android:id="@+id/layout_bottom_sheet_title"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:fontFamily="@font/apple_sd_gothic_neo_r"
+            android:textColor="@color/gray_2"
+            android:textSize="15sp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/layout_bottom_sheet_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/layout_bottom_sheet_title"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <RadioGroup
+                android:id="@+id/layout_bottom_sheet_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="28dp"
+                tools:ignore="UselessLeaf" />
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

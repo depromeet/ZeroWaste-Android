@@ -2,12 +2,14 @@ package com.depromeet.zerowaste.comm
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import android.util.DisplayMetrics
 import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -17,7 +18,8 @@ import kotlinx.coroutines.launch
 abstract class BaseActivity<B : ViewDataBinding>(
     @LayoutRes val layoutId: Int
 ) : AppCompatActivity() {
-    lateinit var binding: B
+    private lateinit var mBinding: B
+    protected val binding get() = mBinding
 
     private var loadingView: View? = null
     private var loadCount = 0
@@ -25,11 +27,11 @@ abstract class BaseActivity<B : ViewDataBinding>(
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, layoutId)
-        binding.lifecycleOwner = this
+        mBinding = DataBindingUtil.setContentView(this, layoutId)
+        mBinding.lifecycleOwner = this
         try {
             loadingView = layoutInflater.inflate(R.layout.layout_loading, null)
-            (binding.root.rootView as ViewGroup).addView(loadingView)
+            (mBinding.root.rootView as ViewGroup).addView(loadingView)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -39,6 +41,23 @@ abstract class BaseActivity<B : ViewDataBinding>(
     protected fun showToast(msg: String) {
         lifecycleScope.launch(Dispatchers.Main) {
             Toast.makeText(this@BaseActivity, msg, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun <V: ViewDataBinding> dialog(@LayoutRes layoutId: Int, widthDP: Float? = null, heightDP: Float? = null, onActive: (V) -> Unit) {
+        lifecycleScope.launch {
+            BaseDialog(layoutId, widthDP, heightDP, onActive).show(supportFragmentManager, layoutId.toString())
+        }
+    }
+
+    fun bottomSheet(
+        title: String,
+        contents: List<Pair<Int,String>>,
+        selectedId: Int? = null,
+        onSelect: (Int) -> Unit
+    ) {
+        lifecycleScope.launch(Dispatchers.Main) {
+            BaseBottomSheet(title, contents, selectedId, onSelect).show(supportFragmentManager, title)
         }
     }
 
@@ -56,7 +75,7 @@ abstract class BaseActivity<B : ViewDataBinding>(
             if(loadCount <= 0)  {
                 loadCount = 0
                 loadingView?.visibility = View.GONE
-                binding.root.bringToFront()
+                mBinding.root.bringToFront()
             }
         }
     }
