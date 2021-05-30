@@ -24,15 +24,22 @@ class MainHomeViewModel @Inject constructor() : BaseViewModel() {
 
     fun getMissionList() {
         val missions = ArrayList<Mission>()
-//        for (i in 0..10) {
-//            missions.add(
-//                Mission(
-//                    iconImg = photosUrls[0],
-//                    logo = photosUrls[1],
-//                    content = "디프만 화이팅 $i"
-//                )
-//            )
-//        }
+        for (i in 0..4) {
+            missions.add(
+                Mission(
+                    bannerImgUrls = "",
+                    content = "디프만 화이팅 $i",
+                    difficulty = i.toString(),
+                    id = i,
+                    name = "미션제목$i",
+                    owner = i,
+                    place = "서울$i",
+                    sentenceForCheer = "",
+                    signedUrlNum = i,
+                    theme = i.toString()
+                )
+            )
+        }
         _missionList.value = missions
     }
 

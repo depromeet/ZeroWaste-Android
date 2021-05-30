@@ -8,6 +8,7 @@ import com.depromeet.zerowaste.comm.BaseRecycleAdapter
 import com.depromeet.zerowaste.comm.SpanStrBuilder
 import com.depromeet.zerowaste.data.home.Mission
 import com.depromeet.zerowaste.databinding.FragmentMainHomeBinding
+import com.depromeet.zerowaste.databinding.ItemMainHomeMissionBinding
 import com.depromeet.zerowaste.databinding.ItemMainHomeNewMissionBinding
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,8 +20,8 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
     private val viewModel: MainHomeViewModel by viewModels()
 
     private val recommendMissionAdapter =
-        BaseRecycleAdapter(R.layout.item_main_home_new_mission) { item: Mission, bind: ItemMainHomeNewMissionBinding, _: Int ->
-            bind.item = item
+        BaseRecycleAdapter(R.layout.item_main_home_mission) { item: Mission, bind: ItemMainHomeMissionBinding, _: Int ->
+            bind.mission = item
         }
 
     override fun init() {
