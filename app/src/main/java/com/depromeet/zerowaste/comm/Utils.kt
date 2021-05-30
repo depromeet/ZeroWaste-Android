@@ -2,6 +2,7 @@ package com.depromeet.zerowaste.comm
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.DisplayMetrics
 import android.util.Log
@@ -91,6 +92,24 @@ fun spToDp(context: Context, sp: Float): Float {
     return pxToDp(context, spToPx(context, sp))
 }
 
+
+/*
+* All View
+* */
+@BindingAdapter("customWidthDP")
+fun customWidthDP(view: View, width: Float) {
+    val param = view.layoutParams
+    param.width = dpToPx(view.context, width).toInt()
+    view.layoutParams = param
+}
+
+@BindingAdapter("customHeightDP")
+fun customHeightDP(view: View, height: Float) {
+    val param = view.layoutParams
+    param.height = dpToPx(view.context, height).toInt()
+    view.layoutParams = param
+}
+
 /*
 * viewpager
 * */
@@ -111,6 +130,15 @@ fun genLayoutManagerInXml(
 @BindingAdapter("loadImage")
 fun loadImage(view: ImageView, loadImage: String) {
     Glide.with(view).load(loadImage).into(view)
+}
+
+@BindingAdapter("loadImageRank")
+fun loadImageRank(view: ImageView, rank: Int) {
+    when (rank) {
+        1 -> view.setImageResource(R.drawable.ic_rank_1)
+        2 -> view.setImageResource(R.drawable.ic_rank_2)
+        3 -> view.setImageResource(R.drawable.ic_rank_3)
+    }
 }
 
 @BindingAdapter("loadImageCircle")

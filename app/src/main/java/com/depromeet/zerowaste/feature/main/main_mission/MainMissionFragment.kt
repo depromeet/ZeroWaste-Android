@@ -68,6 +68,7 @@ class MainMissionFragment :
             })
         }
         viewModel.initTagList()
+        tabSelected(0)
     }
 
     private fun initRanker() {
@@ -105,7 +106,7 @@ class MainMissionFragment :
     private fun tabSelected(position: Int) {
         viewModel.tagList.value?.get(position)?.title?.also {
             binding.mainMissionSuggestTxt.text = SpanStrBuilder(requireContext())
-                .add(it, colorRes = R.color.sub2)
+                .add(it, colorRes = R.color.white)
                 .add(requireContext().resources.getString(R.string.main_mission_suggest))
                 .build()
         }
