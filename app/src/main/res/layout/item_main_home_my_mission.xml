@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="item"
+            name="mission"
             type="com.depromeet.zerowaste.data.home.Mission" />
     </data>
 
@@ -41,26 +42,29 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/main_home_my_mission_iv_icon"
-                    android:layout_width="41dp"
-                    android:layout_height="41dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="17.5dp"
+                    android:layout_marginTop="19dp"
                     android:layout_marginBottom="26dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    bind:loadImageMissionDifficulty="@{mission.difficulty}"
                     tools:src="@drawable/ic_sample_24dp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/main_home_my_mission_tv_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
+                    android:layout_marginEnd="37dp"
                     android:fontFamily="@font/apple_sd_gothic_neo_eb"
+                    android:text="@{mission.name}"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/main_home_my_mission_tv_content_1"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/main_home_my_mission_iv_icon"
                     app:layout_constraintTop_toTopOf="@id/main_home_my_mission_iv_icon"
                     tools:text="수돗물 끓여 마시기" />
@@ -69,7 +73,7 @@
                     android:id="@+id/main_home_my_mission_tv_content_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/apple_sd_gothic_neo_eb"
+                    android:fontFamily="@font/apple_sd_gothic_neo_r"
                     android:text="미션인증까지 "
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -96,7 +100,7 @@
                     android:id="@+id/main_home_my_mission_tv_content_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/apple_sd_gothic_neo_eb"
+                    android:fontFamily="@font/apple_sd_gothic_neo_r"
                     android:text=" 남았어요"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -131,7 +135,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="18dp"
                     android:layout_marginBottom="14dp"
-                    android:background="@drawable/rect_round_sub2_radius_8dp"
+                    android:background="@drawable/rect_round_sub2_radius_26dp"
                     android:fontFamily="@font/apple_sd_gothic_neo_eb"
                     android:stateListAnimator="@null"
                     android:text="인증하기"

@@ -12,7 +12,8 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#F8F8F8">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/main_home_layout_appbar"
@@ -86,12 +87,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="8dp"
-                    android:text="오늘도 우쥬를\n지키러 와주셨군요!"
+                    android:lineSpacingExtra="10px"
                     android:textColor="@color/real_black"
                     android:textSize="22sp"
                     android:textStyle="bold"
+                    app:fontFamily="@font/kotra_bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="오늘도 우쥬를\n지키러 와주셨군요!" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -109,19 +112,17 @@
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/main_home_rv_my_missions"
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/main_home_vp_my_missions"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
                     android:paddingStart="18dp"
-                    app:isVertical="@{false}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:spanCount="@{1}"
-                    tools:itemCount="3"
-                    tools:listitem="@layout/item_main_home_my_mission" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                     android:id="@+id/main_home_rv_my_missions_indicator"
@@ -134,7 +135,7 @@
                     app:dotsSpacing="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/main_home_rv_my_missions"
+                    app:layout_constraintTop_toBottomOf="@id/main_home_vp_my_missions"
                     app:progressMode="true"
                     app:selectedDotColor="#0F1469" />
 
@@ -144,10 +145,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="37dp"
-                    android:text="이런 미션은 어때요?"
-                    android:textColor="#0F1469"
+                    android:drawableEnd="@drawable/ic_star_green"
+                    android:drawablePadding="2dp"
+                    android:text="미션별 추천"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    app:fontFamily="@font/kotra_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/main_home_rv_my_missions_indicator" />
 
@@ -171,10 +175,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="37dp"
-                    android:text="이런 미션은 어때요2?"
-                    android:textColor="#0F1469"
+                    android:drawableEnd="@drawable/ic_star_green"
+                    android:drawablePadding="2dp"
+                    android:text="미션별 추천"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    app:fontFamily="@font/kotra_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/main_home_rv_recommend_missions" />
 
@@ -199,13 +206,27 @@
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="37dp"
                     android:layout_marginBottom="105dp"
-                    android:text="장소별로 알려드릴게요"
-                    android:textColor="#0F1469"
+                    android:drawableEnd="@drawable/ic_star_green"
+                    android:drawablePadding="2dp"
+                    android:text="장소별로 알려드릴게요!"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:fontFamily="@font/kotra_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/main_home_rv_recommend_missions_2" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/main_home_rv_location_missions"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="48dp"
+                    android:clipToPadding="false"
+                    app:isVertical="@{false}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/main_home_tv_location_mission" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
