@@ -5,6 +5,8 @@ import androidx.fragment.app.viewModels
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
+import com.depromeet.zerowaste.comm.SpanStrBuilder
+import com.depromeet.zerowaste.data.home.Mission
 import com.depromeet.zerowaste.databinding.FragmentMainHomeBinding
 import com.depromeet.zerowaste.databinding.ItemMainHomeNewMissionBinding
 import com.google.android.material.appbar.AppBarLayout
@@ -23,9 +25,18 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
 
     override fun init() {
         binding.vm = viewModel
+        initView()
         initToolbarLayout()
         initRecommendMissionList()
         initViewPagerAdapter()
+    }
+
+    private fun initView() {
+        binding.mainHomeTvTitle.text = SpanStrBuilder(requireContext())
+            .add("오늘도", colorRes = R.color.black, sp = 22f)
+            .add(" 우쥬", colorRes = R.color.sub2, sp = 22f)
+            .add("를\n지키러 와주셨군요", colorRes = R.color.black, sp = 22f)
+            .build()
     }
 
     private fun initViewPagerAdapter() {
