@@ -1,10 +1,6 @@
 package com.depromeet.zerowaste.feature.main.main_mission
 
-import android.graphics.Color
-import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.coroutineScope
-import androidx.navigation.fragment.findNavController
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
@@ -16,15 +12,12 @@ import com.depromeet.zerowaste.data.mission.TempMissionTag
 import com.depromeet.zerowaste.databinding.*
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainMissionFragment :
     BaseFragment<FragmentMainMissionBinding>(R.layout.fragment_main_mission) {
-    override var statusBarBackGroundColorRes = R.color.white
-    override var isLightStatusBar = true
+    override var statusBarBackGroundColorRes = R.color.black
+    override var isLightStatusBar = false
 
     private val viewModel: MainMissionViewModel by viewModels()
 
