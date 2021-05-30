@@ -209,7 +209,7 @@
                     android:drawableEnd="@drawable/ic_start_green"
                     android:drawablePadding="2dp"
                     android:text="장소별로 알려드릴게요!"
-                    android:textColor="#0F1469"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:fontFamily="@font/kotra_bold"
