@@ -23,8 +23,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainMissionFragment :
     BaseFragment<FragmentMainMissionBinding>(R.layout.fragment_main_mission) {
-    override var statusBarBackGroundColorString = "#18234E"
-    override var isLightStatusBar = false
+    override var statusBarBackGroundColorRes = R.color.white
+    override var isLightStatusBar = true
 
     private val viewModel: MainMissionViewModel by viewModels()
 
