@@ -6,9 +6,11 @@ import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
 import com.depromeet.zerowaste.comm.SpanStrBuilder
+import com.depromeet.zerowaste.data.Place
 import com.depromeet.zerowaste.data.mission.Mission
 import com.depromeet.zerowaste.databinding.FragmentMainHomeBinding
 import com.depromeet.zerowaste.databinding.ItemMainHomeMissionBinding
+import com.depromeet.zerowaste.databinding.ItemMainHomePlaceBinding
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
@@ -18,9 +20,14 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
 
     private val viewModel: MainHomeViewModel by viewModels()
 
-    private val recommendMissionAdapter =
+    private val missionAdapter =
         BaseRecycleAdapter(R.layout.item_main_home_mission) { item: Mission, bind: ItemMainHomeMissionBinding, _: Int ->
             bind.mission = item
+        }
+
+    private val placeMissionAdapter =
+        BaseRecycleAdapter(R.layout.item_main_home_place) { item: Place, bind: ItemMainHomePlaceBinding, _: Int ->
+            bind.place = item
         }
 
     override fun init() {
@@ -28,14 +35,16 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
         initView()
         initToolbarLayout()
         initMissionList()
+        initPlaceList()
         initViewPagerAdapter()
-        initViewModelCallback()
     }
 
-    private fun initViewModelCallback() {
-        with(viewModel) {
-            myMissionList
-        }
+    private fun initPlaceList() {
+        viewModel.placeList.observe(this, { data ->
+            placeMissionAdapter.addData(data)
+        })
+        binding.mainHomeRvPlaceMissions.adapter = placeMissionAdapter
+        viewModel.getPlaceList()
     }
 
     private fun initView() {
@@ -66,9 +75,9 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
 
     private fun initMissionList() {
         viewModel.missionList.observe(this, { data ->
-            recommendMissionAdapter.addData(data)
+            missionAdapter.addData(data)
         })
-        binding.mainHomeRvRecommendMissions.adapter = recommendMissionAdapter
+        binding.mainHomeRvRecommendMissions.adapter = missionAdapter
         viewModel.getMissionWithPlace()
     }
 

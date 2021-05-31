@@ -23,6 +23,20 @@ class MainHomeViewModel @Inject constructor() : BaseViewModel() {
     private val _myMissionList = MutableLiveData<List<Mission>>()
     val myMissionList: LiveData<List<Mission>> get() = _myMissionList
 
+    private val _placeList = MutableLiveData<List<Place>>()
+    val placeList: LiveData<List<Place>> get() = _placeList
+
+    fun getPlaceList() {
+        execute({
+            val places = ArrayList<Place>()
+            places.add(Place.ALL)
+            Place.values().forEach {
+                places.add(it)
+            }
+            places
+        }, _placeList, isShowLoad = false)
+    }
+
     fun getMissionWithPlace() {
         execute({
             val res = MissionApi.getMissions()
