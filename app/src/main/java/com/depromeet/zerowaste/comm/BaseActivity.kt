@@ -2,6 +2,7 @@ package com.depromeet.zerowaste.comm
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -38,6 +39,11 @@ abstract class BaseActivity<B : ViewDataBinding>(
         loadingView?.visibility = View.GONE
     }
 
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if(loadCount > 0) return true
+        return super.dispatchTouchEvent(ev)
+    }
+
     protected fun showToast(msg: String) {
         lifecycleScope.launch(Dispatchers.Main) {
             Toast.makeText(this@BaseActivity, msg, Toast.LENGTH_SHORT).show()
@@ -64,8 +70,8 @@ abstract class BaseActivity<B : ViewDataBinding>(
     fun startLoad() {
         lifecycleScope.launch(Dispatchers.Main) {
             loadCount++
-            loadingView?.bringToFront()
             loadingView?.visibility = View.VISIBLE
+            loadingView?.bringToFront()
         }
     }
 

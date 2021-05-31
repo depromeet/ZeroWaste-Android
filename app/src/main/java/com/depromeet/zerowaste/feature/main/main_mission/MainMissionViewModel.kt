@@ -31,7 +31,6 @@ class MainMissionViewModel @Inject constructor() : BaseViewModel() {
     fun initPlaceList() {
         execute({
             val places = ArrayList<Place>()
-            places.add(Place.ALL)
             Place.values().forEach {
                 places.add(it)
             }

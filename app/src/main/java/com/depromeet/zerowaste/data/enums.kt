@@ -19,6 +19,7 @@ enum class Difficulty(@IntRange(from=0,to=4) val level: Int) {
 }
 
 enum class Place(@StringRes val textId: Int) {
+    ALL(R.string.place_all),
     @SerializedName("etc")
     ETC( R.string.place_etc),
     @SerializedName("kitchen")
@@ -30,9 +31,7 @@ enum class Place(@StringRes val textId: Int) {
     @SerializedName("restaurant")
     RESTAURANT(R.string.place_restaurant),
     @SerializedName("outside")
-    OUTSIDE(R.string.place_outside),
-
-    ALL(R.string.place_all)
+    OUTSIDE(R.string.place_outside)
 }
 
 enum class Theme(@StringRes val textId: Int) {
