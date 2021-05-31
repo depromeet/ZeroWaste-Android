@@ -5,6 +5,8 @@ import androidx.fragment.app.viewModels
 import com.depromeet.zerowaste.App
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
+import com.depromeet.zerowaste.data.Difficulty
+import com.depromeet.zerowaste.data.Theme
 import com.depromeet.zerowaste.databinding.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,13 +16,18 @@ class MainCommunityFragment :
 
     private val viewModel: MainCommunityViewModel by viewModels()
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getMissionTest()
+    }
+
     override fun init() {
         binding.vm = viewModel
         binding.mainHomeCommunityTvTitle.setOnClickListener {
-            App.dialog(R.layout.sample_dialog, 400f) { binding: SampleDialogBinding ->
+            dialog(R.layout.sample_dialog, 400f) { binding: SampleDialogBinding ->
 
             }
-            App.bottomSheet("테스트",
+            bottomSheet("테스트",
                 arrayListOf(
                     Pair(0, "인기순1"),
                     Pair(1, "참여순2"),

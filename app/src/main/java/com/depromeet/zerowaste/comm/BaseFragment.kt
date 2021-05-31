@@ -48,9 +48,10 @@ abstract class BaseFragment<B : ViewDataBinding>(
         requireActivity().window.statusBarColor = color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             requireActivity().window.insetsController?.setSystemBarsAppearance(
-                if(isLightStatusBar) WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS else 0 ,
-               WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if(isLightStatusBar) WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS else 0,
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requireActivity().window.decorView.systemUiVisibility = if(isLightStatusBar) View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR else 0
         }
 
@@ -74,6 +75,23 @@ abstract class BaseFragment<B : ViewDataBinding>(
     protected fun showToast(msg: String) {
         lifecycleScope.launch(Dispatchers.Main) {
             Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    protected fun <V: ViewDataBinding> dialog(@LayoutRes layoutId: Int, widthDP: Float? = null, heightDP: Float? = null, onActive: (V) -> Unit) {
+        lifecycleScope.launch {
+            BaseDialog(layoutId, widthDP, heightDP, onActive).show(parentFragmentManager, layoutId.toString())
+        }
+    }
+
+    protected fun bottomSheet(
+        title: String,
+        contents: List<Pair<Int,String>>,
+        selectedId: Int? = null,
+        onSelect: (Int) -> Unit
+    ) {
+        lifecycleScope.launch(Dispatchers.Main) {
+            BaseBottomSheet(title, contents, selectedId, onSelect).show(parentFragmentManager, title)
         }
     }
 

@@ -6,21 +6,21 @@
     <data>
         <variable
             name="item"
-            type="com.depromeet.zerowaste.data.mission.TempMissionTag" />
+            type="com.depromeet.zerowaste.data.mission.MissionTag" />
     </data>
 
     <com.google.android.material.chip.Chip
         android:id="@+id/item_main_mission_chip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/apple_sd_gothic_neo_r"
-        android:textSize="15sp"
+        android:fontFamily="@font/apple_sd_gothic_neo_b"
+        android:textSize="13sp"
         android:textColor="@{item.selected ? @color/white : @color/gray_2}"
-        android:text="@{item.title}"
+        android:text="@{item.theme.textId}"
         android:layout_marginStart="10dp"
-        app:chipStrokeColor="@{item.selected ? @color/sub2 : @color/gray_2}"
+        app:chipStrokeColor="@{item.selected ? @color/purple : @color/gray_2}"
         app:chipStrokeWidth="1dp"
-        app:chipBackgroundColor="@{item.selected ? @color/sub2 : @color/white}"
+        app:chipBackgroundColor="@{item.selected ? @color/purple : @color/white}"
         app:rippleColor="@android:color/transparent"
         tools:text="재활용"/>
 </layout>

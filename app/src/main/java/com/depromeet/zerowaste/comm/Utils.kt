@@ -2,6 +2,7 @@ package com.depromeet.zerowaste.comm
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.DisplayMetrics
 import android.util.Log
@@ -23,6 +24,7 @@ import androidx.security.crypto.MasterKeys
 import com.bumptech.glide.Glide
 import com.depromeet.zerowaste.BuildConfig
 import com.depromeet.zerowaste.R
+import com.depromeet.zerowaste.data.Difficulty
 
 
 fun getPreference(context: Context): SharedPreferences {
@@ -91,6 +93,24 @@ fun spToDp(context: Context, sp: Float): Float {
     return pxToDp(context, spToPx(context, sp))
 }
 
+
+/*
+* All View
+* */
+@BindingAdapter("customWidthDP")
+fun customWidthDP(view: View, width: Float) {
+    val param = view.layoutParams
+    param.width = dpToPx(view.context, width).toInt()
+    view.layoutParams = param
+}
+
+@BindingAdapter("customHeightDP")
+fun customHeightDP(view: View, height: Float) {
+    val param = view.layoutParams
+    param.height = dpToPx(view.context, height).toInt()
+    view.layoutParams = param
+}
+
 /*
 * viewpager
 * */
@@ -113,6 +133,15 @@ fun loadImage(view: ImageView, loadImage: String) {
     Glide.with(view).load(loadImage).into(view)
 }
 
+@BindingAdapter("loadImageRank")
+fun loadImageRank(view: ImageView, rank: Int) {
+    when (rank) {
+        1 -> view.setImageResource(R.drawable.ic_rank_1)
+        2 -> view.setImageResource(R.drawable.ic_rank_2)
+        3 -> view.setImageResource(R.drawable.ic_rank_3)
+    }
+}
+
 @BindingAdapter("loadImageCircle")
 fun loadImageCircle(view: ImageView, loadImage: String) {
     Glide.with(view).load(loadImage).circleCrop().into(view)
@@ -131,5 +160,16 @@ fun loadImageMissionDifficulty(view: ImageView, difficulty: String) {
         "2" -> view.setImageResource(R.drawable.ic_level_2)
         "3" -> view.setImageResource(R.drawable.ic_level_3)
         "4" -> view.setImageResource(R.drawable.ic_level_4)
+    }
+}
+
+@BindingAdapter("loadImageMissionDifficulty")
+fun loadImageMissionDifficulty(view: ImageView, difficulty: Difficulty) {
+    when (difficulty.level) {
+        0 -> view.setImageResource(R.drawable.ic_level_0)
+        1 -> view.setImageResource(R.drawable.ic_level_1)
+        2 -> view.setImageResource(R.drawable.ic_level_2)
+        3 -> view.setImageResource(R.drawable.ic_level_3)
+        4 -> view.setImageResource(R.drawable.ic_level_4)
     }
 }

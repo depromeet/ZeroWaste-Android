@@ -10,37 +10,27 @@
             motion:touchAnchorId="@id/main_mission_list_back" />
     </Transition>
     <ConstraintSet android:id="@+id/start">
-<!--        <Constraint-->
-<!--            android:id="@+id/main_mission_sub_title"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="6dp"-->
-<!--            android:alpha="1"-->
-<!--            motion:layout_constraintTop_toBottomOf="@id/main_mission_title"-->
-<!--            motion:layout_constraintStart_toStartOf="@id/main_mission_title"/>-->
         <Constraint
             android:id="@+id/main_mission_icon"
-            android:layout_width="98dp"
-            android:layout_height="89dp"
-            android:layout_marginTop="26dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:alpha="1"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/main_mission_tab"/>
+            android:layout_marginTop="10dp"
+            motion:layout_constraintTop_toBottomOf="@id/main_mission_tab" />
         <Constraint
             android:id="@+id/main_mission_suggest_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
             android:layout_marginTop="10dp"
             android:alpha="1"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/main_mission_icon" />
+            motion:layout_constraintTop_toBottomOf="@id/main_mission_icon"
+            motion:layout_constraintStart_toStartOf="parent" />
         <Constraint
             android:id="@+id/main_mission_ranker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="14dp"
             android:alpha="1"
             motion:layout_constraintTop_toBottomOf="@id/main_mission_suggest_txt" />
         <Constraint
@@ -52,31 +42,21 @@
             motion:layout_constraintTop_toBottomOf="@id/main_mission_ranker"/>
     </ConstraintSet>
     <ConstraintSet android:id="@+id/end">
-<!--        <Constraint-->
-<!--            android:id="@+id/main_mission_sub_title"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="0dp"-->
-<!--            android:alpha="0"-->
-<!--            motion:layout_constraintBottom_toBottomOf="@id/main_mission_title"-->
-<!--            motion:layout_constraintStart_toStartOf="@id/main_mission_title"/>-->
         <Constraint
             android:id="@+id/main_mission_icon"
-            android:layout_width="98dp"
-            android:layout_height="89dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:alpha="0"
             android:layout_marginTop="0dp"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintBottom_toTopOf="@id/main_mission_tab"/>
+            motion:layout_constraintBottom_toTopOf="@id/main_mission_tab" />
         <Constraint
             android:id="@+id/main_mission_suggest_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
             android:layout_marginTop="0dp"
             android:alpha="0"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintBottom_toTopOf="@id/main_mission_tab" />
         <Constraint
             android:id="@+id/main_mission_ranker"
