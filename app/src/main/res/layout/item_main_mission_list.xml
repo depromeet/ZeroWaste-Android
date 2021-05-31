@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.depromeet.zerowaste.data.mission.TempMission" />
+            type="com.depromeet.zerowaste.data.mission.Mission" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -14,7 +14,7 @@
         android:layout_height="126dp"
         android:layout_marginStart="18dp"
         android:layout_marginEnd="18dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="18dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="12dp">
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,24 +25,23 @@
                 android:id="@+id/item_main_mission_list_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:scaleType="centerCrop"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:fontFamily="@font/kotra_bold"
                 android:layout_marginTop="17.5dp"
                 android:layout_marginStart="15dp"
-                app:loadImageMissionDifficulty="@{`1`}"
+                app:loadImageMissionDifficulty="@{item.difficulty}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription"
-                tools:layout_width="40dp"
-                tools:layout_height="40dp"/>
+                tools:src="@drawable/ic_level_0"/>
 
             <TextView
                 android:id="@+id/item_main_mission_list_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{item.title}"
+                android:text="@{item.name}"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/apple_sd_gothic_neo_b"
@@ -64,7 +63,7 @@
                 android:id="@+id/item_main_mission_list_loca_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="카페"
+                android:text="@{item.place.textId}"
                 android:layout_marginStart="6dp"
                 android:textColor="@color/black"
                 android:textSize="13sp"
@@ -87,7 +86,7 @@
                 android:id="@+id/item_main_mission_list_user_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{Integer.toString(item.doCount)+`명 참여중`}"
+                android:text="@{Integer.toString(100)+`명 참여중`}"
                 android:layout_marginStart="6dp"
                 android:textColor="@color/black"
                 android:textSize="13sp"
@@ -101,7 +100,7 @@
                 android:id="@+id/item_main_mission_list_like"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@{item.like ? @drawable/ic_heart_on : @drawable/ic_heart_off}"
+                android:src="@{item.isLiked ? @drawable/ic_heart_on : @drawable/ic_heart_off}"
                 android:scaleType="center"
                 android:layout_marginBottom="13dp"
                 android:layout_marginEnd="16dp"

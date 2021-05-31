@@ -1,6 +1,7 @@
 package com.depromeet.zerowaste.data.mission
 
 import com.depromeet.zerowaste.data.Difficulty
+import com.depromeet.zerowaste.data.Place
 import com.depromeet.zerowaste.data.Theme
 import com.depromeet.zerowaste.data.user.User
 import com.google.gson.annotations.SerializedName
@@ -12,6 +13,8 @@ data class Mission(
     val name: String,
     @SerializedName("owner")
     val owner: Int,
+    @SerializedName("place")
+    val place: Place,
     @SerializedName("theme")
     val theme: List<Theme>,
     @SerializedName("difficulty")

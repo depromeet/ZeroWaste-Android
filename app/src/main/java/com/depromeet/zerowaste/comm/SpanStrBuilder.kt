@@ -11,7 +11,9 @@ import android.text.style.*
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.FontRes
+import androidx.annotation.StringRes
 import androidx.core.content.res.ResourcesCompat
+import okio.IOException
 
 class SpanStrBuilder(private val context: Context) {
 
@@ -27,7 +29,8 @@ class SpanStrBuilder(private val context: Context) {
     private val backColors: HashMap<Int, Int?> = HashMap()
 
     fun add(
-        text: String,
+        text: String? = null,
+        @StringRes textId: Int? = null,
         @FontRes fontRes: Int? = null,
         typeface: Typeface? = null,
         @ColorRes colorRes: Int? = null,
@@ -37,7 +40,8 @@ class SpanStrBuilder(private val context: Context) {
         @ColorRes backColorRes: Int? = null,
         @ColorInt backColor: Int? = null,
     ): SpanStrBuilder {
-        lengths[index] = Pair(lastLength, lastLength + text.length)
+        val mText = text ?: if(textId != null) { context.resources.getString(textId) } else throw IOException()
+        lengths[index] = Pair(lastLength, lastLength + mText.length)
         fontRes?.also {
             typefaces[index] = ResourcesCompat.getFont(context, it)
         } ?: typeface?.also { typefaces[index] = it }
@@ -51,8 +55,8 @@ class SpanStrBuilder(private val context: Context) {
         backColorRes?.also {
             backColors[index] = ResourcesCompat.getColor(context.resources, it, null)
         } ?: backColor?.also { backColors[index] = it }
-        lastLength += text.length
-        targetStr += text
+        lastLength += mText.length
+        targetStr += mText
         index++
         return this
     }

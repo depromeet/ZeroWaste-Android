@@ -34,4 +34,18 @@
     <string name="main_mission_suggest">미션 공감 순위</string>
     <string name="main_mission_list">미션 리스트</string>
     <string name="main_mission_sub_title">장소별로 미션을 알려드려요</string>
+
+    <string name="theme_refuse">거절하기</string>
+    <string name="theme_reduce">줄이기</string>
+    <string name="theme_reuse">재사용</string>
+    <string name="theme_recycle">재활용</string>
+    <string name="theme_rot">썩히기</string>
+
+    <string name="place_etc">기타</string>
+    <string name="place_kitchen">주방</string>
+    <string name="place_bathroom">욕실</string>
+    <string name="place_cafe">카페</string>
+    <string name="place_restaurant">식당</string>
+    <string name="place_outside">실외</string>
+    <string name="place_all">전체</string>
 </resources>

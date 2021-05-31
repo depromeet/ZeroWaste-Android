@@ -83,18 +83,22 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
     open fun setData(data: Collection<T>?) {
         if(data == null) return
         if (data !== this.items) {
-            if (!data.isNullOrEmpty()) {
+            if (!data.isEmpty()) {
                 this.items.clear()
                 this.items.addAll(data)
-                notifyDataSetChanged()
                 mLastPosition = -1
+                notifyDataSetChanged()
+            } else {
+                this.items.clear()
+                mLastPosition = -1
+                notifyDataSetChanged()
             }
-        } else if (!data.isNullOrEmpty()) {
+        } else if (!data.isEmpty()) {
             this.items.clear()
             val newList = ArrayList(data)
             this.items.addAll(newList)
-            notifyDataSetChanged()
             mLastPosition = -1
+            notifyDataSetChanged()
         }
     }
 

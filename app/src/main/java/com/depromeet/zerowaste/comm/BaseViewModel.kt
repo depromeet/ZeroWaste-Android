@@ -15,7 +15,7 @@ abstract class BaseViewModel: ViewModel() {
     private val _error = MutableLiveData<Exception>()
     val error: LiveData<Exception> get() = _error
 
-    protected fun <T> execute(job: suspend CoroutineScope.() -> T, context: CoroutineContext = Dispatchers.IO, isShowLoad: Boolean = true, res: (T) -> Unit) {
+    protected fun <T> execute(job: suspend CoroutineScope.() -> T, context: CoroutineContext = Dispatchers.IO, isShowLoad: Boolean = true, res: (T) -> Unit = {}) {
         viewModelScope.launch(context) {
             launch(Dispatchers.Main) { if(isShowLoad) App.startLoad() }
             try {

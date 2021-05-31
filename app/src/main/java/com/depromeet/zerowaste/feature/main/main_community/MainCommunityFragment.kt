@@ -5,6 +5,8 @@ import androidx.fragment.app.viewModels
 import com.depromeet.zerowaste.App
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
+import com.depromeet.zerowaste.data.Difficulty
+import com.depromeet.zerowaste.data.Theme
 import com.depromeet.zerowaste.databinding.*
 import dagger.hilt.android.AndroidEntryPoint
 

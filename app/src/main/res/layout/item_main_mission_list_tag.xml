@@ -5,14 +5,14 @@
     <data>
         <variable
             name="item"
-            type="com.depromeet.zerowaste.data.mission.TempMissionTag" />
+            type="com.depromeet.zerowaste.data.Theme" />
     </data>
 
     <TextView
         android:id="@+id/item_main_mission_list_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@{item.title}"
+        android:text="@{item.textId}"
         android:background="@drawable/rect_round_chip_4dp"
         android:gravity="center"
         android:fontFamily="@font/apple_sd_gothic_neo_r"
