@@ -2,8 +2,10 @@ package com.depromeet.zerowaste.feature.main.main_home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.depromeet.zerowaste.api.MissionApi
 import com.depromeet.zerowaste.comm.BaseViewModel
-import com.depromeet.zerowaste.data.home.Mission
+import com.depromeet.zerowaste.data.Place
+import com.depromeet.zerowaste.data.mission.Mission
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -21,10 +23,19 @@ class MainHomeViewModel @Inject constructor() : BaseViewModel() {
     private val _myMissionList = MutableLiveData<List<Mission>>()
     val myMissionList: LiveData<List<Mission>> get() = _myMissionList
 
+    fun getMissionWithPlace() {
+        execute({
+            val res = MissionApi.getMissions()
+            res.data ?: throw Exception(res.message)
+        })
+        {
+            _missionList.value = it
+        }
+    }
 
-    fun getMissionList() {
+    fun getMockMissionList() {
         val missions = ArrayList<Mission>()
-        for (i in 0..4) {
+/*        for (i in 0..4) {
             missions.add(
                 Mission(
                     bannerImgUrls = "",
@@ -39,21 +50,7 @@ class MainHomeViewModel @Inject constructor() : BaseViewModel() {
                     theme = i.toString()
                 )
             )
-        }
+        }*/
         _missionList.value = missions
-    }
-
-    fun getNewMissionList() {
-        val missions = ArrayList<Mission>()
-//        for (i in 0..10) {
-//            missions.add(
-//                Mission(
-//                    iconImg = photosUrls[2],
-//                    logo = photosUrls[1],
-//                    content = "디프만 화이팅 $i"
-//                )
-//            )
-//        }
-        _myMissionList.value = missions
     }
 }

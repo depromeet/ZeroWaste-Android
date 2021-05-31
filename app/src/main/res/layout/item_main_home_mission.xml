@@ -8,7 +8,7 @@
 
         <variable
             name="mission"
-            type="com.depromeet.zerowaste.data.home.Mission" />
+            type="com.depromeet.zerowaste.data.mission.Mission" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:fontFamily="@font/apple_sd_gothic_neo_r"
-                    android:text="@{mission.place}"
+                    android:text="@{mission.place.textId}"
                     android:textColor="@color/real_black"
                     android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="@id/main_home_mission_iv_location"
@@ -110,7 +110,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:fontFamily="@font/apple_sd_gothic_neo_r"
-                    android:text="@{String.valueOf(mission.signedUrlNum)}"
                     android:textColor="@color/black"
                     android:textSize="13sp"
                     app:fontFamily="@font/apple_sd_gothic_neo_r"
@@ -124,13 +123,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/apple_sd_gothic_neo_r"
+                    android:text="명 참여중"
                     android:textColor="@color/black"
                     android:textSize="13sp"
                     app:fontFamily="@font/apple_sd_gothic_neo_r"
                     app:layout_constraintBottom_toBottomOf="@id/main_home_mission_tv_num"
                     app:layout_constraintStart_toEndOf="@id/main_home_mission_tv_num"
-                    app:layout_constraintTop_toTopOf="@id/main_home_mission_tv_num"
-                    tools:text="명 참여중" />
+                    app:layout_constraintTop_toTopOf="@id/main_home_mission_tv_num" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/main_home_mission_iv_recommend"

@@ -6,10 +6,9 @@ import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
 import com.depromeet.zerowaste.comm.SpanStrBuilder
-import com.depromeet.zerowaste.data.home.Mission
+import com.depromeet.zerowaste.data.mission.Mission
 import com.depromeet.zerowaste.databinding.FragmentMainHomeBinding
 import com.depromeet.zerowaste.databinding.ItemMainHomeMissionBinding
-import com.depromeet.zerowaste.databinding.ItemMainHomeNewMissionBinding
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
@@ -28,8 +27,15 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
         binding.vm = viewModel
         initView()
         initToolbarLayout()
-        initRecommendMissionList()
+        initMissionList()
         initViewPagerAdapter()
+        initViewModelCallback()
+    }
+
+    private fun initViewModelCallback() {
+        with(viewModel) {
+            myMissionList
+        }
     }
 
     private fun initView() {
@@ -58,12 +64,12 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
     }
 
 
-    private fun initRecommendMissionList() {
+    private fun initMissionList() {
         viewModel.missionList.observe(this, { data ->
             recommendMissionAdapter.addData(data)
         })
         binding.mainHomeRvRecommendMissions.adapter = recommendMissionAdapter
-        viewModel.getMissionList()
+        viewModel.getMissionWithPlace()
     }
 
 

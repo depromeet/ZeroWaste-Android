@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.zerowaste.R
-import com.depromeet.zerowaste.data.home.Mission
+import com.depromeet.zerowaste.data.mission.Mission
 import com.depromeet.zerowaste.databinding.ItemMainHomeMyMissionBinding
 
 
