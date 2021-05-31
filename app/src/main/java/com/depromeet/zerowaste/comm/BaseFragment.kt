@@ -78,4 +78,21 @@ abstract class BaseFragment<B : ViewDataBinding>(
         }
     }
 
+    protected fun <V: ViewDataBinding> dialog(@LayoutRes layoutId: Int, widthDP: Float? = null, heightDP: Float? = null, onActive: (V) -> Unit) {
+        lifecycleScope.launch {
+            BaseDialog(layoutId, widthDP, heightDP, onActive).show(parentFragmentManager, layoutId.toString())
+        }
+    }
+
+    protected fun bottomSheet(
+        title: String,
+        contents: List<Pair<Int,String>>,
+        selectedId: Int? = null,
+        onSelect: (Int) -> Unit
+    ) {
+        lifecycleScope.launch(Dispatchers.Main) {
+            BaseBottomSheet(title, contents, selectedId, onSelect).show(parentFragmentManager, title)
+        }
+    }
+
 }
