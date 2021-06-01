@@ -42,7 +42,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/main_home_mission_iv_icon"
+                    android:id="@+id/main_home_mission_iv_level"
                     android:layout_width="37dp"
                     android:layout_height="46dp"
                     android:layout_marginStart="18.28dp"
@@ -65,8 +65,8 @@
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/main_home_mission_iv_icon"
-                    app:layout_constraintTop_toTopOf="@id/main_home_mission_iv_icon"
+                    app:layout_constraintStart_toEndOf="@id/main_home_mission_iv_level"
+                    app:layout_constraintTop_toTopOf="@id/main_home_mission_iv_level"
                     tools:text="수돗물 끓여 마시기" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:scaleType="fitXY"
-                    app:layout_constraintBottom_toBottomOf="@id/main_home_mission_iv_icon"
+                    app:layout_constraintBottom_toBottomOf="@id/main_home_mission_iv_level"
                     app:layout_constraintStart_toStartOf="@id/main_home_mission_tv_title"
                     app:layout_constraintTop_toBottomOf="@id/main_home_mission_tv_title"
                     app:srcCompat="@drawable/ic_location_black" />

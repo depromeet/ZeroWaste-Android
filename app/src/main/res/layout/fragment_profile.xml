@@ -107,7 +107,7 @@
                         tools:text="지구를 이제 막 지키기 시작한" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/main_home_my_mission_btn_auth"
+                        android:id="@+id/item_main_home_my_mission_btn_auth"
                         android:layout_width="0dp"
                         android:layout_height="36dp"
                         android:layout_marginStart="9.42dp"
