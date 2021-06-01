@@ -1,6 +1,10 @@
 package com.depromeet.zerowaste.feature.main.main_mission
 
+import android.util.Log
+import android.view.View
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
@@ -9,11 +13,12 @@ import com.depromeet.zerowaste.comm.genLayoutManager
 import com.depromeet.zerowaste.data.Place
 import com.depromeet.zerowaste.data.Theme
 import com.depromeet.zerowaste.data.mission.Mission
-import com.depromeet.zerowaste.data.mission.Rank
 import com.depromeet.zerowaste.data.mission.MissionTag
+import com.depromeet.zerowaste.data.mission.Rank
 import com.depromeet.zerowaste.databinding.*
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainMissionFragment :
@@ -61,6 +66,14 @@ class MainMissionFragment :
     }
 
     private fun initMissions() {
+        binding.mainMissionList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if(dy > 0 && binding.mainMissionMotion.progress != 1f) {
+                    binding.mainMissionMotion.progress += Float.MIN_VALUE
+                }
+            }
+        })
         viewModel.missionList.observe(this) {
             binding.mainMissionList.post {
                 missionAdapter.setData(it)
@@ -133,7 +146,7 @@ class MainMissionFragment :
             chipAdapter.getItems().forEach { item -> item.selected = false }
             chipAdapter.notifyDataSetChanged()
             if(binding.mainMissionMotion.progress != 0f) binding.mainMissionMotion.transitionToStart()
-            binding.mainMissionListNested.smoothScrollTo(0,0)
+            binding.mainMissionList.scrollTo(0, 0)
         }
     }
 }

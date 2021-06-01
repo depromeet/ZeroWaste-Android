@@ -7,7 +7,7 @@
         motion:duration="500"
         motion:motionInterpolator="easeInOut">
         <OnSwipe
-            motion:touchAnchorId="@id/main_mission_list_back" />
+            motion:touchAnchorId="@id/main_mission_list_back"/>
     </Transition>
     <ConstraintSet android:id="@+id/start">
         <Constraint
