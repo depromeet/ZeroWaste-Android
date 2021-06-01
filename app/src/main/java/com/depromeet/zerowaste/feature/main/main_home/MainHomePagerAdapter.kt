@@ -31,10 +31,9 @@ class MainHomePagerAdapter(vm: MainHomeViewModel) :
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        with(items[position]) {
-            holder.itemView
+        items[position].let {
+            holder.bind(it)
         }
-
     }
 
     fun addItems(items: List<Mission>) {

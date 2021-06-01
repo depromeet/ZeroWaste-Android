@@ -13,14 +13,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginEnd="10dp">
 
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/sub1"
+            app:cardBackgroundColor="@color/black"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     bind:loadImageMissionDifficulty="@{mission.difficulty}"
-                    tools:src="@drawable/ic_sample_24dp" />
+                    tools:src="@drawable/ic_level_0" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/main_home_my_mission_tv_title"
@@ -139,7 +139,7 @@
                     android:fontFamily="@font/apple_sd_gothic_neo_eb"
                     android:stateListAnimator="@null"
                     android:text="인증하기"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"

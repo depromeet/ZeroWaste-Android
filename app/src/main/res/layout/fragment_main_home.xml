@@ -129,8 +129,8 @@
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/main_home_vp_my_missions"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="16dp"
                     android:clipChildren="false"
                     android:clipToPadding="false"
@@ -151,7 +151,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/main_home_vp_my_missions"
-                    app:progressMode="true"
                     app:selectedDotColor="#0F1469" />
 
                 <androidx.appcompat.widget.AppCompatTextView

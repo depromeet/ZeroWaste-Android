@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.depromeet.zerowaste.api.MissionApi
 import com.depromeet.zerowaste.comm.BaseViewModel
+import com.depromeet.zerowaste.comm.data.Share
 import com.depromeet.zerowaste.data.Place
 import com.depromeet.zerowaste.data.mission.Mission
+import com.depromeet.zerowaste.data.user.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -37,7 +39,7 @@ class MainHomeViewModel @Inject constructor() : BaseViewModel() {
         }, _placeList, isShowLoad = false)
     }
 
-    fun getMissionWithPlace() {
+    fun getMissionList() {
         execute({
             val res = MissionApi.getMissions()
             res.data ?: throw Exception(res.message)
@@ -47,24 +49,25 @@ class MainHomeViewModel @Inject constructor() : BaseViewModel() {
         }
     }
 
-    fun getMockMissionList() {
-        val missions = ArrayList<Mission>()
-/*        for (i in 0..4) {
-            missions.add(
-                Mission(
-                    bannerImgUrls = "",
-                    content = "디프만 화이팅 $i",
-                    difficulty = i.toString(),
-                    id = i,
-                    name = "미션제목$i",
-                    owner = i,
-                    place = "서울$i",
-                    sentenceForCheer = "",
-                    signedUrlNum = i,
-                    theme = i.toString()
-                )
-            )
-        }*/
-        _missionList.value = missions
+    fun getMyMissionList() {
+        execute({
+            val res = MissionApi.getMissions()
+            res.data ?: throw Exception(res.message)
+        })
+        { missions ->
+            _myMissionList.value = missions.filter { it.creater.id == Share.user?.id ?: -1 }
+        }
+    }
+
+    fun getMockMyMissionList() {
+        execute({
+            val res = MissionApi.getMissions()
+            res.data ?: throw Exception(res.message)
+        })
+        { missions ->
+//            missions[0].creater.id = Share.user!!.id
+//            missions[1].creater.id = Share.user!!.id
+            _myMissionList.value = missions.filter { it.creater.id == Share.user?.id ?: -1 }
+        }
     }
 }

@@ -153,17 +153,6 @@ fun loadImageCenterCrop(view: ImageView, loadImage: String) {
 }
 
 @BindingAdapter("loadImageMissionDifficulty")
-fun loadImageMissionDifficulty(view: ImageView, difficulty: String) {
-    when (difficulty) {
-        "0" -> view.setImageResource(R.drawable.ic_level_0)
-        "1" -> view.setImageResource(R.drawable.ic_level_1)
-        "2" -> view.setImageResource(R.drawable.ic_level_2)
-        "3" -> view.setImageResource(R.drawable.ic_level_3)
-        "4" -> view.setImageResource(R.drawable.ic_level_4)
-    }
-}
-
-@BindingAdapter("loadImageMissionDifficulty")
 fun loadImageMissionDifficulty(view: ImageView, difficulty: Difficulty) {
     when (difficulty.level) {
         0 -> view.setImageResource(R.drawable.ic_level_0)
