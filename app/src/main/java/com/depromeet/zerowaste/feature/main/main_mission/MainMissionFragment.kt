@@ -1,8 +1,5 @@
 package com.depromeet.zerowaste.feature.main.main_mission
 
-import android.util.Log
-import android.view.View
-import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.zerowaste.R
@@ -38,7 +35,7 @@ class MainMissionFragment :
     }
     private val missionAdapter = BaseRecycleAdapter(R.layout.item_main_mission_list)
     { item: Mission, bind: ItemMainMissionListBinding, _ ->
-        val tagAdapter = BaseRecycleAdapter(R.layout.item_main_mission_list_tag){ i: Theme, b: ItemMainMissionListTagBinding, _ -> b.item = i }
+        val tagAdapter = BaseRecycleAdapter(R.layout.item_mission_tag){ i: Theme, b: ItemMissionTagBinding, _ -> b.item = i }
         tagAdapter.setData(item.theme)
         bind.itemMainMissionListTags.layoutManager = genLayoutManager(requireContext(), isVertical = false)
         bind.itemMainMissionListTags.adapter = tagAdapter

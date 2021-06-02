@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+    <Transition
+        motion:constraintSetStart="@+id/start"
+        motion:constraintSetEnd="@+id/end"
+        motion:duration="500"
+        motion:motionInterpolator="easeInOut">
+        <OnSwipe/>
+<!--        <KeyFrameSet>-->
+<!--            <KeyAttribute-->
+<!--                motion:motionTarget="@id/mission_detail_title"-->
+<!--                motion:framePosition="50">-->
+<!--                <CustomAttribute-->
+<!--                    motion:attributeName="maxLines"-->
+<!--                    motion:customIntegerValue="1"/>-->
+<!--            </KeyAttribute>-->
+<!--        </KeyFrameSet>-->
+    </Transition>
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/mission_detail_approve_cnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="18dp"
+            android:alpha="1"
+            motion:layout_constraintTop_toBottomOf="@id/mission_detail_back"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/mission_detail_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:scaleX="1"
+            android:scaleY="1"
+            motion:layout_constraintEnd_toStartOf="@id/mission_detail_is_like"
+            motion:layout_constraintStart_toStartOf="@id/mission_detail_approve_cnt"
+            motion:layout_constraintTop_toBottomOf="@id/mission_detail_approve_cnt">
+            <CustomAttribute
+                motion:attributeName="maxLines"
+                motion:customIntegerValue="2"/>
+        </Constraint>
+        <Constraint
+            android:id="@+id/mission_detail_is_like"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:alpha="1"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/mission_detail_title"
+            motion:layout_constraintBottom_toBottomOf="@id/mission_detail_title" />
+        <Constraint
+            android:id="@+id/mission_detail_tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:alpha="1"
+            motion:layout_constraintTop_toBottomOf="@id/mission_detail_title" />
+        <Constraint
+            android:id="@+id/mission_detail_nested"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            motion:layout_constraintTop_toBottomOf="@id/mission_detail_tags"
+            motion:layout_constraintBottom_toTopOf="@id/mission_detail_bottom_line"/>
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/mission_detail_approve_cnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginStart="18dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/mission_detail_title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:scaleX="0.81"
+            android:scaleY="0.81"
+            motion:layout_constraintEnd_toStartOf="@id/mission_detail_share"
+            motion:layout_constraintStart_toEndOf="@id/mission_detail_back"
+            motion:layout_constraintTop_toTopOf="@id/mission_detail_back"
+            motion:layout_constraintBottom_toBottomOf="@id/mission_detail_back">
+            <CustomAttribute
+                motion:attributeName="maxLines"
+                motion:customIntegerValue="1"/>
+        </Constraint>
+        <Constraint
+            android:id="@+id/mission_detail_is_like"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:alpha="0"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/mission_detail_title"
+            motion:layout_constraintBottom_toBottomOf="@id/mission_detail_title" />
+        <Constraint
+            android:id="@+id/mission_detail_tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:alpha="0"
+            motion:layout_constraintTop_toBottomOf="@id/mission_detail_title" />
+        <Constraint
+            android:id="@+id/mission_detail_nested"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="56dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toTopOf="@id/mission_detail_bottom_line"/>
+    </ConstraintSet>
+</MotionScene>

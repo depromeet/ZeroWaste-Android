@@ -34,6 +34,9 @@
     <string name="main_mission_suggest">미션 공감 순위</string>
     <string name="main_mission_list">미션 리스트</string>
     <string name="main_mission_sub_title">장소별로 미션을 알려드려요</string>
+    <string name="mission_count">회</string>
+    <string name="mission_detail_approve">인증 완료</string>
+    <string name="mission_detail_participate">명이 참가하고 있어요!</string>
 
     <string name="theme_refuse">거절하기</string>
     <string name="theme_reduce">줄이기</string>

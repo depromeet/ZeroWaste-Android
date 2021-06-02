@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/mission_detail_motion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:layoutDescription="@xml/scene_mission_detail">
+
+        <TextView
+            android:id="@+id/mission_detail_approve_cnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple"
+            android:textSize="13sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="18dp"
+            app:layout_constraintTop_toBottomOf="@id/mission_detail_back"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="1회 인증 완료"/>
+
+        <TextView
+            android:id="@+id/mission_detail_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:transformPivotX="0sp"
+            android:transformPivotY="33sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:fontFamily="@font/kotra_bold"
+            android:layout_marginTop="10dp"
+            android:text="수돗물 끓여 마시기 수돗물 끓여 마시기 수돗물 끓여 마시기"
+            app:layout_constraintEnd_toStartOf="@id/mission_detail_is_like"
+            app:layout_constraintStart_toStartOf="@id/mission_detail_approve_cnt"
+            app:layout_constraintTop_toBottomOf="@id/mission_detail_approve_cnt"
+            tools:text="수돗물 끓여 마시기 수돗물 끓여 마시기 수돗물 끓여 마시기"/>
+
+        <ImageView
+            android:id="@+id/mission_detail_is_like"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_heart_on"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/mission_detail_title"
+            app:layout_constraintBottom_toBottomOf="@id/mission_detail_title"
+            tools:ignore="ContentDescription" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mission_detail_tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/mission_detail_title"
+            tools:listitem="@layout/item_mission_tag"
+            tools:itemCount="1"/>
+
+        <ImageView
+            android:id="@+id/mission_detail_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_back"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/mission_detail_more"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_more"
+            android:layout_marginEnd="13dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/mission_detail_back"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/mission_detail_share"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_share"
+            app:layout_constraintEnd_toStartOf="@id/mission_detail_more"
+            app:layout_constraintTop_toTopOf="@id/mission_detail_back"
+            tools:ignore="ContentDescription" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/mission_detail_nested"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/mission_detail_tags"
+            app:layout_constraintBottom_toTopOf="@id/mission_detail_bottom_line">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
+                <View
+                    android:id="@+id/mission_detail_level_guide_back"
+                    android:layout_width="0dp"
+                    android:layout_height="66dp"
+                    android:background="@drawable/rect_round_16_gray5"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="18dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:scaleType="center"
+                    android:layout_marginStart="12dp"
+                    app:layout_constraintStart_toStartOf="@id/mission_detail_level_guide_back"
+                    app:layout_constraintTop_toTopOf="@id/mission_detail_level_guide_back"
+                    app:layout_constraintBottom_toBottomOf="@id/mission_detail_level_guide_back"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/ic_level_1"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <View
+            android:id="@+id/mission_detail_bottom_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_3"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/mission_detail_start_btn"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mission_detail_start_btn"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:background="@drawable/selector_button"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/mission_detail_participate_cnt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/mission_detail_participate_cnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/gray_1"
+            android:fontFamily="@font/apple_sd_gothic_neo_r"
+            android:layout_marginBottom="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="324명이 참가하고 있어요!"/>
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+</layout>

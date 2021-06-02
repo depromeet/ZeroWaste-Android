@@ -36,6 +36,13 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_missionDetailFragment"
+            app:destination="@id/missionDetailFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -43,6 +50,12 @@
         android:name="com.depromeet.zerowaste.feature.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile"/>
+
+    <fragment
+        android:id="@+id/missionDetailFragment"
+        android:name="com.depromeet.zerowaste.feature.mission.MissionDetailFragment"
+        android:label="fragment_mission_detail"
+        tools:layout="@layout/fragment_mission_detail"/>
 
     <fragment
         android:id="@+id/loginFragment"
