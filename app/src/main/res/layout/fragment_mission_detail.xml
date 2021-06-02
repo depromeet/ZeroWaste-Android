@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:transformPivotX="0sp"
-            android:transformPivotY="33sp"
+            android:transformPivotY="26sp"
             android:maxLines="2"
             android:ellipsize="end"
             android:textColor="@color/black"
@@ -118,6 +118,7 @@
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <ImageView
+                    android:id="@+id/mission_detail_level"
                     android:layout_width="46dp"
                     android:layout_height="46dp"
                     android:scaleType="center"
@@ -127,6 +128,18 @@
                     app:layout_constraintBottom_toBottomOf="@id/mission_detail_level_guide_back"
                     tools:ignore="ContentDescription"
                     tools:src="@drawable/ic_level_1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_black"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toEndOf="@id/mission_detail_level"
+                    app:layout_constraintTop_toTopOf="@id/mission_detail_level_guide_back"
+                    tools:text="가볍게 실천할 수 있는 미션이에요"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
@@ -143,13 +156,13 @@
             android:id="@+id/mission_detail_start_btn"
             android:layout_width="0dp"
             android:layout_height="52dp"
-            android:background="@drawable/selector_button"
             android:layout_marginStart="18dp"
             android:layout_marginEnd="18dp"
             android:layout_marginBottom="10dp"
+            android:background="@drawable/selector_button"
             app:layout_constraintBottom_toTopOf="@id/mission_detail_participate_cnt"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/mission_detail_participate_cnt"
