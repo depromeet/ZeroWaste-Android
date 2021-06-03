@@ -45,6 +45,8 @@
     <string name="mission_detail_approve_cnt">명의 용사들이 수행했어요.</string>
     <string name="mission_detail_how_to">이렇게 인증할 수 있어요</string>
     <string name="mission_detail_make_user">님이 만드신 미션이에요</string>
+    <string name="mission_detail_start">미션 시작</string>
+    <string name="mission_detail_hero_start">미션에 참가한 우쥬용사들</string>
 
     <string name="theme_refuse">거절하기</string>
     <string name="theme_reduce">줄이기</string>

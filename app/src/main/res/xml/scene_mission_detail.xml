@@ -81,7 +81,7 @@
             android:layout_marginTop="0dp"
             android:scaleX="0.81"
             android:scaleY="0.81"
-            motion:layout_constraintEnd_toStartOf="@id/mission_detail_share"
+            motion:layout_constraintEnd_toStartOf="@id/mission_detail_more"
             motion:layout_constraintStart_toEndOf="@id/mission_detail_back"
             motion:layout_constraintTop_toTopOf="@id/mission_detail_back"
             motion:layout_constraintBottom_toBottomOf="@id/mission_detail_back">

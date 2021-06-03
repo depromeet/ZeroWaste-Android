@@ -1,5 +1,6 @@
 package com.depromeet.zerowaste.feature.main.main_mission
 
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.zerowaste.R
@@ -13,6 +14,8 @@ import com.depromeet.zerowaste.data.mission.Mission
 import com.depromeet.zerowaste.data.mission.MissionTag
 import com.depromeet.zerowaste.data.mission.Rank
 import com.depromeet.zerowaste.databinding.*
+import com.depromeet.zerowaste.feature.main.MainFragmentDirections
+import com.depromeet.zerowaste.feature.main.MainViewModel
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,17 +27,17 @@ class MainMissionFragment :
     override var isLightStatusBar = false
 
     private val viewModel: MainMissionViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     private val rankerAdapter = BaseRecycleAdapter(R.layout.item_main_mission_ranker) { item: Rank, bind: ItemMainMissionRankerBinding, _ -> bind.item = item }
     private val chipAdapter = BaseRecycleAdapter(R.layout.item_main_mission_chip)
     { item: MissionTag, bind: ItemMainMissionChipBinding, position ->
-        bind.itemMainMissionChip.setOnClickListener {
-            missionChipClick(position)
-        }
+        bind.itemMainMissionChip.setOnClickListener { missionChipClick(position) }
         bind.item = item
     }
     private val missionAdapter = BaseRecycleAdapter(R.layout.item_main_mission_list)
     { item: Mission, bind: ItemMainMissionListBinding, _ ->
+        bind.root.setOnClickListener { missionCardClick(item) }
         val tagAdapter = BaseRecycleAdapter(R.layout.item_mission_tag){ i: Theme, b: ItemMissionTagBinding, _ -> b.item = i }
         tagAdapter.setData(item.theme)
         bind.itemMainMissionListTags.layoutManager = genLayoutManager(requireContext(), isVertical = false)
@@ -116,6 +119,10 @@ class MainMissionFragment :
 
     private fun initData() {
         tabSelected(0)
+    }
+
+    private fun missionCardClick(item: Mission) {
+        mainViewModel.navigate(MainFragmentDirections.actionMainFragmentToMissionDetailFragment())
     }
 
     private fun missionChipClick(position: Int) {

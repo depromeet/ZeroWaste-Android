@@ -1,6 +1,5 @@
 package com.depromeet.zerowaste.feature.mission
 
-import android.util.Log
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.NestedScrollView
