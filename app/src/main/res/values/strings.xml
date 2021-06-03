@@ -37,6 +37,14 @@
     <string name="mission_count">회</string>
     <string name="mission_detail_approve">인증 완료</string>
     <string name="mission_detail_participate">명이 참가하고 있어요!</string>
+    <string name="mission_detail_level_1">우쥬 용사가 되는 습관의 시작!</string>
+    <string name="mission_detail_level_2">가볍게 실천할 수 있어요.</string>
+    <string name="mission_detail_level_3">마음만 먹으면 충분히 할 수 있어요.</string>
+    <string name="mission_detail_level_4">초심자에겐 어려울 수 있어요.</string>
+    <string name="mission_detail_level_5">진정한 우쥬 용사가 되는 거에요!</string>
+    <string name="mission_detail_approve_cnt">명의 용사들이 수행했어요.</string>
+    <string name="mission_detail_how_to">이렇게 인증할 수 있어요</string>
+    <string name="mission_detail_make_user">님이 만드신 미션이에요</string>
 
     <string name="theme_refuse">거절하기</string>
     <string name="theme_reduce">줄이기</string>

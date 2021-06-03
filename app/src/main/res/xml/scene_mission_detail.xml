@@ -6,7 +6,7 @@
         motion:constraintSetEnd="@+id/end"
         motion:duration="500"
         motion:motionInterpolator="easeInOut">
-        <OnSwipe/>
+        <OnSwipe motion:touchAnchorId="@id/mission_detail_contents"/>
 <!--        <KeyFrameSet>-->
 <!--            <KeyAttribute-->
 <!--                motion:motionTarget="@id/mission_detail_title"-->
@@ -58,7 +58,7 @@
             android:alpha="1"
             motion:layout_constraintTop_toBottomOf="@id/mission_detail_title" />
         <Constraint
-            android:id="@+id/mission_detail_nested"
+            android:id="@+id/mission_detail_contents"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             motion:layout_constraintTop_toBottomOf="@id/mission_detail_tags"
@@ -106,7 +106,7 @@
             android:alpha="0"
             motion:layout_constraintTop_toBottomOf="@id/mission_detail_title" />
         <Constraint
-            android:id="@+id/mission_detail_nested"
+            android:id="@+id/mission_detail_contents"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="56dp"
