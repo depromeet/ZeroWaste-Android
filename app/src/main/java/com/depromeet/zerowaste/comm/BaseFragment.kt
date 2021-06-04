@@ -26,7 +26,8 @@ abstract class BaseFragment<B : ViewDataBinding>(
     private lateinit var mBinding: B
     protected val binding get() = mBinding
 
-    private var isInitialized = false
+    var isInitialized = false
+        private set
 
     open var statusBarBackGroundColorString: String = ""
     @ColorRes open var statusBarBackGroundColorRes: Int = -1
@@ -70,7 +71,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
         }
     }
 
-    abstract fun init()
+    protected abstract fun init()
 
     protected fun showToast(msg: String) {
         lifecycleScope.launch(Dispatchers.Main) {
@@ -84,14 +85,14 @@ abstract class BaseFragment<B : ViewDataBinding>(
         }
     }
 
-    protected fun bottomSheet(
+    protected fun <T> bottomSheet(
         title: String,
-        contents: List<Pair<Int,String>>,
-        selectedId: Int? = null,
-        onSelect: (Int) -> Unit
+        contents: List<Pair<T,String>>,
+        selected: T? = null,
+        onSelect: (T) -> Unit
     ) {
         lifecycleScope.launch(Dispatchers.Main) {
-            BaseBottomSheet(title, contents, selectedId, onSelect).show(parentFragmentManager, title)
+            BaseBottomSheet(title, contents, selected, onSelect).show(parentFragmentManager, title)
         }
     }
 

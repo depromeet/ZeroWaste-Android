@@ -86,7 +86,7 @@
                 android:id="@+id/item_main_mission_list_user_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{Integer.toString(100)+`명 참여중`}"
+                android:text="@{item.inProgressCount + @string/mission_participate_count}"
                 android:layout_marginStart="6dp"
                 android:textColor="@color/black"
                 android:textSize="13sp"

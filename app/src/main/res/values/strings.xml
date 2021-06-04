@@ -35,6 +35,7 @@
     <string name="main_mission_list">미션 리스트</string>
     <string name="main_mission_sub_title">장소별로 미션을 알려드려요</string>
     <string name="mission_count">회</string>
+    <string name="mission_participate_count">명 참여중</string>
     <string name="mission_detail_approve">인증 완료</string>
     <string name="mission_detail_participate">명이 참가하고 있어요!</string>
     <string name="mission_detail_level_1">우쥬 용사가 되는 습관의 시작!</string>
@@ -47,6 +48,9 @@
     <string name="mission_detail_make_user">님이 만드신 미션이에요</string>
     <string name="mission_detail_start">미션 시작</string>
     <string name="mission_detail_hero_start">미션에 참가한 우쥬용사들</string>
+    <string name="mission_detail_all_heros">후기 전체보기</string>
+
+    <string name="empathy">공감</string>
 
     <string name="theme_refuse">거절하기</string>
     <string name="theme_reduce">줄이기</string>
@@ -61,4 +65,9 @@
     <string name="place_restaurant">식당</string>
     <string name="place_outside">실외</string>
     <string name="place_all">전체</string>
+
+    <string name="sort">정렬</string>
+    <string name="sort_recent">최신순</string>
+    <string name="sort_popularity">인기순</string>
+    <string name="sort_participation">참여순</string>
 </resources>

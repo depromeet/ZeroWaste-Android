@@ -14,22 +14,28 @@
         android:layout_height="140dp">
         <FrameLayout
             android:id="@+id/item_main_mission_rank_back"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:padding="2dp"
+            android:layout_width="106dp"
+            android:layout_height="106dp"
+            android:padding="3dp"
             android:layout_marginBottom="9dp"
-            app:customHeightDP="@{item.rank == 1 ? 100 : 80}"
-            app:customWidthDP="@{item.rank == 1 ? 100 : 80}"
+            app:customHeightDP="@{item.rank == 1 ? 106 : 88}"
+            app:customWidthDP="@{item.rank == 1 ? 106 : 88}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/item_main_mission_rank_user_txt"
             android:background="@drawable/circle_white">
-            <ImageView
-                android:id="@+id/item_main_mission_rank_img"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:loadImageCircle="@{item.img}"
-                tools:ignore="ContentDescription" />
+                android:background="@drawable/circle_black"
+                android:padding="2dp">
+                <ImageView
+                    android:id="@+id/item_main_mission_rank_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:loadImageCircle="@{item.img}"
+                    tools:ignore="ContentDescription" />
+            </FrameLayout>
         </FrameLayout>
         <TextView
             android:id="@+id/item_main_mission_rank_user_txt"
@@ -47,7 +53,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:scaleType="centerCrop"
-            android:translationY="-14dp"
+            android:translationY="-9dp"
             app:loadImageRank="@{item.rank}"
             app:layout_constraintTop_toTopOf="@id/item_main_mission_rank_back"
             app:layout_constraintStart_toStartOf="@id/item_main_mission_rank_back"

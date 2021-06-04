@@ -3,6 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="item"
+            type="com.depromeet.zerowaste.data.mission.Mission" />
+        <variable
+            name="fragment"
+            type="com.depromeet.zerowaste.feature.mission.MissionDetailFragment" />
+    </data>
+
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/mission_detail_motion"
         android:layout_width="match_parent"
@@ -35,7 +44,7 @@
             android:textSize="22sp"
             android:fontFamily="@font/kotra_bold"
             android:layout_marginTop="10dp"
-            android:text="수돗물 끓여 마시기 수돗물 끓여 마시기 수돗물 끓여 마시기"
+            android:text="@{item.name}"
             app:layout_constraintEnd_toStartOf="@id/mission_detail_is_like"
             app:layout_constraintStart_toStartOf="@id/mission_detail_approve_cnt"
             app:layout_constraintTop_toBottomOf="@id/mission_detail_approve_cnt"
@@ -45,8 +54,9 @@
             android:id="@+id/mission_detail_is_like"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:onClick="@{() -> fragment.likeClick()}"
             android:scaleType="center"
-            android:src="@drawable/ic_heart_on"
+            android:src="@{item.isLiked ? @drawable/ic_heart_on : @drawable/ic_heart_off}"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/mission_detail_title"
@@ -174,7 +184,7 @@
                         android:id="@+id/mission_detail_how_to_img"
                         android:layout_width="0dp"
                         android:layout_height="182dp"
-                        android:background="@drawable/rect_round_16_gray5"
+                        android:background="@drawable/rect_round_16"
                         android:layout_marginStart="18dp"
                         android:layout_marginEnd="18dp"
                         android:layout_marginTop="16dp"
@@ -249,6 +259,22 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@id/mission_detail_hero_txt" />
 
+                    <TextView
+                        android:id="@+id/mission_detail_all_heros"
+                        android:layout_width="110dp"
+                        android:layout_height="36dp"
+                        android:gravity="center"
+                        android:textColor="@color/main_enabled"
+                        android:textSize="13sp"
+                        android:background="@drawable/rect_round_stroke_main_enabled_26"
+                        android:text="@string/mission_detail_all_heros"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="40dp"
+                        app:layout_constraintTop_toBottomOf="@id/mission_detail_hero_list"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
         </FrameLayout>
@@ -273,12 +299,12 @@
             android:textSize="15sp"
             android:fontFamily="@font/roboto_bold"
             android:text="@string/mission_detail_start"
-            app:layout_constraintBottom_toTopOf="@id/mission_detail_participate_cnt"
+            app:layout_constraintBottom_toTopOf="@id/mission_detail_start_txt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/mission_detail_participate_cnt"
+            android:id="@+id/mission_detail_start_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"

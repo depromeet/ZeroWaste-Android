@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<BaseViewHolder<T, V>> {
 
-    constructor(@LayoutRes layoutId: Int, onDataBind: (T, V, Int) -> Unit) {
+    constructor(@LayoutRes layoutId: Int, onDataBind: BaseRecycleAdapter<T,V>.(T, V, Int) -> Unit) {
         this.layoutId = layoutId
         this.onDataBind = onDataBind
     }
@@ -24,7 +24,7 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
     }
 
     private val layoutId: Int
-    private val onDataBind: ((T, V, Int) -> Unit)?
+    private val onDataBind: (BaseRecycleAdapter<T,V>.(T, V, Int) -> Unit)?
 
     private val items = mutableListOf<T>()
     private var mLastPosition = -1
@@ -100,6 +100,12 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
             mLastPosition = -1
             notifyDataSetChanged()
         }
+    }
+
+    open fun changeData(data: T?, position: Int) {
+        if(data == null) return
+        this.items[position] = data
+        notifyItemChanged(position)
     }
 
     open fun addData(data: T?) {
