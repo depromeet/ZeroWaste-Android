@@ -1,17 +1,15 @@
 package com.depromeet.zerowaste.feature.main.main_mission
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.api.MissionApi
 import com.depromeet.zerowaste.comm.BaseViewModel
+import com.depromeet.zerowaste.data.Ordering
 import com.depromeet.zerowaste.data.Place
 import com.depromeet.zerowaste.data.Theme
 import com.depromeet.zerowaste.data.mission.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlin.random.Random
 
 @HiltViewModel
 class MainMissionViewModel @Inject constructor() : BaseViewModel() {
@@ -27,6 +25,11 @@ class MainMissionViewModel @Inject constructor() : BaseViewModel() {
 
     private val _missionList = MutableLiveData<List<Mission>>()
     val missionList: LiveData<List<Mission>> get() = _missionList
+
+    private val _selectedPlace = MutableLiveData(Place.ALL)
+    private val _selectedTheme = MutableLiveData<Theme?>()
+    private val _selectedOrder = MutableLiveData(Ordering.RECENT)
+    val selectedOrder: LiveData<Ordering> get() = _selectedOrder
 
     fun initPlaceList() {
         execute({
@@ -58,30 +61,41 @@ class MainMissionViewModel @Inject constructor() : BaseViewModel() {
         }, _rankerList, isShowLoad = false)
     }
 
-    fun getMissionWithPlace(place: Place, finish: () -> Unit) {
+    fun changePlace(place: Place, finish: (() -> Unit)? = null) {
+        _selectedPlace.value = place
+        getMissionList(finish)
+    }
+
+    fun changeTheme(theme: Theme?, finish: (() -> Unit)? = null) {
+        _selectedTheme.value = theme
+        getMissionList(finish)
+    }
+
+    fun changeOrder(ordering: Ordering, finish: (() -> Unit)? = null) {
+        _selectedOrder.value = ordering
+        getMissionList(finish)
+    }
+
+    fun resetOrder() {
+        _selectedOrder.value = Ordering.RECENT
+    }
+
+    fun getMissionList(finish: (() -> Unit)? = null) {
         execute({
-            val res = MissionApi.getMissions(place = place)
-            refreshRankerList()
+            val res = MissionApi.getMissions(place = _selectedPlace.value, theme = _selectedTheme.value, ordering = _selectedOrder.value)
             res.data ?: throw Exception(res.message)
         })
         {
             _missionList.value = it
-            finish()
+            finish?.invoke()
         }
     }
 
-    fun refreshMissionWithTag(place: Place, theme: Theme?, finish: () -> Unit) {
+    fun toggleLikeMission(id:Int, isLiked: Boolean, finish: (Int) -> Unit) {
         execute({
-            val res = MissionApi.getMissions(
-                place = place,
-                theme = theme
-            )
-            res.data ?: throw Exception(res.message)
-        })
-        {
-            _missionList.value = it
-            finish()
-        }
+            if (isLiked) MissionApi.dislikeMission(id)
+            else MissionApi.likeMission(id)
+        }) { finish(it.errorCode) }
     }
 
 }

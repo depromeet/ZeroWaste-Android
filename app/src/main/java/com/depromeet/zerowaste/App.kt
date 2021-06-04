@@ -28,7 +28,7 @@ class App : Application() {
 
         fun startLoad() { currentBaseActivity?.startLoad() }
         fun finishLoad() { currentBaseActivity?.finishLoad() }
-        fun bottomSheet(title: String, contents: List<Pair<Int,String>>, selectedId: Int? = null, onSelect: (Int) -> Unit) { currentBaseActivity?.bottomSheet(title, contents, selectedId, onSelect) }
+        fun <T> bottomSheet(title: String, contents: List<Pair<T,String>>, selected: T? = null, onSelect: (T) -> Unit) { currentBaseActivity?.bottomSheet(title, contents, selected, onSelect) }
         fun <V: ViewDataBinding> dialog(@LayoutRes layoutId: Int, widthDP: Float? = null, heightDP: Float? = null, onActive: (V) -> Unit) { currentBaseActivity?.dialog(layoutId, widthDP, heightDP, onActive) }
     }
 

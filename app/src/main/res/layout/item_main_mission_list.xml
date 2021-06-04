@@ -86,7 +86,7 @@
                 android:id="@+id/item_main_mission_list_user_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{Integer.toString(100)+`명 참여중`}"
+                android:text="@{item.inProgressCount + @string/mission_participate_count}"
                 android:layout_marginStart="6dp"
                 android:textColor="@color/black"
                 android:textSize="13sp"
@@ -113,10 +113,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
+                android:overScrollMode="never"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/item_main_mission_list_like"
                 app:layout_constraintTop_toTopOf="@id/item_main_mission_list_like"
-                tools:listitem="@layout/item_main_mission_list_tag"
+                tools:listitem="@layout/item_mission_tag"
                 tools:itemCount="1"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

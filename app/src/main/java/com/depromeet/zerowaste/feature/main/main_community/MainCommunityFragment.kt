@@ -1,6 +1,7 @@
 package com.depromeet.zerowaste.feature.main.main_community
 
 import android.util.Log
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.depromeet.zerowaste.App
 import com.depromeet.zerowaste.R
@@ -8,6 +9,8 @@ import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.data.Difficulty
 import com.depromeet.zerowaste.data.Theme
 import com.depromeet.zerowaste.databinding.*
+import com.depromeet.zerowaste.feature.main.MainFragmentDirections
+import com.depromeet.zerowaste.feature.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

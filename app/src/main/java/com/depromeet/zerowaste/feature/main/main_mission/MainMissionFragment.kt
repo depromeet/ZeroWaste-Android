@@ -1,19 +1,28 @@
 package com.depromeet.zerowaste.feature.main.main_mission
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.os.Bundle
+import android.view.View
+import android.view.animation.LinearInterpolator
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.zerowaste.R
-import com.depromeet.zerowaste.comm.BaseFragment
-import com.depromeet.zerowaste.comm.BaseRecycleAdapter
-import com.depromeet.zerowaste.comm.SpanStrBuilder
-import com.depromeet.zerowaste.comm.genLayoutManager
+import com.depromeet.zerowaste.comm.*
+import com.depromeet.zerowaste.data.Ordering
 import com.depromeet.zerowaste.data.Place
 import com.depromeet.zerowaste.data.Theme
 import com.depromeet.zerowaste.data.mission.Mission
-import com.depromeet.zerowaste.data.mission.Rank
 import com.depromeet.zerowaste.data.mission.MissionTag
+import com.depromeet.zerowaste.data.mission.Rank
 import com.depromeet.zerowaste.databinding.*
+import com.depromeet.zerowaste.feature.main.MainFragmentDirections
+import com.depromeet.zerowaste.feature.main.MainViewModel
+import com.depromeet.zerowaste.feature.mission.MissionDetailViewModel
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainMissionFragment :
@@ -22,25 +31,33 @@ class MainMissionFragment :
     override var isLightStatusBar = false
 
     private val viewModel: MainMissionViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private val missionDetailViewModel: MissionDetailViewModel by activityViewModels()
 
     private val rankerAdapter = BaseRecycleAdapter(R.layout.item_main_mission_ranker) { item: Rank, bind: ItemMainMissionRankerBinding, _ -> bind.item = item }
     private val chipAdapter = BaseRecycleAdapter(R.layout.item_main_mission_chip)
     { item: MissionTag, bind: ItemMainMissionChipBinding, position ->
-        bind.itemMainMissionChip.setOnClickListener {
-            missionChipClick(position)
-        }
+        bind.itemMainMissionChip.setOnClickListener { missionChipClick(position) }
         bind.item = item
     }
     private val missionAdapter = BaseRecycleAdapter(R.layout.item_main_mission_list)
-    { item: Mission, bind: ItemMainMissionListBinding, _ ->
-        val tagAdapter = BaseRecycleAdapter(R.layout.item_main_mission_list_tag){ i: Theme, b: ItemMainMissionListTagBinding, _ -> b.item = i }
+    { item: Mission, bind: ItemMainMissionListBinding, position ->
+        bind.item = item
+        bind.root.setOnClickListener { missionCardClick(item) }
+        bind.itemMainMissionListLike.setOnClickListener {
+            viewModel.toggleLikeMission(item.id, item.isLiked)
+            {
+                if(it == 0) {
+                    item.isLiked = !item.isLiked
+                    this.changeData(item, position)
+                }
+            }
+        }
+        val tagAdapter = BaseRecycleAdapter(R.layout.item_mission_tag){ i: Theme, b: ItemMissionTagBinding, _ -> b.item = i }
         tagAdapter.setData(item.theme)
         bind.itemMainMissionListTags.layoutManager = genLayoutManager(requireContext(), isVertical = false)
         bind.itemMainMissionListTags.adapter = tagAdapter
-        bind.item = item
     }
-
-    private var selectedPlace: Place = Place.ALL
 
     override fun init() {
         binding.vm = viewModel
@@ -53,6 +70,7 @@ class MainMissionFragment :
         initMissions()
         initRanker()
         initMissionTags()
+        initSort()
         initPlaces()
         /*
         * 데이터 값 초기 세팅
@@ -60,10 +78,30 @@ class MainMissionFragment :
         initData()
     }
 
+    /*
+    * 초기화
+    * */
     private fun initMissions() {
+        binding.mainMissionList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if(dy > 0 && binding.mainMissionMotion.progress != 1f) {
+                    binding.mainMissionMotion.progress += Float.MIN_VALUE
+                }
+            }
+        })
         viewModel.missionList.observe(this) {
             binding.mainMissionList.post {
                 missionAdapter.setData(it)
+            }
+        }
+        missionAdapter.loadAnimation = recycleAnimation {
+            val animator = ObjectAnimator.ofFloat(it, "alpha", 0f, 1f).apply {
+                duration = 300L
+                interpolator = LinearInterpolator()
+            }
+            AnimatorSet().apply {
+                play(animator)
             }
         }
         binding.mainMissionList.adapter = missionAdapter
@@ -104,8 +142,36 @@ class MainMissionFragment :
         viewModel.initPlaceList()
     }
 
+    private fun initSort() {
+        val sortKinds = ArrayList<Pair<Ordering, String>>()
+        Ordering.values().forEach {
+            sortKinds.add(Pair(it, resources.getString(it.textId)))
+        }
+        binding.mainMissionSort.setText(viewModel.selectedOrder.value?.textId ?: Ordering.RECENT.textId)
+        viewModel.selectedOrder.observe(this) { order ->
+            binding.mainMissionSort.setText(order.textId)
+        }
+        binding.mainMissionSort.setOnClickListener {
+            bottomSheet(resources.getString(R.string.sort),
+                sortKinds,
+                viewModel.selectedOrder.value
+            ) {
+                viewModel.changeOrder(it)
+            }
+        }
+    }
+
     private fun initData() {
         tabSelected(0)
+    }
+
+
+    /*
+    * 이벤트 세팅
+    * */
+    private fun missionCardClick(item: Mission) {
+        missionDetailViewModel.setMission(item)
+        mainViewModel.navigate(MainFragmentDirections.actionMainFragmentToMissionDetailFragment())
     }
 
     private fun missionChipClick(position: Int) {
@@ -115,17 +181,18 @@ class MainMissionFragment :
         }
         chipAdapter.getItems().forEachIndexed { i, item ->
             item.selected = if(position == i) {
-                viewModel.refreshMissionWithTag(selectedPlace, if(item.selected) null else item.theme, refreshFinish)
+                viewModel.changeTheme(if(item.selected) null else item.theme, refreshFinish)
                 !item.selected
             } else false
         }
     }
 
     private fun tabSelected(position: Int) {
-        val place = viewModel.placeList.value?.get(position) ?: selectedPlace
-        viewModel.getMissionWithPlace(place)
+        val place = viewModel.placeList.value?.get(position) ?: Place.ALL
+        viewModel.changePlace(place)
         {
-            selectedPlace = place
+            viewModel.refreshRankerList()
+            viewModel.resetOrder()
             binding.mainMissionSuggestTxt.text = SpanStrBuilder(requireContext())
                 .add(textId = place.textId)
                 .add(textId = R.string.main_mission_suggest)
@@ -133,7 +200,15 @@ class MainMissionFragment :
             chipAdapter.getItems().forEach { item -> item.selected = false }
             chipAdapter.notifyDataSetChanged()
             if(binding.mainMissionMotion.progress != 0f) binding.mainMissionMotion.transitionToStart()
-            binding.mainMissionListNested.smoothScrollTo(0,0)
+            binding.mainMissionList.scrollTo(0, 0)
         }
+    }
+
+    /*
+    * 생명주기 동작 세팅
+    * */
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        if(isInitialized) viewModel.getMissionList()
+        super.onViewCreated(view, savedInstanceState)
     }
 }

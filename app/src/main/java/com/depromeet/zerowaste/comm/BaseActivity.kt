@@ -56,14 +56,14 @@ abstract class BaseActivity<B : ViewDataBinding>(
         }
     }
 
-    fun bottomSheet(
+    fun <T>bottomSheet(
         title: String,
-        contents: List<Pair<Int,String>>,
-        selectedId: Int? = null,
-        onSelect: (Int) -> Unit
+        contents: List<Pair<T,String>>,
+        selected: T? = null,
+        onSelect: (T) -> Unit
     ) {
         lifecycleScope.launch(Dispatchers.Main) {
-            BaseBottomSheet(title, contents, selectedId, onSelect).show(supportFragmentManager, title)
+            BaseBottomSheet(title, contents, selected, onSelect).show(supportFragmentManager, title)
         }
     }
 
