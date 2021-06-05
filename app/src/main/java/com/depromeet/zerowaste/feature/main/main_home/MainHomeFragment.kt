@@ -1,16 +1,20 @@
 package com.depromeet.zerowaste.feature.main.main_home
 
 import android.view.View
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.viewModels
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
 import com.depromeet.zerowaste.comm.SpanStrBuilder
+import com.depromeet.zerowaste.comm.genLayoutManager
 import com.depromeet.zerowaste.data.Place
+import com.depromeet.zerowaste.data.Theme
 import com.depromeet.zerowaste.data.mission.Mission
 import com.depromeet.zerowaste.databinding.FragmentMainHomeBinding
 import com.depromeet.zerowaste.databinding.ItemMainHomeMissionBinding
 import com.depromeet.zerowaste.databinding.ItemMainHomePlaceBinding
+import com.depromeet.zerowaste.databinding.ItemMissionTagBinding
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
@@ -21,8 +25,21 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
     private val viewModel: MainHomeViewModel by viewModels()
 
     private val missionAdapter =
-        BaseRecycleAdapter(R.layout.item_main_home_mission) { item: Mission, bind: ItemMainHomeMissionBinding, _: Int ->
+        BaseRecycleAdapter(R.layout.item_main_home_mission) { item: Mission, bind: ItemMainHomeMissionBinding, position: Int ->
             bind.mission = item
+            bind.mainHomeMissionIvRecommend.setOnClickListener {
+                viewModel.toggleLikeMission(item.id, item.isLiked)
+                {
+                    if (it == 0) {
+                        item.isLiked = !item.isLiked
+                        this.changeData(item, position)
+                    }
+                }
+            }
+            val tagAdapter = BaseRecycleAdapter(R.layout.item_mission_tag){ i: Theme, b: ItemMissionTagBinding, _ -> b.item = i }
+            tagAdapter.setData(item.theme)
+            bind.itemMainHomeListTags.layoutManager = genLayoutManager(requireContext(), isVertical = false)
+            bind.itemMainHomeListTags.adapter = tagAdapter
         }
 
     private val placeMissionAdapter =
@@ -32,7 +49,6 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
 
     override fun init() {
         binding.vm = viewModel
-        initView()
         initToolbarLayout()
         initMissionList()
         initMyMissionList()
@@ -47,12 +63,20 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
         viewModel.getPlaceList()
     }
 
-    private fun initView() {
-        binding.mainHomeTvTitle.text = SpanStrBuilder(requireContext())
-            .add("오늘도", colorRes = R.color.black, sp = 22f)
-            .add(" 우쥬", colorRes = R.color.sub2, sp = 22f)
-            .add("를\n지키러 와주셨군요", colorRes = R.color.black, sp = 22f)
-            .build()
+    private fun initTitleView(data: List<Mission>) {
+        if (data.isNotEmpty()) { // 내 미션이 있는 경우
+            binding.mainHomeRvMyMissionsIndicator.visibility = View.VISIBLE
+            binding.mainHomeTvTitle.text = SpanStrBuilder(requireContext())
+                .add("오늘도", colorRes = R.color.black, sp = 22f)
+                .add(" 우쥬", colorRes = R.color.sub2, sp = 22f)
+                .add("를\n지키러 와주셨군요", colorRes = R.color.black, sp = 22f)
+                .build()
+        } else {
+            binding.mainHomeTvTitle.text = SpanStrBuilder(requireContext())
+                .add("지금 바로 미션을\n수행해 보세요!", colorRes = R.color.black, sp = 22f)
+                .build()
+            binding.mainHomeRvMyMissionsIndicator.visibility = View.GONE
+        }
     }
 
     private fun initToolbarLayout() {
@@ -83,10 +107,12 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
         binding.mainHomeRvMyMissionsIndicator.setViewPager2(binding.mainHomeVpMyMissions)
         // 데이터 로드
         viewModel.myMissionList.observe(this, { data ->
+            initTitleView(data)
             myMissionPagerAdapter.addItems(data)
         })
         binding.mainHomeRvRecommendMissions.adapter = missionAdapter
-        viewModel.getMyMissionList()
+        // viewModel.getMyMissionList()
+        viewModel.getMockMyMissionList()
     }
 
 

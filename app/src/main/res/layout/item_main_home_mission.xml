@@ -78,7 +78,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/main_home_mission_iv_level"
                     app:layout_constraintStart_toStartOf="@id/main_home_mission_tv_title"
                     app:layout_constraintTop_toBottomOf="@id/main_home_mission_tv_title"
-                    app:srcCompat="@drawable/ic_location_black" />
+                    app:srcCompat="@drawable/ic_location" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/main_home_mission_tv_location"
@@ -138,37 +138,22 @@
                     android:layout_marginTop="37dp"
                     android:layout_marginEnd="12dp"
                     android:layout_marginBottom="17.06dp"
-                    android:src="@drawable/ic_heart_off_gray"
+                    android:src="@{mission.isLiked ? @drawable/ic_heart_on : @drawable/ic_heart_off}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/main_home_mission_iv_location" />
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/main_home_my_mission_chip_group"
-                    android:layout_width="0dp"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/item_main_home_list_tags"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginEnd="18dp"
+                    android:layout_marginStart="12dp"
+                    android:overScrollMode="never"
                     app:layout_constraintBottom_toBottomOf="@id/main_home_mission_iv_recommend"
-                    app:layout_constraintEnd_toStartOf="@id/main_home_mission_iv_recommend"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/main_home_mission_iv_recommend">
-
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/apple_sd_gothic_neo_r"
-                        android:text="줄이기"
-                        android:textColor="@color/black"
-                        android:textSize="13sp"
-                        app:chipBackgroundColor="#F4F7FA"
-                        app:chipCornerRadius="4dp"
-                        app:chipEndPadding="4dp"
-                        app:chipMinHeight="24dp"
-                        app:chipStartPadding="4dp" />
-
-                </com.google.android.material.chip.ChipGroup>
-
+                    app:layout_constraintTop_toTopOf="@id/main_home_mission_iv_recommend"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_mission_tag" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 

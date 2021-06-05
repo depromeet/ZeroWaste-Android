@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:lineSpacingExtra="10px"
-                    android:textColor="@color/real_black"
+                    android:textColor="@color/black"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     app:fontFamily="@font/kotra_bold"

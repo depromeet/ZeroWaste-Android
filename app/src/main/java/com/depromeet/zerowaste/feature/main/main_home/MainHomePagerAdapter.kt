@@ -20,7 +20,7 @@ class MainHomePagerAdapter(vm: MainHomeViewModel) :
             false
         )
         return ViewHolder(binding).apply {
-            binding.mainHomeMyMissionBtnAuth.setOnClickListener { view ->
+            binding.itemMainHomeMyMissionBtnAuth.setOnClickListener { view ->
                 val position = bindingAdapterPosition.takeIf { it != RecyclerView.NO_POSITION }
                     ?: return@setOnClickListener
                 //vm.request(items{position])

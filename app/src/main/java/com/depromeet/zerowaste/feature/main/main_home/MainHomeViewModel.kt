@@ -67,7 +67,15 @@ class MainHomeViewModel @Inject constructor() : BaseViewModel() {
         { missions ->
 //            missions[0].creater.id = Share.user!!.id
 //            missions[1].creater.id = Share.user!!.id
-            _myMissionList.value = missions.filter { it.creater.id == Share.user?.id ?: -1 }
+//            _myMissionList.value = missions.filter { it.creater.id == Share.user?.id ?: -1 }
+            _myMissionList.value = missions
         }
+    }
+
+    fun toggleLikeMission(id: Int, isLiked: Boolean, finish: (Int) -> Unit) {
+        execute({
+            if (isLiked) MissionApi.dislikeMission(id)
+            else MissionApi.likeMission(id)
+        }) { finish(it.errorCode) }
     }
 }
