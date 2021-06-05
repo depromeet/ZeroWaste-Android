@@ -17,14 +17,14 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BaseBottomSheet(
+class BaseBottomSheet<T>(
     private val title: String,
-    private val contents: List<Pair<Int,String>>,
-    private val selectedId: Int? = null,
-    private val onSelect: (Int) -> Unit): BottomSheetDialogFragment() {
+    private val contents: List<Pair<T,String>>,
+    private val selected: T? = null,
+    private val onSelect: (T) -> Unit): BottomSheetDialogFragment() {
 
     private lateinit var binding: LayoutBottomSheetBinding
-    private val radioWithPositionMap: HashMap<Int, Int> = HashMap()
+    private val radioWithPositionMap: HashMap<Int, T> = HashMap()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +74,7 @@ class BaseBottomSheet(
             radioWithPositionMap[newId] = content.first
             radioBtn.id = newId
             radioBtn.text = content.second
-            if(content.first == selectedId) {
+            if(content.first == selected) {
                 radioBtn.typeface = ResourcesCompat.getFont(requireContext(), R.font.apple_sd_gothic_neo_b)
                 binding.layoutBottomSheetRadioGroup.check(newId)
             }

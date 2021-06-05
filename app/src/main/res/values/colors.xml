@@ -21,10 +21,13 @@
     <color name="sub3">#FFD86C</color>
     <color name="point">#F24938</color>
     <color name="black">#283237</color>
+    <color name="gray_6">#F9F9FC</color>
+    <color name="gray_5">#F1F4F6</color>
     <color name="gray_4">#E0E7ED</color>
     <color name="gray_3">#D1D8DD</color>
     <color name="gray_2">#94A3AD</color>
     <color name="gray_1">#667D89</color>
+    <color name="gray_0.5">#48575F</color>
     <color name="purple">#4824AF</color>
 
     <color name="not_impl_gray_1">#F8F8F8</color>

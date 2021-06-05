@@ -5,6 +5,15 @@ import androidx.annotation.StringRes
 import com.depromeet.zerowaste.R
 import com.google.gson.annotations.SerializedName
 
+enum class Ordering(@StringRes val textId: Int) {
+    @SerializedName("recent")
+    RECENT(R.string.sort_recent),
+    @SerializedName("popularity")
+    POPULARITY(R.string.sort_popularity),
+    @SerializedName("participation")
+    PARTICIPATION(R.string.sort_participation)
+}
+
 enum class Difficulty(@IntRange(from=0,to=4) val level: Int) {
     @SerializedName("very_easy")
     VERY_EASY(0),

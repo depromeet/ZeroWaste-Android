@@ -25,10 +25,16 @@ data class Mission(
     val content: String,
     @SerializedName("sentence_for_cheer")
     val sentenceForCheer: String,
+    @SerializedName("likes_count")
+    val likesCount: Int,
+    @SerializedName("successful_count")
+    val successfulCount: Int,
+    @SerializedName("in_progress_count")
+    val inProgressCount: Int,
     @SerializedName("creater")
     val creater: User,
     @SerializedName("participation")
     val participation: Participation,
     @SerializedName("is_liked")
-    val isLiked: Boolean
+    var isLiked: Boolean
 )
