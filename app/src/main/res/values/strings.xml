@@ -37,7 +37,7 @@
     <string name="mission_count">회</string>
     <string name="mission_participate_count">명 참여중</string>
     <string name="mission_detail_approve">인증 완료</string>
-    <string name="mission_detail_participate">명이 참가하고 있어요!</string>
+    <string name="mission_detail_participate_users">명이 참가하고 있어요!</string>
     <string name="mission_detail_level_1">우쥬 용사가 되는 습관의 시작!</string>
     <string name="mission_detail_level_2">가볍게 실천할 수 있어요.</string>
     <string name="mission_detail_level_3">마음만 먹으면 충분히 할 수 있어요.</string>
@@ -47,8 +47,14 @@
     <string name="mission_detail_how_to">이렇게 인증할 수 있어요</string>
     <string name="mission_detail_make_user">님이 만드신 미션이에요</string>
     <string name="mission_detail_start">미션 시작</string>
+    <string name="mission_detail_start_participate">미션 인증</string>
     <string name="mission_detail_hero_start">미션에 참가한 우쥬용사들</string>
     <string name="mission_detail_all_heros">후기 전체보기</string>
+    <string name="mission_detail_limit">미션 인증까지 %s 남았어요!</string>
+
+    <string name="mission_approve">미션 수락 완료!</string>
+    <string name="mission_approve_next_time">다음에 인증</string>
+    <string name="mission_approve_immediately">바로 인증</string>
 
     <string name="empathy">공감</string>
 
@@ -70,4 +76,6 @@
     <string name="sort_recent">최신순</string>
     <string name="sort_popularity">인기순</string>
     <string name="sort_participation">참여순</string>
+
+    <string name="finish_toast">한번 더 누르시면 종료됩니다.</string>
 </resources>

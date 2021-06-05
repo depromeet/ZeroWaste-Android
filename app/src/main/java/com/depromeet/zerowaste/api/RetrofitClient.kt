@@ -3,6 +3,7 @@ package com.depromeet.zerowaste.api
 import com.depromeet.zerowaste.BuildConfig
 import com.depromeet.zerowaste.comm.data.Constants
 import com.depromeet.zerowaste.comm.data.Share
+import com.google.gson.GsonBuilder
 import com.google.gson.annotations.SerializedName
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -28,10 +29,14 @@ object RetrofitClient {
         chain.proceed(request)
     }
 
+    private val gsonBuilder = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX").create()
+
+
     private fun getNoAuthRetrofit(endPoint: String): Retrofit {
         return Retrofit.Builder()
             .baseUrl(endPoint)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(EnumConverterFactory())
+            .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
             .client(OkHttpClient.Builder().addInterceptor(loggingInterceptor).build())
             .build()
     }
@@ -40,7 +45,7 @@ object RetrofitClient {
         return Retrofit.Builder()
             .baseUrl(endPoint)
             .addConverterFactory(EnumConverterFactory())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
             .client(OkHttpClient.Builder().addInterceptor(authHeaderInterceptor).addInterceptor(loggingInterceptor).build())
             .build()
     }

@@ -77,7 +77,7 @@ class MainMissionViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun resetOrder() {
-        _selectedOrder.value = Ordering.RECENT
+        if(Ordering.RECENT != _selectedOrder.value) _selectedOrder.value = Ordering.RECENT
     }
 
     fun getMissionList(finish: (() -> Unit)? = null) {

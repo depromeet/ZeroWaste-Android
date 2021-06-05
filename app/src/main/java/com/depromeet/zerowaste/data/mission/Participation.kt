@@ -6,11 +6,11 @@ import java.util.*
 
 data class Participation(
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
     @SerializedName("status")
     val status: ParticipateStatus,
     @SerializedName("start_date")
-    val startDate: Date,
+    val startDate: Date?,
     @SerializedName("end_date")
-    val endDate: Date
+    val endDate: Date?
 )

@@ -21,8 +21,13 @@ abstract class BaseViewModel: ViewModel() {
             try {
                 val result = job()
                 launch(Dispatchers.Main) {
-                    res(result)
-                    if(isShowLoad) App.finishLoad()
+                    try {
+                        res(result)
+                    } catch (e: Exception) {
+                        _error.value =e
+                    } finally {
+                        if(isShowLoad) App.finishLoad()
+                    }
                 }
             } catch (e: Exception){
                 e.printStackTrace()

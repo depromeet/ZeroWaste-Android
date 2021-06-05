@@ -59,6 +59,11 @@ class MainMissionFragment :
         bind.itemMainMissionListTags.adapter = tagAdapter
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        if(isInitialized) viewModel.getMissionList()
+        super.onViewCreated(view, savedInstanceState)
+    }
+
     override fun init() {
         binding.vm = viewModel
         viewModel.error.observe(this) {
@@ -157,6 +162,7 @@ class MainMissionFragment :
                 viewModel.selectedOrder.value
             ) {
                 viewModel.changeOrder(it)
+                if(binding.mainMissionMotion.progress != 1f) binding.mainMissionMotion.transitionToEnd()
             }
         }
     }
@@ -169,8 +175,8 @@ class MainMissionFragment :
     /*
     * 이벤트 세팅
     * */
-    private fun missionCardClick(item: Mission) {
-        missionDetailViewModel.setMission(item)
+    private fun missionCardClick(mission: Mission) {
+        missionDetailViewModel.setMission(mission)
         mainViewModel.navigate(MainFragmentDirections.actionMainFragmentToMissionDetailFragment())
     }
 
@@ -204,11 +210,4 @@ class MainMissionFragment :
         }
     }
 
-    /*
-    * 생명주기 동작 세팅
-    * */
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if(isInitialized) viewModel.getMissionList()
-        super.onViewCreated(view, savedInstanceState)
-    }
 }

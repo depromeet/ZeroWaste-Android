@@ -1,7 +1,6 @@
 package com.depromeet.zerowaste.feature.main
 
-import android.content.res.ColorStateList
-import android.util.Log
+import androidx.activity.addCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
@@ -30,6 +29,17 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         viewModel.navDirection.observe(this) {
             findNavController().navigate(it)
         }
-    }
 
+        var lastPressedTime = 0L
+
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            val currentTime = System.currentTimeMillis()
+            if(lastPressedTime + 2000 > currentTime) {
+                requireActivity().finish()
+            } else {
+                lastPressedTime = currentTime
+                showToast(resources.getString(R.string.finish_toast))
+            }
+        }
+    }
 }
