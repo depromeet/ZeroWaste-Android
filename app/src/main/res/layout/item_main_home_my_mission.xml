@@ -8,20 +8,21 @@
 
         <variable
             name="mission"
-            type="com.depromeet.zerowaste.data.home.Mission" />
+            type="com.depromeet.zerowaste.data.mission.Mission" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginEnd="10dp">
 
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/sub1"
+            app:cardBackgroundColor="@color/black"
             app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -31,7 +32,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/main_home_my_mission_iv_bg_image"
+                    android:id="@+id/item_main_home_my_mission_iv_bg_image"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:alpha="0.5"
@@ -41,110 +42,134 @@
 
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/main_home_my_mission_iv_icon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="15dp"
+                    android:id="@+id/item_main_home_my_mission_iv_level"
+                    android:layout_width="37dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="18.28dp"
                     android:layout_marginTop="19dp"
-                    android:layout_marginBottom="26dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     bind:loadImageMissionDifficulty="@{mission.difficulty}"
-                    tools:src="@drawable/ic_sample_24dp" />
+                    tools:src="@drawable/ic_level_1" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/main_home_my_mission_tv_title"
+                    android:id="@+id/item_main_home_my_mission_tv_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
                     android:layout_marginEnd="37dp"
-                    android:fontFamily="@font/apple_sd_gothic_neo_eb"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:text="@{mission.name}"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/main_home_my_mission_tv_content_1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/main_home_my_mission_iv_icon"
-                    app:layout_constraintTop_toTopOf="@id/main_home_my_mission_iv_icon"
+                    app:layout_constraintStart_toEndOf="@id/item_main_home_my_mission_iv_level"
+                    app:layout_constraintTop_toTopOf="@id/item_main_home_my_mission_iv_level"
                     tools:text="수돗물 끓여 마시기" />
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/item_main_home_my_mission_iv_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintBottom_toBottomOf="@id/item_main_home_my_mission_iv_level"
+                    app:layout_constraintStart_toStartOf="@id/item_main_home_my_mission_tv_title"
+                    app:layout_constraintTop_toBottomOf="@id/item_main_home_my_mission_tv_title"
+                    app:srcCompat="@drawable/ic_location_white" />
+
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/main_home_my_mission_tv_content_1"
+                    android:id="@+id/item_main_home_my_mission_tv_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/apple_sd_gothic_neo_r"
+                    android:text="@{mission.place.textId}"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="@id/item_main_home_my_mission_iv_location"
+                    app:layout_constraintStart_toEndOf="@id/item_main_home_my_mission_iv_location"
+                    app:layout_constraintTop_toTopOf="@id/item_main_home_my_mission_iv_location"
+                    tools:text="카페" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/main_home_mission_iv_person"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/item_main_home_my_mission_iv_location"
+                    app:layout_constraintStart_toEndOf="@id/item_main_home_my_mission_tv_location"
+                    app:layout_constraintTop_toTopOf="@id/item_main_home_my_mission_iv_location"
+                    app:srcCompat="@drawable/ic_person_white" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/item_main_home_my_mission_tv_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/apple_sd_gothic_neo_r"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/apple_sd_gothic_neo_r"
+                    app:layout_constraintBottom_toBottomOf="@id/main_home_mission_iv_person"
+                    app:layout_constraintStart_toEndOf="@id/main_home_mission_iv_person"
+                    app:layout_constraintTop_toTopOf="@id/main_home_mission_iv_person"
+                    tools:text="230" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/item_main_home_my_mission_tv_num_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/apple_sd_gothic_neo_r"
-                    android:text="미션인증까지 "
+                    android:text="명 참여중"
                     android:textColor="@color/white"
                     android:textSize="13sp"
-                    app:layout_constraintBottom_toBottomOf="@id/main_home_my_mission_iv_icon"
-                    app:layout_constraintStart_toStartOf="@id/main_home_my_mission_tv_title"
-                    app:layout_constraintTop_toBottomOf="@id/main_home_my_mission_tv_title" />
+                    app:fontFamily="@font/apple_sd_gothic_neo_r"
+                    app:layout_constraintBottom_toBottomOf="@id/item_main_home_my_mission_tv_num"
+                    app:layout_constraintStart_toEndOf="@id/item_main_home_my_mission_tv_num"
+                    app:layout_constraintTop_toTopOf="@id/item_main_home_my_mission_tv_num" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/main_home_my_mission_tv_date"
+                    android:id="@+id/item_main_home_my_mission_tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="35dp"
                     android:fontFamily="@font/apple_sd_gothic_neo_eb"
                     android:textColor="@color/white"
                     android:textSize="13sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/main_home_my_mission_tv_content_1"
-                    app:layout_constraintEnd_toStartOf="@id/main_home_my_mission_tv_content_2"
-                    app:layout_constraintStart_toEndOf="@id/main_home_my_mission_tv_content_1"
-                    app:layout_constraintTop_toTopOf="@id/main_home_my_mission_tv_content_1"
+                    app:layout_constraintStart_toStartOf="@id/item_main_home_my_mission_iv_level"
+                    app:layout_constraintTop_toBottomOf="@id/item_main_home_my_mission_iv_location"
                     tools:text="00:00:00초" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/main_home_my_mission_tv_content_2"
+                    android:id="@+id/item_main_home_my_mission_tv_time_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/apple_sd_gothic_neo_r"
-                    android:text=" 남았어요"
                     android:textColor="@color/white"
                     android:textSize="13sp"
-                    app:layout_constraintBottom_toBottomOf="@id/main_home_my_mission_tv_content_1"
-                    app:layout_constraintStart_toEndOf="@id/main_home_my_mission_tv_date"
-                    app:layout_constraintTop_toTopOf="@id/main_home_my_mission_tv_content_1" />
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/main_home_my_mission_chip_group"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginEnd="18dp"
-                    app:layout_constraintBottom_toBottomOf="@id/main_home_my_mission_btn_auth"
-                    app:layout_constraintEnd_toStartOf="@id/main_home_my_mission_btn_auth"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/main_home_my_mission_btn_auth">
-
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="50dp"
-                        android:layout_height="20dp"
-                        android:background="#303A60"
-                        android:text="줄이기"
-                        android:textColor="@color/white" />
-
-                </com.google.android.material.chip.ChipGroup>
+                    app:layout_constraintBottom_toBottomOf="@+id/item_main_home_my_mission_tv_time"
+                    app:layout_constraintStart_toEndOf="@id/item_main_home_my_mission_tv_time"
+                    app:layout_constraintTop_toTopOf="@+id/item_main_home_my_mission_tv_time"
+                    tools:text=" 남았어요!" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/main_home_my_mission_btn_auth"
-                    android:layout_width="96dp"
+                    android:id="@+id/item_main_home_my_mission_btn_auth"
+                    android:layout_width="110dp"
                     android:layout_height="36dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="18dp"
+                    android:layout_marginTop="21dp"
+                    android:layout_marginEnd="14dp"
                     android:layout_marginBottom="14dp"
                     android:background="@drawable/rect_round_sub2_radius_26dp"
                     android:fontFamily="@font/apple_sd_gothic_neo_eb"
                     android:stateListAnimator="@null"
                     android:text="인증하기"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="14sp"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/main_home_my_mission_tv_content_1" />
+                    app:layout_constraintTop_toBottomOf="@id/item_main_home_my_mission_iv_location" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
