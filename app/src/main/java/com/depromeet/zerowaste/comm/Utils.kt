@@ -129,7 +129,7 @@ fun genLayoutManagerInXml(
 * imageView
 * */
 @BindingAdapter("loadImage")
-fun loadImage(view: ImageView, loadImage: String) {
+fun loadImage(view: ImageView, loadImage: String?) {
     Glide.with(view).load(loadImage).into(view)
 }
 
@@ -143,12 +143,12 @@ fun loadImageRank(view: ImageView, rank: Int) {
 }
 
 @BindingAdapter("loadImageCircle")
-fun loadImageCircle(view: ImageView, loadImage: String) {
+fun loadImageCircle(view: ImageView, loadImage: String?) {
     Glide.with(view).load(loadImage).circleCrop().into(view)
 }
 
 @BindingAdapter("loadImageCenterCrop")
-fun loadImageCenterCrop(view: ImageView, loadImage: String) {
+fun loadImageCenterCrop(view: ImageView, loadImage: String?) {
     Glide.with(view).load(loadImage).centerCrop().into(view)
 }
 
@@ -164,8 +164,8 @@ fun loadImageMissionDifficulty(view: ImageView, difficulty: String) {
 }
 
 @BindingAdapter("loadImageMissionDifficulty")
-fun loadImageMissionDifficulty(view: ImageView, difficulty: Difficulty) {
-    when (difficulty.level) {
+fun loadImageMissionDifficulty(view: ImageView, difficulty: Difficulty?) {
+    when (difficulty?.level) {
         0 -> view.setImageResource(R.drawable.ic_level_0)
         1 -> view.setImageResource(R.drawable.ic_level_1)
         2 -> view.setImageResource(R.drawable.ic_level_2)

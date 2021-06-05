@@ -57,6 +57,8 @@ enum class Theme(@StringRes val textId: Int) {
 }
 
 enum class ParticipateStatus(val value: String) {
+    @SerializedName("none")
+    NONE("none"),
     @SerializedName("ready")
     READY("ready"),
     @SerializedName("participated")

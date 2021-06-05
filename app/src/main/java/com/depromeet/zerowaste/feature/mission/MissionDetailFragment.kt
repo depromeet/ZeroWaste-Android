@@ -1,31 +1,50 @@
 package com.depromeet.zerowaste.feature.mission
 
+import android.os.Bundle
+import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
 import com.depromeet.zerowaste.comm.SpanStrBuilder
+import com.depromeet.zerowaste.comm.data.Share
 import com.depromeet.zerowaste.comm.genLayoutManager
+import com.depromeet.zerowaste.data.ParticipateStatus
 import com.depromeet.zerowaste.data.Theme
+import com.depromeet.zerowaste.data.mission.Mission
 import com.depromeet.zerowaste.databinding.FragmentMissionDetailBinding
 import com.depromeet.zerowaste.databinding.ItemMissionTagBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.lang.StringBuilder
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout.fragment_mission_detail) {
 
     private val viewModel: MissionDetailViewModel by activityViewModels()
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.setMission {
+            binding.item = it
+        }
+    }
+
     override fun init() {
-        binding.item = viewModel.mission.value ?: return
+        viewModel.mission.value?.also { binding.item = it }
         binding.fragment = this
         initTitle()
         initContent()
     }
 
     private fun initTitle() {
-        val mission = binding.item ?: return
         val endFont = ResourcesCompat.getFont(requireContext(), R.font.roboto_bold)
         val startFont = ResourcesCompat.getFont(requireContext(), R.font.kotra_bold)
         binding.missionDetailMotion.setTransitionListener(object: MotionLayout.TransitionListener {
@@ -40,15 +59,19 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
             override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {}
             override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {}
         })
-        binding.missionDetailApproveCnt.text = SpanStrBuilder(requireContext())
-            .add("${mission.successfulCount}${resources.getString(R.string.mission_count)} ")
-            .add(textId = R.string.mission_detail_approve)
-            .build()
 
-        val tagAdapter = BaseRecycleAdapter(R.layout.item_mission_tag){ i: Theme, b: ItemMissionTagBinding, _ -> b.item = i }
-        tagAdapter.setData(mission.theme)
-        binding.missionDetailTags.layoutManager = genLayoutManager(requireContext(), isVertical = false)
-        binding.missionDetailTags.adapter = tagAdapter
+        viewModel.mission.observe(this) { mission ->
+            binding.missionDetailApproveCnt.text = SpanStrBuilder(requireContext())
+                .add("${mission.successfulCount}${resources.getString(R.string.mission_count)} ")
+                .add(textId = R.string.mission_detail_approve)
+                .build()
+
+            val tagAdapter = BaseRecycleAdapter(R.layout.item_mission_tag){ i: Theme, b: ItemMissionTagBinding, _ -> b.item = i }
+            tagAdapter.setData(mission.theme)
+            binding.missionDetailTags.layoutManager = genLayoutManager(requireContext(), isVertical = false)
+            binding.missionDetailTags.adapter = tagAdapter
+        }
+
     }
 
     private fun initContent() {
@@ -59,10 +82,33 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
             }
         })
         binding.missionDetailHowToImg.clipToOutline = true
+
+        viewModel.mission.observe(this) { mission ->
+            binding.missionDetailMakeUser.text = SpanStrBuilder(requireContext())
+                .add(mission.creater.nickname, colorRes = R.color.purple)
+                .add(textId = R.string.mission_detail_make_user)
+                .build()
+
+            binding.missionDetailCheerUpEdit.visibility = if(mission.creater.id == Share.user?.id) View.VISIBLE else View.GONE
+
+            if (mission.participation.status == ParticipateStatus.READY || mission.participation.status == ParticipateStatus.PARTICIPATED) {
+                binding.missionDetailStartBtn.text = resources.getText(R.string.mission_detail_start)
+                val endTime = mission.participation.endDate?.time ?: return@observe
+                val format = SimpleDateFormat("HH:mm:ss", Locale.KOREA)
+                lifecycleScope.launch {
+                    while (true) {
+                        binding.missionDetailStartTxt.text = getString(R.string.mission_detail_limit, format.format(Date(endTime - System.currentTimeMillis())))
+                        delay(1000)
+                    }
+                }
+            } else {
+                binding.missionDetailStartBtn.text = resources.getText(R.string.mission_detail_start_participate)
+                binding.missionDetailStartTxt.text = StringBuilder().append(mission.inProgressCount).append(resources.getString(R.string.mission_detail_participate_users)).toString()
+            }
+        }
     }
 
-    fun likeClick() {
-        val mission = binding.item ?: return
+    fun likeClick(mission: Mission) {
         viewModel.toggleLikeMission(mission.id, mission.isLiked)
         {
             if(it == 0) {
@@ -71,4 +117,20 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
             }
         }
     }
+
+    fun backClick() {
+        findNavController().popBackStack()
+    }
+
+    fun startClick() {
+        val mission = binding.item ?: return
+        if (mission.participation.status == ParticipateStatus.READY || mission.participation.status == ParticipateStatus.PARTICIPATED) {
+            findNavController().navigate(MissionDetailFragmentDirections.actionMissionDetailFragmentToMissionApproveFragment())
+        } else {
+            viewModel.startParticipate(mission.id) {
+                findNavController().navigate(MissionDetailFragmentDirections.actionMissionDetailFragmentToMissionApproveFragment())
+            }
+        }
+    }
+
 }

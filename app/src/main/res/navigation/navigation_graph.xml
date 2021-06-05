@@ -55,7 +55,21 @@
         android:id="@+id/missionDetailFragment"
         android:name="com.depromeet.zerowaste.feature.mission.MissionDetailFragment"
         android:label="fragment_mission_detail"
-        tools:layout="@layout/fragment_mission_detail"/>
+        tools:layout="@layout/fragment_mission_detail">
+        <action
+            android:id="@+id/action_missionDetailFragment_to_missionApproveFragment"
+            app:destination="@id/missionApproveFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/missionApproveFragment"
+        android:name="com.depromeet.zerowaste.feature.mission.approve.MissionApproveFragment"
+        android:label="fragment_mission_approve"
+        tools:layout="@layout/fragment_mission_approve"/>
 
     <fragment
         android:id="@+id/loginFragment"
