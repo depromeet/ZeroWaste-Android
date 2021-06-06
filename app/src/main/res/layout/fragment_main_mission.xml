@@ -131,7 +131,7 @@
             android:id="@+id/main_mission_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/mission"
+            android:text="@string/mission_place"
             android:textColor="@color/white"
             android:fontFamily="@font/kotra_bold"
             android:textSize="22sp"

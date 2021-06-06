@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+        <ImageView
+            android:id="@+id/mission_done_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_mission_done"
+            android:scaleType="centerCrop"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/mission_done_txt"
+            tools:ignore="ContentDescription" />
+        <TextView
+            android:id="@+id/mission_done_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:fontFamily="@font/kotra_bold"
+            android:text="@string/mission_done"
+            android:layout_marginTop="24dp"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintBottom_toTopOf="@id/mission_done_msg_back"
+            app:layout_constraintTop_toBottomOf="@id/mission_done_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/mission_done_msg_back"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:text="@string/mission_done_msg"
+            android:background="@drawable/rect_round_stroke_white_12"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="80dp"
+            app:layout_constraintTop_toBottomOf="@id/mission_done_txt"
+            app:layout_constraintBottom_toTopOf="@id/mission_done_home"/>
+
+        <View
+            android:layout_width="28dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_small_planet"
+            android:scaleType="centerCrop"
+            android:translationY="-13dp"
+            app:layout_constraintStart_toStartOf="@id/mission_done_msg_back"
+            app:layout_constraintEnd_toEndOf="@id/mission_done_msg_back"
+            app:layout_constraintTop_toBottomOf="@id/mission_done_msg_back"/>
+        
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mission_done_home"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:text="@string/home"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:background="@drawable/selector_button"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="70dp"
+            app:layout_constraintEnd_toStartOf="@id/mission_done_share"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mission_done_msg_back"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mission_done_share"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:text="@string/mission_done_share"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:background="@drawable/selector_button"
+            android:layout_marginEnd="18dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toEndOf="@id/mission_done_home"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/mission_done_home"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

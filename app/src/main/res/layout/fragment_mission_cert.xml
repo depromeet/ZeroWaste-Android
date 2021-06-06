@@ -18,6 +18,7 @@
             android:layout_height="48dp"
             android:scaleType="center"
             android:src="@drawable/ic_back"
+            android:onClick="@{() -> fragment.backClick()}"
             android:layout_marginStart="7dp"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -91,7 +92,7 @@
                     android:paddingEnd="18dp"
                     app:layout_constraintTop_toBottomOf="@id/mission_cert_level_txt"
                     tools:itemCount="1"
-                    tools:listitem="@layout/item_cert_level"/>
+                    tools:listitem="@layout/item_mission_cert_level"/>
 
                 <TextView
                     android:id="@+id/mission_cert_after_txt"
@@ -107,14 +108,13 @@
                 <EditText
                     android:id="@+id/mission_cert_after_edit"
                     android:layout_width="match_parent"
-                    android:layout_height="96dp"
+                    android:layout_height="108dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/rect_round_stroke_gray3_8"
                     android:gravity="top"
                     android:hint="@string/mission_cert_after_hint"
                     android:inputType="textMultiLine"
-                    android:imeOptions="actionDone"
-                    android:maxLines="3"
+                    android:maxLines="4"
                     android:textSize="15sp"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
@@ -122,7 +122,8 @@
                     android:paddingEnd="16dp"
                     android:layout_marginStart="18dp"
                     android:layout_marginEnd="18dp"
-                    app:layout_constraintTop_toBottomOf="@id/mission_cert_after_txt" />
+                    app:layout_constraintTop_toBottomOf="@id/mission_cert_after_txt"
+                    tools:text="테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/mission_cert_next"
@@ -135,6 +136,7 @@
                     android:layout_marginTop="36dp"
                     android:layout_marginBottom="42dp"
                     android:enabled="false"
+                    android:onClick="@{() -> fragment.nextClick()}"
                     app:layout_constraintTop_toBottomOf="@id/mission_cert_after_edit"
                     app:layout_constraintStart_toStartOf="@id/mission_cert_after_edit"
                     app:layout_constraintEnd_toEndOf="@id/mission_cert_after_edit"

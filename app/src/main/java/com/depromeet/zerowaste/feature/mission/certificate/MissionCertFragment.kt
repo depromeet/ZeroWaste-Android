@@ -1,12 +1,16 @@
 package com.depromeet.zerowaste.feature.mission.certificate
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
-import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Build
+import android.text.Editable
+import android.text.InputType
+import android.text.TextWatcher
 import android.util.Log
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -17,8 +21,8 @@ import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.*
 import com.depromeet.zerowaste.data.Difficulty
 import com.depromeet.zerowaste.databinding.FragmentMissionCertBinding
-import com.depromeet.zerowaste.databinding.ItemCertImgBinding
-import com.depromeet.zerowaste.databinding.ItemCertLevelBinding
+import com.depromeet.zerowaste.databinding.ItemMissionCertImgBinding
+import com.depromeet.zerowaste.databinding.ItemMissionCertLevelBinding
 import gun0912.tedimagepicker.builder.TedImagePicker
 import gun0912.tedimagepicker.builder.type.MediaType
 import java.text.SimpleDateFormat
@@ -28,21 +32,22 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
 
     private val viewModel: MissionCertViewModel by viewModels()
 
-    private val imageListAdapter =  BaseRecycleAdapter(R.layout.item_cert_img) { item: Uri, bind: ItemCertImgBinding, _ -> bind.uri = item }
-    private val levelAdapter = BaseRecycleAdapter(R.layout.item_cert_level)
-    { item: LevelItem, bind: ItemCertLevelBinding, position: Int ->
-        loadTxtMissionDifficulty(bind.itemCertLevelTxt, item.difficulty)
+    private val imageListAdapter =  BaseRecycleAdapter(R.layout.item_mission_cert_img) { item: Uri, bind: ItemMissionCertImgBinding, _ -> bind.uri = item }
+    private val levelAdapter = BaseRecycleAdapter(R.layout.item_mission_cert_level)
+    { item: LevelItem, bind: ItemMissionCertLevelBinding, position: Int ->
+        loadTxtMissionDifficulty(bind.itemMissionCertLevelTxt, item.difficulty)
         if(item.selected) {
-            loadImageMissionDifficulty(bind.itemCertLevelImg, item.difficulty)
-            bind.itemCertLevelTxt.setTextColor(ResourcesCompat.getColor(resources, R.color.black, null))
+            loadImageMissionDifficulty(bind.itemMissionCertLevelImg, item.difficulty)
+            bind.itemMissionCertLevelTxt.setTextColor(ResourcesCompat.getColor(resources, R.color.black, null))
         } else {
-            loadImageMissionDifficultyOff(bind.itemCertLevelImg, item.difficulty)
-            bind.itemCertLevelTxt.setTextColor(ResourcesCompat.getColor(resources, R.color.gray_2, null))
+            loadImageMissionDifficultyOff(bind.itemMissionCertLevelImg, item.difficulty)
+            bind.itemMissionCertLevelTxt.setTextColor(ResourcesCompat.getColor(resources, R.color.gray_2, null))
         }
         bind.root.setOnClickListener { levelClick(position) }
     }
 
     override fun init() {
+        binding.fragment = this
         checkPermission()
         initTitle()
         initLevel()
@@ -65,8 +70,8 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
     private fun initImgList(imgs: List<Uri>) {
         binding.missionCertImgs.offscreenPageLimit = 3
 
-        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.default_margin)
-        val pagerWidth = resources.displayMetrics.widthPixels
+        val pageMarginPx = dpToPx(requireContext(), 9F)
+        val pagerWidth = resources.displayMetrics.widthPixels - dpToPx(requireContext(), 36F)
         val screenWidth = resources.displayMetrics.widthPixels
         val offsetPx = screenWidth - pageMarginPx - pagerWidth
 
@@ -90,17 +95,33 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
     }
 
     private fun initNextCheck() {
-        binding.missionCertAfterEdit.setOnEditorActionListener { _, actionId, _ ->
-            actionId == EditorInfo.IME_ACTION_DONE
+        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        binding.missionCertAfterEdit.imeOptions = EditorInfo.IME_ACTION_DONE
+        binding.missionCertAfterEdit.setRawInputType(InputType.TYPE_CLASS_TEXT)
+        binding.missionCertAfterEdit.setOnEditorActionListener { v, actionId, _ ->
+            if(actionId == EditorInfo.IME_ACTION_DONE) {
+                imm.hideSoftInputFromWindow(v.windowToken, 0)
+                true
+            } else false
         }
-        binding.missionCertAfterEdit.addTextChangedListener {
-            it?.also {
-                viewModel.editTxt(it.toString())
+        binding.missionCertAfterEdit.addTextChangedListener(object: TextWatcher {
+            var preString = ""
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                preString = s.toString()
             }
-        }
-        binding.missionCertNext.setOnClickListener {
-            Log.e("ttt", "tttt")
-        }
+            override fun afterTextChanged(s: Editable?) {
+                s?.also {
+                    if(binding.missionCertAfterEdit.lineCount > 3) {
+                        binding.missionCertAfterEdit.setText(preString)
+                        binding.missionCertAfterEdit.setSelection(binding.missionCertAfterEdit.length())
+                        viewModel.editTxt(preString)
+                    } else {
+                        viewModel.editTxt(it.toString())
+                    }
+                }
+            }
+        })
 
         viewModel.selectedDifficulty.observe(this) {
             if(viewModel.editedTxt.value.isNullOrEmpty()) {
@@ -134,7 +155,6 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
                     if(it) {
                         getPhotos()
                     } else {
-                        showToast("권한이 없어용")
                         findNavController().popBackStack()
                     }
                 }.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -154,6 +174,7 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
                 findNavController().popBackStack()
             }
             .startMultiImage {
+                if(it.isEmpty()) findNavController().popBackStack()
                 initImgList(it)
             }
     }
@@ -166,6 +187,14 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
             } else false
         }
         levelAdapter.notifyDataSetChanged()
+    }
+
+    fun nextClick() {
+        findNavController().navigate(MissionCertFragmentDirections.actionMissionCertFragmentToMissionDoneFragment())
+    }
+
+    fun backClick() {
+        findNavController().popBackStack()
     }
 
     private data class LevelItem (val difficulty: Difficulty, var selected: Boolean)

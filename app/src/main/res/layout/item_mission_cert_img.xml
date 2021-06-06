@@ -8,10 +8,12 @@
             type="android.net.Uri" />
     </data>
     <ImageView
-        android:id="@+id/item_cert_img"
+        android:id="@+id/item_mission_cert_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:loadImage="@{uri}"
         app:imageRadius="@{16}"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
         tools:ignore="ContentDescription" />
 </layout>

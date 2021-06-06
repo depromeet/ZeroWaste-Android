@@ -8,7 +8,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/item_cert_level_img"
+            android:id="@+id/item_mission_cert_level_img"
             android:layout_width="match_parent"
             android:layout_height="63dp"
             android:scaleType="center"
@@ -17,7 +17,7 @@
             tools:src="@drawable/ic_level_4_off"/>
 
         <TextView
-            android:id="@+id/item_cert_level_txt"
+            android:id="@+id/item_mission_cert_level_txt"
             android:layout_width="match_parent"
             android:layout_height="27dp"
             android:gravity="center"

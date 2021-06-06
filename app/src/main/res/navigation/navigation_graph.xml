@@ -107,7 +107,23 @@
         android:id="@+id/missionCertFragment"
         android:name="com.depromeet.zerowaste.feature.mission.certificate.MissionCertFragment"
         android:label="fragment_mission_cert"
-        tools:layout="@layout/fragment_mission_cert"/>
+        tools:layout="@layout/fragment_mission_cert">
+        <action
+            android:id="@+id/action_missionCertFragment_to_missionDoneFragment"
+            app:destination="@id/missionDoneFragment"
+            app:popUpTo="@id/missionCertFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/missionDoneFragment"
+        android:name="com.depromeet.zerowaste.feature.mission.done.MissionDoneFragment"
+        android:label="fragment_mission_done"
+        tools:layout="@layout/fragment_mission_done"/>
 
     <fragment
         android:id="@+id/loginFragment"
