@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.depromeet.zerowaste.BuildConfig
 import com.depromeet.zerowaste.R

@@ -73,7 +73,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     protected abstract fun init()
 
-    protected fun showToast(msg: String?) {
+    fun showToast(msg: String?) {
         if(msg == null) return
         lifecycleScope.launch(Dispatchers.Main) {
             Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()

@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.databinding.FragmentMissionApproveBinding
+import com.depromeet.zerowaste.feature.mission.certificate.MissionCertFragment
 import com.depromeet.zerowaste.feature.mission.detail.MissionDetailViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -44,7 +45,7 @@ class MissionApproveFragment: BaseFragment<FragmentMissionApproveBinding>(R.layo
     }
 
     fun clickNow() {
-        findNavController().navigate(MissionApproveFragmentDirections.actionMissionApproveFragmentToMissionCertFragment())
+        MissionCertFragment.startMissionCert(this, MissionApproveFragmentDirections.actionMissionApproveFragmentToMissionCertFragment())
     }
 
     fun clickNextTime() {

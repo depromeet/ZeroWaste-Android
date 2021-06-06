@@ -1,5 +1,6 @@
 package com.depromeet.zerowaste.comm.data
 
+import android.net.Uri
 import com.depromeet.zerowaste.data.user.User
 
 // 동적 객체 공유

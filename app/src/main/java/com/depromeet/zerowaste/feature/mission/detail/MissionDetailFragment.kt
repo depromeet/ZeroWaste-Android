@@ -20,6 +20,7 @@ import com.depromeet.zerowaste.data.Theme
 import com.depromeet.zerowaste.data.mission.Mission
 import com.depromeet.zerowaste.databinding.FragmentMissionDetailBinding
 import com.depromeet.zerowaste.databinding.ItemMissionTagBinding
+import com.depromeet.zerowaste.feature.mission.certificate.MissionCertFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.lang.StringBuilder
@@ -129,7 +130,7 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
     fun startClick() {
         val mission = binding.item ?: return
         if (mission.participation.status == ParticipateStatus.READY) {
-            findNavController().navigate(MissionDetailFragmentDirections.actionMissionDetailFragmentToMissionCertFragment())
+            MissionCertFragment.startMissionCert(this, MissionDetailFragmentDirections.actionMissionDetailFragmentToMissionCertFragment())
         } else {
             viewModel.startParticipate(mission.id) {
                 findNavController().navigate(MissionDetailFragmentDirections.actionMissionDetailFragmentToMissionApproveFragment())

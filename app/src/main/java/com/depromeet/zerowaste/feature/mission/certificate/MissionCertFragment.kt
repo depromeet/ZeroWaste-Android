@@ -1,6 +1,7 @@
 package com.depromeet.zerowaste.feature.mission.certificate
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -15,7 +16,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.*
@@ -29,6 +32,43 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fragment_mission_cert) {
+
+    companion object {
+        private var certUriList: List<Uri> = ArrayList()
+
+        fun startMissionCert(fragment: BaseFragment<*>, navDirections: NavDirections) {
+            when (PackageManager.PERMISSION_GRANTED) {
+                ContextCompat.checkSelfPermission(
+                    fragment.requireContext(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) -> getPhotos(fragment, navDirections)
+                else -> {
+                    fragment.registerForActivityResult(ActivityResultContracts.RequestPermission())
+                    {
+                        if(it) {
+                            getPhotos(fragment, navDirections)
+                        }
+                    }.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                }
+            }
+        }
+
+        private fun getPhotos(fragment: BaseFragment<*>, navDirections: NavDirections) {
+            TedImagePicker.with(fragment.requireContext())
+                .mediaType(MediaType.IMAGE)
+                .max(3, R.string.mission_cert_max_img)
+                .buttonBackground(R.drawable.selector_button)
+                .buttonTextColor(R.color.white)
+                .backButton(R.drawable.ic_back)
+                .errorListener {
+                    fragment.showToast(it.message)
+                }
+                .startMultiImage {
+                    certUriList = it
+                    fragment.findNavController().navigate(navDirections)
+                }
+        }
+    }
 
     private val viewModel: MissionCertViewModel by viewModels()
 
@@ -48,7 +88,7 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
 
     override fun init() {
         binding.fragment = this
-        checkPermission()
+        initImgList()
         initTitle()
         initLevel()
         initNextCheck()
@@ -67,7 +107,7 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
         binding.missionCertTitle.text = format.format(nowDate)
     }
 
-    private fun initImgList(imgs: List<Uri>) {
+    private fun initImgList() {
         binding.missionCertImgs.offscreenPageLimit = 3
 
         val pageMarginPx = dpToPx(requireContext(), 9F)
@@ -79,7 +119,7 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
             page.translationX = position * -offsetPx
         }
 
-        imageListAdapter.setData(imgs)
+        imageListAdapter.setData(certUriList)
         binding.missionCertImgs.adapter = imageListAdapter
         binding.missionCertIndicator.setViewPager2(binding.missionCertImgs)
     }
@@ -141,42 +181,6 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
                 binding.missionCertNext.setTextColor(ResourcesCompat.getColor(resources, R.color.black, null))
             }
         }
-    }
-
-    private fun checkPermission() {
-        when (PackageManager.PERMISSION_GRANTED) {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) -> getPhotos()
-            else -> {
-                registerForActivityResult(ActivityResultContracts.RequestPermission())
-                {
-                    if(it) {
-                        getPhotos()
-                    } else {
-                        findNavController().popBackStack()
-                    }
-                }.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-            }
-        }
-    }
-
-    private fun getPhotos() {
-        TedImagePicker.with(requireContext())
-            .mediaType(MediaType.IMAGE)
-            .max(3, R.string.mission_cert_max_img)
-            .buttonBackground(R.drawable.selector_button)
-            .buttonTextColor(R.color.white)
-            .backButton(R.drawable.ic_back)
-            .errorListener {
-                showToast(it.message)
-                findNavController().popBackStack()
-            }
-            .startMultiImage {
-                if(it.isEmpty()) findNavController().popBackStack()
-                initImgList(it)
-            }
     }
 
     private fun levelClick(position: Int) {
