@@ -9,7 +9,10 @@
             type="com.depromeet.zerowaste.data.mission.Mission" />
         <variable
             name="fragment"
-            type="com.depromeet.zerowaste.feature.mission.MissionDetailFragment" />
+            type="com.depromeet.zerowaste.feature.mission.detail.MissionDetailFragment" />
+        <variable
+            name="layoutParam"
+            type="android.view.ViewGroup.LayoutParams" />
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout
@@ -189,6 +192,7 @@
                         android:id="@+id/mission_detail_how_to_img"
                         android:layout_width="0dp"
                         android:layout_height="182dp"
+                        app:customHeightDP="@{item.bannerImgUrls[0] == null ? 0 : 182}"
                         android:background="@drawable/rect_round_16"
                         android:layout_marginStart="18dp"
                         android:layout_marginEnd="18dp"
@@ -246,6 +250,7 @@
                         android:paddingBottom="12dp"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
+                        app:customHeightDP="@{item.sentenceForCheer == null || item.sentenceForCheer.empty ? 0 : layoutParam.WRAP_CONTENT }"
                         app:layout_constraintStart_toStartOf="@id/mission_detail_how_to_img"
                         app:layout_constraintEnd_toEndOf="@id/mission_detail_how_to_img"
                         app:layout_constraintTop_toBottomOf="@id/mission_detail_make_user"/>

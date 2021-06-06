@@ -3,6 +3,7 @@ package com.depromeet.zerowaste.comm
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Build
 import android.util.DisplayMetrics
 import android.util.Log
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.databinding.BindingAdapter
@@ -22,6 +24,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.depromeet.zerowaste.BuildConfig
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.data.Difficulty
@@ -98,16 +102,32 @@ fun spToDp(context: Context, sp: Float): Float {
 * All View
 * */
 @BindingAdapter("customWidthDP")
-fun customWidthDP(view: View, width: Float) {
+fun customWidthDP(view: View, width: Number) {
     val param = view.layoutParams
-    param.width = dpToPx(view.context, width).toInt()
+    param.width = if(width is Int) {
+        if(width == ViewGroup.LayoutParams.WRAP_CONTENT || width == ViewGroup.LayoutParams.MATCH_PARENT) {
+            width
+        } else {
+            dpToPx(view.context, width.toFloat()).toInt()
+        }
+    } else {
+        dpToPx(view.context, width.toFloat()).toInt()
+    }
     view.layoutParams = param
 }
 
 @BindingAdapter("customHeightDP")
-fun customHeightDP(view: View, height: Float) {
+fun customHeightDP(view: View, height: Number) {
     val param = view.layoutParams
-    param.height = dpToPx(view.context, height).toInt()
+    param.height = if(height is Int) {
+        if(height == ViewGroup.LayoutParams.WRAP_CONTENT || height == ViewGroup.LayoutParams.MATCH_PARENT) {
+             height
+        } else {
+            dpToPx(view.context, height.toFloat()).toInt()
+        }
+    } else {
+        dpToPx(view.context, height.toFloat()).toInt()
+    }
     view.layoutParams = param
 }
 
@@ -131,6 +151,21 @@ fun genLayoutManagerInXml(
 @BindingAdapter("loadImage")
 fun loadImage(view: ImageView, loadImage: String?) {
     Glide.with(view).load(loadImage).into(view)
+}
+
+@BindingAdapter("loadImage")
+fun loadImage(view: ImageView, loadImage: Uri?) {
+    Glide.with(view).load(loadImage).into(view)
+}
+
+@BindingAdapter("loadImage", "imageRadius", requireAll = true)
+fun loadImageRadius(view: ImageView, loadImage: String?, imageRadius: Float) {
+    Glide.with(view).load(loadImage).transform(RoundedCorners(dpToPx(view.context,imageRadius).toInt())).into(view)
+}
+
+@BindingAdapter("loadImage", "imageRadius", requireAll = true)
+fun loadImageRadius(view: ImageView, loadImage: Uri?, imageRadius: Float) {
+    Glide.with(view).load(loadImage).transform(RoundedCorners(dpToPx(view.context,imageRadius).toInt())).into(view)
 }
 
 @BindingAdapter("loadImageRank")
@@ -171,5 +206,28 @@ fun loadImageMissionDifficulty(view: ImageView, difficulty: Difficulty?) {
         2 -> view.setImageResource(R.drawable.ic_level_2)
         3 -> view.setImageResource(R.drawable.ic_level_3)
         4 -> view.setImageResource(R.drawable.ic_level_4)
+    }
+}
+
+@BindingAdapter("loadImageMissionDifficultyOff")
+fun loadImageMissionDifficultyOff(view: ImageView, difficulty: Difficulty?) {
+    when (difficulty?.level) {
+        0 -> view.setImageResource(R.drawable.ic_level_0_off)
+        1 -> view.setImageResource(R.drawable.ic_level_1_off)
+        2 -> view.setImageResource(R.drawable.ic_level_2_off)
+        3 -> view.setImageResource(R.drawable.ic_level_3_off)
+        4 -> view.setImageResource(R.drawable.ic_level_4_off)
+    }
+}
+
+@BindingAdapter("loadTxtMissionDifficulty")
+fun loadTxtMissionDifficulty(view: TextView, difficulty: Difficulty?) {
+    view.text = when (difficulty?.level) {
+        0 -> view.resources.getText(R.string.mission_level_0_txt)
+        1 -> view.resources.getText(R.string.mission_level_1_txt)
+        2 -> view.resources.getText(R.string.mission_level_2_txt)
+        3 -> view.resources.getText(R.string.mission_level_3_txt)
+        4 -> view.resources.getText(R.string.mission_level_4_txt)
+        else -> ""
     }
 }

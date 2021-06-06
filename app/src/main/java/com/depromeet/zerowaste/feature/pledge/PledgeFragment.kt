@@ -24,7 +24,7 @@ class PledgeFragment : BaseFragment<FragmentPledgeBinding>(R.layout.fragment_ple
     override fun init() {
         binding.fragment = this
 
-        binding.pledgeVpViewpager.adapter = PledgeAdapter(this, isNeedPledge)
+        binding.pledgeVpViewpager.adapter = PledgeAdapter(this, true)
         binding.dotsIndicator.setViewPager2(binding.pledgeVpViewpager)
         if(isNeedPledge) {
             var position = 0

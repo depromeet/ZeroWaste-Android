@@ -73,14 +73,15 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     protected abstract fun init()
 
-    protected fun showToast(msg: String) {
+    protected fun showToast(msg: String?) {
+        if(msg == null) return
         lifecycleScope.launch(Dispatchers.Main) {
             Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
         }
     }
 
     protected fun <V: ViewDataBinding> dialog(@LayoutRes layoutId: Int, widthDP: Float? = null, heightDP: Float? = null, onActive: (V) -> Unit) {
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.Main) {
             BaseDialog(layoutId, widthDP, heightDP, onActive).show(parentFragmentManager, layoutId.toString())
         }
     }

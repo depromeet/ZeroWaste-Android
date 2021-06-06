@@ -19,7 +19,7 @@ import com.depromeet.zerowaste.data.mission.Rank
 import com.depromeet.zerowaste.databinding.*
 import com.depromeet.zerowaste.feature.main.MainFragmentDirections
 import com.depromeet.zerowaste.feature.main.MainViewModel
-import com.depromeet.zerowaste.feature.mission.MissionDetailViewModel
+import com.depromeet.zerowaste.feature.mission.detail.MissionDetailViewModel
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +31,7 @@ class MainMissionFragment :
     override var isLightStatusBar = false
 
     private val viewModel: MainMissionViewModel by viewModels()
-    private val mainViewModel: MainViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by viewModels({requireParentFragment()})
     private val missionDetailViewModel: MissionDetailViewModel by activityViewModels()
 
     private val rankerAdapter = BaseRecycleAdapter(R.layout.item_main_mission_ranker) { item: Rank, bind: ItemMainMissionRankerBinding, _ -> bind.item = item }
@@ -116,6 +116,11 @@ class MainMissionFragment :
         viewModel.rankerList.observe(this) {
             rankerAdapter.setData(it)
         }
+        val rankers = ArrayList<Rank>()
+        rankers.add(Rank(2, "",""))
+        rankers.add(Rank(1, "",""))
+        rankers.add(Rank(3, "",""))
+        rankerAdapter.setData(rankers)
         binding.mainMissionRanker.adapter = rankerAdapter
     }
 
@@ -171,7 +176,6 @@ class MainMissionFragment :
         tabSelected(0)
     }
 
-
     /*
     * 이벤트 세팅
     * */
@@ -195,18 +199,18 @@ class MainMissionFragment :
 
     private fun tabSelected(position: Int) {
         val place = viewModel.placeList.value?.get(position) ?: Place.ALL
+        viewModel.resetOrder()
+        binding.mainMissionSuggestTxt.text = SpanStrBuilder(requireContext())
+            .add(textId = place.textId)
+            .add(textId = R.string.main_mission_suggest)
+            .build()
+        chipAdapter.getItems().forEach { item -> item.selected = false }
+        chipAdapter.notifyDataSetChanged()
+        if(binding.mainMissionMotion.progress != 0f) binding.mainMissionMotion.transitionToStart()
+        binding.mainMissionList.scrollTo(0, 0)
         viewModel.changePlace(place)
         {
             viewModel.refreshRankerList()
-            viewModel.resetOrder()
-            binding.mainMissionSuggestTxt.text = SpanStrBuilder(requireContext())
-                .add(textId = place.textId)
-                .add(textId = R.string.main_mission_suggest)
-                .build()
-            chipAdapter.getItems().forEach { item -> item.selected = false }
-            chipAdapter.notifyDataSetChanged()
-            if(binding.mainMissionMotion.progress != 0f) binding.mainMissionMotion.transitionToStart()
-            binding.mainMissionList.scrollTo(0, 0)
         }
     }
 

@@ -1,4 +1,4 @@
-package com.depromeet.zerowaste.feature.mission
+package com.depromeet.zerowaste.feature.mission.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,6 @@ import kotlin.Exception
 class MissionDetailViewModel: BaseViewModel() {
 
     private val _missionId = MutableLiveData<Int>()
-    val missionId: LiveData<Int> get() = _missionId
 
     private val _mission = MutableLiveData<Mission>()
     val mission: LiveData<Mission> get() = _mission

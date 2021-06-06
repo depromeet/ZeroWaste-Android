@@ -1,13 +1,13 @@
 package com.depromeet.zerowaste.feature.mission.approve
 
+import android.os.Build
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.databinding.FragmentMissionApproveBinding
-import com.depromeet.zerowaste.feature.mission.MissionDetailViewModel
-import kotlinx.coroutines.Dispatchers
+import com.depromeet.zerowaste.feature.mission.detail.MissionDetailViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -28,7 +28,11 @@ class MissionApproveFragment: BaseFragment<FragmentMissionApproveBinding>(R.layo
     private fun initCnt() {
         val startData = viewModel.participated.value ?: return
         val endTime = startData.endDate.time
-        val format = SimpleDateFormat("HH:mm:ss", Locale.KOREA)
+        val format = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            SimpleDateFormat("HH:mm:ss", resources.configuration.locales[0])
+        } else {
+            SimpleDateFormat("HH:mm:ss", resources.configuration.locale)
+        }
         lifecycleScope.launch {
             while (true) {
                 binding.missionApproveCnt.text = getString(R.string.mission_detail_limit, format.format(
@@ -39,6 +43,9 @@ class MissionApproveFragment: BaseFragment<FragmentMissionApproveBinding>(R.layo
         }
     }
 
+    fun clickNow() {
+        findNavController().navigate(MissionApproveFragmentDirections.actionMissionApproveFragmentToMissionCertFragment())
+    }
 
     fun clickNextTime() {
         findNavController().popBackStack()

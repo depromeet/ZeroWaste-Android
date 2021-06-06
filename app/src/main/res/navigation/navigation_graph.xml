@@ -43,22 +43,44 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_missionCertFragment"
+            app:destination="@id/missionCertFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.depromeet.zerowaste.feature.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_missionCertFragment"
+            app:destination="@id/missionCertFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
 
     <fragment
         android:id="@+id/missionDetailFragment"
-        android:name="com.depromeet.zerowaste.feature.mission.MissionDetailFragment"
+        android:name="com.depromeet.zerowaste.feature.mission.detail.MissionDetailFragment"
         android:label="fragment_mission_detail"
         tools:layout="@layout/fragment_mission_detail">
         <action
             android:id="@+id/action_missionDetailFragment_to_missionApproveFragment"
             app:destination="@id/missionApproveFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_missionDetailFragment_to_missionCertFragment"
+            app:destination="@id/missionCertFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
@@ -69,7 +91,23 @@
         android:id="@+id/missionApproveFragment"
         android:name="com.depromeet.zerowaste.feature.mission.approve.MissionApproveFragment"
         android:label="fragment_mission_approve"
-        tools:layout="@layout/fragment_mission_approve"/>
+        tools:layout="@layout/fragment_mission_approve">
+        <action
+            android:id="@+id/action_missionApproveFragment_to_missionCertFragment"
+            app:destination="@id/missionCertFragment"
+            app:popUpTo="@id/missionApproveFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/missionCertFragment"
+        android:name="com.depromeet.zerowaste.feature.mission.certificate.MissionCertFragment"
+        android:label="fragment_mission_cert"
+        tools:layout="@layout/fragment_mission_cert"/>
 
     <fragment
         android:id="@+id/loginFragment"

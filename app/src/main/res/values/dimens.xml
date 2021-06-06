@@ -5,6 +5,8 @@
     <dimen name="dp_100">100dp</dimen>
     <dimen name="dp_80">80dp</dimen>
 
+    <dimen name="default_margin">18dp</dimen>
+
     <dimen name="height_bottom_nav">62dp</dimen>
 
     <dimen name="design_bottom_navigation_text_size" tools:override="true">13sp</dimen>

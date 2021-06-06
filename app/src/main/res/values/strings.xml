@@ -56,7 +56,22 @@
     <string name="mission_approve_next_time">다음에 인증</string>
     <string name="mission_approve_immediately">바로 인증</string>
 
+    <string name="mission_cert_max_img">3장까지만 선택할 수 있어요.</string>
+    <string name="mission_cert_level_txt">미션 체감 난이도</string>
+    <string name="mission_cert_after">미션 후기</string>
+    <string name="mission_cert_after_hint">미션을 수행하면서 느낀점이 있으신가요?</string>
+
+    <string name="mission_level_0_txt">매우 쉬움</string>
+    <string name="mission_level_1_txt">쉬움</string>
+    <string name="mission_level_2_txt">보통</string>
+    <string name="mission_level_3_txt">어려움</string>
+    <string name="mission_level_4_txt">매우 어려움</string>
+
     <string name="empathy">공감</string>
+    <string name="next">다음</string>
+    <string name="year">년</string>
+    <string name="month">월</string>
+    <string name="date">일</string>
 
     <string name="theme_refuse">거절하기</string>
     <string name="theme_reduce">줄이기</string>
