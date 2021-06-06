@@ -14,7 +14,7 @@ import com.depromeet.zerowaste.databinding.FragmentMainBinding
 
 class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun init() {
         val navHostFragment =

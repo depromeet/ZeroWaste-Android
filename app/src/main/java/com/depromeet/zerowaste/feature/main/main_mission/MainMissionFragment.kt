@@ -31,7 +31,7 @@ class MainMissionFragment :
     override var isLightStatusBar = false
 
     private val viewModel: MainMissionViewModel by viewModels()
-    private val mainViewModel: MainViewModel by viewModels({requireParentFragment()})
+    private val mainViewModel: MainViewModel by activityViewModels()
     private val missionDetailViewModel: MissionDetailViewModel by activityViewModels()
 
     private val rankerAdapter = BaseRecycleAdapter(R.layout.item_main_mission_ranker) { item: Rank, bind: ItemMainMissionRankerBinding, _ -> bind.item = item }
@@ -100,15 +100,15 @@ class MainMissionFragment :
                 missionAdapter.setData(it)
             }
         }
-        missionAdapter.loadAnimation = recycleAnimation {
-            val animator = ObjectAnimator.ofFloat(it, "alpha", 0f, 1f).apply {
-                duration = 300L
-                interpolator = LinearInterpolator()
-            }
-            AnimatorSet().apply {
-                play(animator)
-            }
-        }
+//        missionAdapter.loadAnimation = recycleAnimation {
+//            val animator = ObjectAnimator.ofFloat(it, "alpha", 0f, 1f).apply {
+//                duration = 300L
+//                interpolator = LinearInterpolator()
+//            }
+//            AnimatorSet().apply {
+//                play(animator)
+//            }
+//        }
         binding.mainMissionList.adapter = missionAdapter
     }
 

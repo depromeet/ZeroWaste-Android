@@ -11,7 +11,7 @@ class MissionDoneFragment: BaseFragment<FragmentMissionDoneBinding>(R.layout.fra
 
     override fun init() {
         binding.missionDoneHome.setOnClickListener {
-            findNavController().popBackStack(R.id.mainFragment, true)
+            findNavController().popBackStack(R.id.mainFragment, false)
         }
     }
 }

@@ -91,15 +91,14 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
 
             binding.missionDetailCheerUpEdit.visibility = if(mission.creater.id == Share.user?.id) View.VISIBLE else View.GONE
 
-            if (mission.participation.status == ParticipateStatus.READY || mission.participation.status == ParticipateStatus.PARTICIPATED) {
-                binding.missionDetailStartBtn.text = resources.getText(R.string.mission_detail_start)
+            if (mission.participation.status == ParticipateStatus.READY) {
+                binding.missionDetailStartBtn.text = resources.getText(R.string.mission_detail_start_participate)
                 val endTime = mission.participation.endDate?.time ?: return@observe
                 val format = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     SimpleDateFormat("HH:mm:ss", resources.configuration.locales[0])
                 } else {
                     SimpleDateFormat("HH:mm:ss", resources.configuration.locale)
                 }
-                Locale.ROOT
                 lifecycleScope.launch {
                     while (true) {
                         binding.missionDetailStartTxt.text = getString(R.string.mission_detail_limit, format.format(Date(endTime - Date().time)))
@@ -107,7 +106,7 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
                     }
                 }
             } else {
-                binding.missionDetailStartBtn.text = resources.getText(R.string.mission_detail_start_participate)
+                binding.missionDetailStartBtn.text = resources.getText(R.string.mission_detail_start)
                 binding.missionDetailStartTxt.text = StringBuilder().append(mission.inProgressCount).append(resources.getString(R.string.mission_detail_participate_users)).toString()
             }
         }
@@ -129,7 +128,7 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
 
     fun startClick() {
         val mission = binding.item ?: return
-        if (mission.participation.status == ParticipateStatus.READY || mission.participation.status == ParticipateStatus.PARTICIPATED) {
+        if (mission.participation.status == ParticipateStatus.READY) {
             findNavController().navigate(MissionDetailFragmentDirections.actionMissionDetailFragmentToMissionCertFragment())
         } else {
             viewModel.startParticipate(mission.id) {

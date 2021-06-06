@@ -61,8 +61,6 @@ enum class ParticipateStatus(val value: String) {
     NONE("none"),
     @SerializedName("ready")
     READY("ready"),
-    @SerializedName("participated")
-    PARTICIPATED("participated"),
     @SerializedName("success")
     SUCCESS("success"),
     @SerializedName("failure")

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.zerowaste.R
-import com.depromeet.zerowaste.data.home.Mission
+import com.depromeet.zerowaste.data.mission.Mission
 import com.depromeet.zerowaste.databinding.ItemMainHomeMyMissionBinding
 
 
@@ -20,7 +20,7 @@ class MainHomePagerAdapter(vm: MainHomeViewModel) :
             false
         )
         return ViewHolder(binding).apply {
-            binding.mainHomeMyMissionBtnAuth.setOnClickListener { view ->
+            binding.itemMainHomeMyMissionBtnAuth.setOnClickListener { view ->
                 val position = bindingAdapterPosition.takeIf { it != RecyclerView.NO_POSITION }
                     ?: return@setOnClickListener
                 //vm.request(items{position])
@@ -31,10 +31,9 @@ class MainHomePagerAdapter(vm: MainHomeViewModel) :
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        with(items[position]) {
-            holder.itemView
+        items[position].let {
+            holder.bind(it)
         }
-
     }
 
     fun addItems(items: List<Mission>) {
