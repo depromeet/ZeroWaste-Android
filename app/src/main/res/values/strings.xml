@@ -70,6 +70,18 @@
     <string name="mission_level_3_txt">어려움</string>
     <string name="mission_level_4_txt">매우 어려움</string>
 
+    <string name="mission_suggest_phase1_title">어디서 할 수 있는 미션인가요?</string>
+    <string name="mission_suggest_phase1_sub_title">미션을 수행할 수 있는 장소를 선택해 주세요.</string>
+    <string name="mission_suggest_phase2_title">어떤 미션인가요?</string>
+    <string name="mission_suggest_phase2_sub_title">20자 이내로 미션 제목을 정확하게 입력해 주세요.</string>
+    <string name="mission_suggest_phase2_edit_hint">미션 제목</string>
+    <string name="mission_suggest_phase3_title">인증 방법을 설명해 주세요</string>
+    <string name="mission_suggest_phase3_sub_title">인증 방법과 인증 예시 사진을 첨부해 주세요.</string>
+    <string name="mission_suggest_phase3_photo">앨범 가져오기/사진 찍기</string>
+    <string name="mission_suggest_phase3_photo_noti">* 미션 방법을 잘 나타내는 사진 1장만 첨부할 수 있습니다.\n* 미션 내용과 관련 없는 사진은 삭제될 수 있습니다.</string>
+    <string name="mission_suggest_phase4_title">5R 종류를 선택해 주세요</string>
+    <string name="mission_suggest_phase4_sub_title">최대 3개까지 선택할 수 있어요.</string>
+
     <string name="empathy">공감</string>
     <string name="next">다음</string>
     <string name="year">년</string>

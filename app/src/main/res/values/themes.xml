@@ -36,4 +36,9 @@
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/rect_round_top_white_32</item>
     </style>
+
+    <style name="suggestEditStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/gray_2</item>
+        <item name="colorControlActivated">@color/main_enabled</item>
+    </style>
 </resources>

@@ -1,4 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/mission_suggest_phase2_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:fontFamily="@font/kotra_bold"
+            android:textSize="22sp"
+            android:text="@string/mission_suggest_phase2_title"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="@dimen/default_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/mission_suggest_phase2_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_1"
+            android:textSize="15sp"
+            android:text="@string/mission_suggest_phase2_sub_title"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@id/mission_suggest_phase2_title"
+            app:layout_constraintTop_toBottomOf="@id/mission_suggest_phase2_title"/>
+
+        <EditText
+            android:id="@+id/mission_suggest_phase2_edit"
+            android:theme="@style/suggestEditStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textCursorDrawable="@color/main_enabled"
+            android:maxLength="20"
+            android:textColorHint="@color/gray_2"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginTop="60dp"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:hint="@string/mission_suggest_phase2_edit_hint"
+            app:layout_constraintTop_toBottomOf="@id/mission_suggest_phase2_sub_title"
+            tools:text="테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

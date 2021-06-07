@@ -110,7 +110,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="108dp"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/rect_round_stroke_gray3_8"
+                    android:background="@drawable/selector_edittext"
                     android:gravity="top"
                     android:hint="@string/mission_cert_after_hint"
                     android:inputType="textMultiLine"
