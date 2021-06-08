@@ -62,18 +62,30 @@ class MainMissionViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun changePlace(place: Place, finish: (() -> Unit)? = null) {
-        _selectedPlace.value = place
-        getMissionList(finish)
+        if(_selectedPlace.value != place) {
+            _selectedPlace.value = place
+            getMissionList(finish)
+        } else {
+            finish?.invoke()
+        }
     }
 
     fun changeTheme(theme: Theme?, finish: (() -> Unit)? = null) {
-        _selectedTheme.value = theme
-        getMissionList(finish)
+        if(_selectedTheme.value != theme) {
+            _selectedTheme.value = theme
+            getMissionList(finish)
+        } else {
+            finish?.invoke()
+        }
     }
 
     fun changeOrder(ordering: Ordering, finish: (() -> Unit)? = null) {
-        _selectedOrder.value = ordering
-        getMissionList(finish)
+        if(_selectedOrder.value != ordering) {
+            _selectedOrder.value = ordering
+            getMissionList(finish)
+        } else {
+            finish?.invoke()
+        }
     }
 
     fun resetOrder() {

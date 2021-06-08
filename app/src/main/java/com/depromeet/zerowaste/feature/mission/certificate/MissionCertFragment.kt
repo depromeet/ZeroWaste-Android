@@ -43,12 +43,11 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
                     Manifest.permission.READ_EXTERNAL_STORAGE
                 ) -> getPhotos(fragment, navDirections)
                 else -> {
-                    fragment.registerForActivityResult(ActivityResultContracts.RequestPermission())
-                    {
+                    fragment.permissionCheck(Manifest.permission.READ_EXTERNAL_STORAGE) {
                         if(it) {
                             getPhotos(fragment, navDirections)
                         }
-                    }.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    }
                 }
             }
         }
@@ -56,7 +55,7 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
         private fun getPhotos(fragment: BaseFragment<*>, navDirections: NavDirections) {
             TedImagePicker.with(fragment.requireContext())
                 .mediaType(MediaType.IMAGE)
-                .max(3, R.string.mission_cert_max_img)
+                .max(3, fragment.getString(R.string.mission_cert_max_img, "3"))
                 .buttonBackground(R.drawable.selector_button)
                 .buttonTextColor(R.color.white)
                 .backButton(R.drawable.ic_back)

@@ -59,9 +59,9 @@ class MainMissionFragment :
         bind.itemMainMissionListTags.adapter = tagAdapter
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if(isInitialized) viewModel.getMissionList()
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
+        viewModel.getMissionList()
     }
 
     override fun init() {
@@ -77,10 +77,6 @@ class MainMissionFragment :
         initMissionTags()
         initSort()
         initPlaces()
-        /*
-        * 데이터 값 초기 세팅
-        * */
-        initData()
     }
 
     /*
@@ -150,6 +146,7 @@ class MainMissionFragment :
             })
         }
         viewModel.initPlaceList()
+        tabSelected(0)
     }
 
     private fun initSort() {
@@ -170,10 +167,6 @@ class MainMissionFragment :
                 if(binding.mainMissionMotion.progress != 1f) binding.mainMissionMotion.transitionToEnd()
             }
         }
-    }
-
-    private fun initData() {
-        tabSelected(0)
     }
 
     /*

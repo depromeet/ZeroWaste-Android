@@ -31,8 +31,8 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
 
     private val viewModel: MissionDetailViewModel by activityViewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         viewModel.setMission {
             binding.item = it
         }

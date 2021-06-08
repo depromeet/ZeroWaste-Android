@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsetsController
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.core.content.res.ResourcesCompat
@@ -34,6 +35,9 @@ abstract class BaseFragment<B : ViewDataBinding>(
     open var isLightStatusBar: Boolean = true
 
     protected lateinit var preference: SharedPreferences
+
+    private val permissionChecker = registerForActivityResult(ActivityResultContracts.RequestPermission()) { permissionAgreeLambda.invoke(it) }
+    private var permissionAgreeLambda: (Boolean) -> Unit = {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,6 +82,11 @@ abstract class BaseFragment<B : ViewDataBinding>(
         lifecycleScope.launch(Dispatchers.Main) {
             Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun permissionCheck(permission: String, result: (Boolean) -> Unit) {
+        permissionAgreeLambda = result
+        permissionChecker.launch(permission)
     }
 
     protected fun <V: ViewDataBinding> dialog(@LayoutRes layoutId: Int, widthDP: Float? = null, heightDP: Float? = null, onActive: (V) -> Unit) {

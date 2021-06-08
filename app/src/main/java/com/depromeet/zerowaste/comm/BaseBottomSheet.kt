@@ -24,7 +24,6 @@ class BaseBottomSheet<T>(
     private val onSelect: (T) -> Unit): BottomSheetDialogFragment() {
 
     private lateinit var binding: LayoutBottomSheetBinding
-    private val radioWithPositionMap: HashMap<Int, T> = HashMap()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,24 +64,22 @@ class BaseBottomSheet<T>(
         }
     }
 
-
     private fun genRadios() {
         contents.forEachIndexed { i, content ->
             layoutInflater.inflate(R.layout.layout_bottom_sheet_radio_btn, binding.layoutBottomSheetRadioGroup)
             val radioBtn = binding.layoutBottomSheetRadioGroup[i] as RadioButton
             val newId = View.generateViewId()
-            radioWithPositionMap[newId] = content.first
             radioBtn.id = newId
             radioBtn.text = content.second
             if(content.first == selected) {
                 radioBtn.typeface = ResourcesCompat.getFont(requireContext(), R.font.apple_sd_gothic_neo_b)
                 binding.layoutBottomSheetRadioGroup.check(newId)
             }
-        }
-        binding.layoutBottomSheetRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            radioWithPositionMap[checkedId]?.also {
-                onSelect(it)
-                dismiss()
+            radioBtn.setOnCheckedChangeListener { _, isChecked ->
+                if(isChecked) {
+                    onSelect(content.first)
+                    dismiss()
+                }
             }
         }
     }

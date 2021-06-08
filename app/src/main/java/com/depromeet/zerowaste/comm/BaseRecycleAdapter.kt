@@ -82,50 +82,60 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
 
     open fun setData(data: Collection<T>?) {
         if(data == null) return
-        if (data !== this.items) {
+        if (data !== items) {
             if (!data.isEmpty()) {
-                this.items.clear()
-                this.items.addAll(data)
+                items.clear()
+                items.addAll(data)
                 mLastPosition = -1
                 notifyDataSetChanged()
             } else {
-                this.items.clear()
+                items.clear()
                 mLastPosition = -1
                 notifyDataSetChanged()
             }
         } else if (!data.isEmpty()) {
-            this.items.clear()
+            items.clear()
             val newList = ArrayList(data)
-            this.items.addAll(newList)
+            items.addAll(newList)
             mLastPosition = -1
             notifyDataSetChanged()
         }
     }
 
-    open fun changeData(data: T?, position: Int) {
+    open fun changeData(data: T?, @IntRange(from = 0) position: Int) {
         if(data == null) return
-        this.items[position] = data
+        items[position] = data
         notifyItemChanged(position)
+    }
+
+    open fun changeData(data: Collection<T>?, @IntRange(from = 0) position: Int) {
+        if(data == null) return
+        for(i in itemCount - 1 downTo 0) {
+            if(i <= position) items.removeLast()
+        }
+        items.addAll(data)
+        notifyItemRangeInserted(position, data.size)
+        compatibilityDataSizeChanged(data.size)
     }
 
     open fun addData(data: T?) {
         if(data == null) return
-        this.items.add(data)
-        notifyItemInserted(this.items.size)
+        items.add(data)
+        notifyItemInserted(items.size)
         compatibilityDataSizeChanged(1)
     }
 
     open fun addData(@IntRange(from = 0) position: Int, newData: Collection<T>?) {
         if(newData == null) return
-        this.items.addAll(position, newData)
+        items.addAll(position, newData)
         notifyItemRangeInserted(position, newData.size)
         compatibilityDataSizeChanged(newData.size)
     }
 
     open fun addData(newData: Collection<T>?) {
         if(newData == null) return
-        this.items.addAll(newData)
-        notifyItemRangeInserted(this.items.size - newData.size, newData.size)
+        items.addAll(newData)
+        notifyItemRangeInserted(items.size - newData.size, newData.size)
         compatibilityDataSizeChanged(newData.size)
     }
 
@@ -142,7 +152,7 @@ open class BaseRecycleAdapter<T, V : ViewDataBinding>: RecyclerView.Adapter<Base
     }
 
     private fun compatibilityDataSizeChanged(size: Int) {
-        if (this.items.size == size) {
+        if (items.size == size) {
             notifyDataSetChanged()
         }
     }

@@ -50,6 +50,13 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_missionSuggestFragment"
+            app:destination="@id/missionSuggestFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -60,6 +67,13 @@
         <action
             android:id="@+id/action_profileFragment_to_missionCertFragment"
             app:destination="@id/missionCertFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_missionSuggestFragment"
+            app:destination="@id/missionSuggestFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
@@ -124,6 +138,28 @@
         android:name="com.depromeet.zerowaste.feature.mission.done.MissionDoneFragment"
         android:label="fragment_mission_done"
         tools:layout="@layout/fragment_mission_done"/>
+
+    <fragment
+        android:id="@+id/missionSuggestFragment"
+        android:name="com.depromeet.zerowaste.feature.suggest.SuggestFragment"
+        android:label="fragment_mission_suggest"
+        tools:layout="@layout/fragment_mission_suggest">
+        <action
+            android:id="@+id/action_missionSuggestFragment_to_missionSuggestDoneFragment"
+            app:destination="@id/missionSuggestDoneFragment"
+            app:popUpTo="@id/missionSuggestFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/missionSuggestDoneFragment"
+        android:name="com.depromeet.zerowaste.feature.suggest.SuggestDoneFragment"
+        android:label="fragment_mission_suggest_done"
+        tools:layout="@layout/fragment_mission_suggest_done"/>
 
     <fragment
         android:id="@+id/loginFragment"

@@ -38,7 +38,7 @@
             android:textCursorDrawable="@color/main_enabled"
             android:background="@drawable/selector_edittext"
             android:gravity="top"
-            android:hint="@string/mission_cert_after_hint"
+            android:hint="@string/mission_suggest_phase3_how_to"
             android:inputType="textMultiLine"
             android:maxLines="4"
             android:textSize="15sp"
@@ -49,8 +49,7 @@
             android:layout_marginStart="18dp"
             android:layout_marginEnd="18dp"
             android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@id/mission_suggest_phase3_sub_title"
-            tools:text="테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트"/>
+            app:layout_constraintTop_toBottomOf="@id/mission_suggest_phase3_sub_title" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/mission_suggest_phase3_photo"
@@ -72,7 +71,9 @@
             android:layout_marginTop="24dp"
             android:textSize="13sp"
             android:textColor="@color/gray_1"
-            android:gravity="center"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
             android:text="@string/mission_suggest_phase3_photo_noti"
             app:layout_constraintTop_toBottomOf="@id/mission_suggest_phase3_photo"
             app:layout_constraintStart_toStartOf="@id/mission_suggest_phase3_edit"
