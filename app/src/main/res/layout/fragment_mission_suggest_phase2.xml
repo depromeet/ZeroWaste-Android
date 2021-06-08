@@ -46,7 +46,7 @@
             android:layout_marginTop="60dp"
             android:inputType="text"
             android:imeOptions="actionDone"
-            android:hint="@string/mission_suggest_phase2_edit_hint"
+            android:hint="@string/mission_title"
             app:layout_constraintTop_toBottomOf="@id/mission_suggest_phase2_sub_title"
             tools:text="테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트"/>
 

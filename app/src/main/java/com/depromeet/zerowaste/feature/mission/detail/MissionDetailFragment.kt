@@ -82,7 +82,6 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
                 binding.missionDetailMotion.progress += Float.MIN_VALUE
             }
         })
-        binding.missionDetailHowToImg.clipToOutline = true
 
         viewModel.mission.observe(this) { mission ->
             binding.missionDetailMakeUser.text = SpanStrBuilder(requireContext())
