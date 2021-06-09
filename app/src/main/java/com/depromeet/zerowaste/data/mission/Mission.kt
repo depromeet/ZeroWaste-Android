@@ -36,5 +36,7 @@ data class Mission(
     @SerializedName("participation")
     val participation: Participation,
     @SerializedName("is_liked")
-    var isLiked: Boolean
+    var isLiked: Boolean,
+    @SerializedName("user_certified_counts")
+    val userCertifiedCounts: Int
 )

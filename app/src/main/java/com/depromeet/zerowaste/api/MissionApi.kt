@@ -1,8 +1,15 @@
 package com.depromeet.zerowaste.api
 
 import com.depromeet.zerowaste.data.*
+import com.depromeet.zerowaste.data.comn.SignedUrlList
+import com.depromeet.zerowaste.data.mission.CheerSentence
 import com.depromeet.zerowaste.data.mission.Mission
 import com.depromeet.zerowaste.data.mission.StartParticipateData
+import com.depromeet.zerowaste.data.mission.SuggestMission
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
 import retrofit2.http.*
 
 class MissionApi {
@@ -23,6 +30,17 @@ class MissionApi {
             @Path("id") missionId: Int
         ): Res<Mission>
 
+        @POST("/api/missions/")
+        suspend fun suggestNewMission(
+            @Body suggestMission: SuggestMission
+        ): Res<SignedUrlList>
+
+        @PATCH("/api/missions/{id}/")
+        suspend fun addCheerSentence(
+            @Path("id") missionId: Int,
+            @Body cheerSentence: CheerSentence
+        ): Res<Mission>
+
         @POST("/api/missions/{id}/like")
         suspend fun likeMission(
             @Path("id") missionId: Int
@@ -37,6 +55,12 @@ class MissionApi {
         suspend fun participateMission(
             @Path("id") missionId: Int
         ): Res<StartParticipateData>
+
+        @PATCH("/api/missions/{missionId}/participations/{participationId}/")
+        suspend fun participatePatchMission(
+            @Path("missionId") missionId: Int,
+            @Path("participationId") participationId: Int
+        ): Res<StartParticipateData>
     }
 
     companion object {
@@ -47,6 +71,18 @@ class MissionApi {
         suspend fun likeMission(missionId: Int) = client.likeMission(missionId)
         suspend fun dislikeMission(missionId: Int) = client.dislikeMission(missionId)
         suspend fun participateMission(missionId: Int) = client.participateMission(missionId)
+        suspend fun participatePatchMission(missionId: Int, participationId: Int) = client.participatePatchMission(missionId, participationId)
+        suspend fun suggestNewMission(suggestMission: SuggestMission) = client.suggestNewMission(suggestMission)
+        suspend fun addCheerSentence(missionId: Int, cheerSentence: CheerSentence) = client.addCheerSentence(missionId, cheerSentence)
+
+        fun uploadImage(url: String, byteArray: ByteArray): Response {
+            val client = RetrofitClient.uploadClient
+            val request = Request.Builder()
+                .url(url)
+                .put(byteArray.toRequestBody("application/offset+octet-stream".toMediaTypeOrNull()))
+                .build()
+            return client.newCall(request).execute()
+        }
     }
 
 }

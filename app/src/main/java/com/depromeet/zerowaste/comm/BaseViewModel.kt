@@ -24,7 +24,7 @@ abstract class BaseViewModel: ViewModel() {
                     try {
                         res(result)
                     } catch (e: Exception) {
-                        _error.value =e
+                        _error.value = e
                     } finally {
                         if(isShowLoad) App.finishLoad()
                     }

@@ -31,6 +31,7 @@ object RetrofitClient {
 
     private val gsonBuilder = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX").create()
 
+    val uploadClient = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
 
     private fun getNoAuthRetrofit(endPoint: String): Retrofit {
         return Retrofit.Builder()

@@ -3,9 +3,14 @@ package com.depromeet.zerowaste.feature.suggest
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.depromeet.zerowaste.api.MissionApi
 import com.depromeet.zerowaste.comm.BaseViewModel
+import com.depromeet.zerowaste.data.Difficulty
 import com.depromeet.zerowaste.data.Place
 import com.depromeet.zerowaste.data.Theme
+import com.depromeet.zerowaste.data.mission.CheerSentence
+import com.depromeet.zerowaste.data.mission.Mission
+import com.depromeet.zerowaste.data.mission.SuggestMission
 
 class SuggestViewModel: BaseViewModel() {
     private val _checkCanDoNext = MutableLiveData(false)
@@ -27,6 +32,9 @@ class SuggestViewModel: BaseViewModel() {
     val themeList: LiveData<ArrayList<Theme>> get() = _themeList
 
     private val _position = MutableLiveData(0)
+
+    private val _createdMissionId = MutableLiveData<Int>()
+    val createdMissionId: LiveData<Int> get() = _createdMissionId
 
     fun checkCanDoNext(position: Int? = null) {
         position?.also { _position.value = it }
@@ -68,5 +76,32 @@ class SuggestViewModel: BaseViewModel() {
     fun removeTheme(theme: Theme) {
         _themeList.value?.remove(theme)
         checkCanDoNext()
+    }
+
+    fun startSuggestMission(imgBytes: ByteArray, finish: () -> Unit) {
+        execute({
+            val suggestMission = SuggestMission(
+                _title.value ?: throw Exception("title is null"),
+                _place.value ?: throw Exception("place is null"),
+                _themeList.value ?: throw Exception("theme is null"),
+                Difficulty.EASY,
+                _contents.value ?: throw Exception("contents is null"),
+                1,
+                null
+            )
+            val created = MissionApi.suggestNewMission(suggestMission).data ?: throw Exception("data is null")
+            created.signedUrlList.forEach {
+                MissionApi.uploadImage(it, imgBytes)
+            }
+            _createdMissionId.postValue(created.id)
+        }) {
+            finish()
+        }
+    }
+
+    fun updateCheerUp(missionId: Int, contents: String) {
+        execute({
+            MissionApi.addCheerSentence(missionId, CheerSentence(contents))
+        })
     }
 }

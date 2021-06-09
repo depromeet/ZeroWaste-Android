@@ -57,7 +57,7 @@ abstract class BaseActivity<B : ViewDataBinding>(
         }
     }
 
-    fun <T>bottomSheet(
+    fun <T> bottomSheet(
         title: String,
         contents: List<Pair<T,String>>,
         selected: T? = null,

@@ -152,14 +152,24 @@
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"/>
+            app:popExitAnim="@android:anim/slide_out_right">
+            <argument
+                android:name="missionId"
+                app:argType="integer"
+                app:nullable="false"/>
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/missionSuggestDoneFragment"
         android:name="com.depromeet.zerowaste.feature.suggest.SuggestDoneFragment"
         android:label="fragment_mission_suggest_done"
-        tools:layout="@layout/fragment_mission_suggest_done"/>
+        tools:layout="@layout/fragment_mission_suggest_done">
+        <argument
+            android:name="missionId"
+            app:argType="integer"
+            app:nullable="false" />
+    </fragment>
 
     <fragment
         android:id="@+id/loginFragment"

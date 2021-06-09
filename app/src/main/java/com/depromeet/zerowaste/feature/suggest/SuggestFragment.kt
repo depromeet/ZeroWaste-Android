@@ -9,6 +9,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
+import com.depromeet.zerowaste.comm.readBytes
+import com.depromeet.zerowaste.data.mission.SuggestMission
 import com.depromeet.zerowaste.databinding.FragmentMissionSuggestBinding
 
 class SuggestFragment: BaseFragment<FragmentMissionSuggestBinding>(R.layout.fragment_mission_suggest) {
@@ -82,7 +84,14 @@ class SuggestFragment: BaseFragment<FragmentMissionSuggestBinding>(R.layout.frag
 
     fun nextClick() {
         imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
-        if(binding.missionSuggestContents.currentItem == pagerAdapter.itemCount - 1) findNavController().navigate(SuggestFragmentDirections.actionMissionSuggestFragmentToMissionSuggestDoneFragment())
+        if(binding.missionSuggestContents.currentItem == pagerAdapter.itemCount - 1) {
+            val imgUri = viewModel.imgUri.value ?: return showToast("imgUri is null")
+            val imgBytes = readBytes(requireContext(), imgUri) ?: return showToast("imgByte is null")
+            viewModel.startSuggestMission(imgBytes) finish@{
+                val missionId = viewModel.createdMissionId.value ?: return@finish showToast("mission id is null")
+                findNavController().navigate(SuggestFragmentDirections.actionMissionSuggestFragmentToMissionSuggestDoneFragment(missionId))
+            }
+        }
         else {
             binding.missionSuggestContents.currentItem++
         }

@@ -57,6 +57,7 @@
             android:layout_height="68dp"
             android:background="@drawable/rect_round_4"
             app:loadImage="@{item.bannerImgUrls[0]}"
+            app:imageRadius="@{4f}"
             app:layout_constraintStart_toStartOf="@id/mission_approve_content_back"
             app:layout_constraintTop_toTopOf="@id/mission_approve_content_back"
             app:layout_constraintBottom_toBottomOf="@id/mission_approve_content_back"

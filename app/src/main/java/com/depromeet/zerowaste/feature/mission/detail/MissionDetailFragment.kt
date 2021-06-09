@@ -31,15 +31,16 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
 
     private val viewModel: MissionDetailViewModel by activityViewModels()
 
+    private var isFirstResume = true
+
     override fun onResume() {
         super.onResume()
-        viewModel.setMission {
-            binding.item = it
-        }
+        if(!isFirstResume) viewModel.setMission()
+        isFirstResume = false
     }
 
     override fun init() {
-        viewModel.mission.value?.also { binding.item = it }
+        binding.vm = viewModel
         binding.fragment = this
         initTitle()
         initContent()
@@ -63,7 +64,7 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
 
         viewModel.mission.observe(this) { mission ->
             binding.missionDetailApproveCnt.text = SpanStrBuilder(requireContext())
-                .add("${mission.successfulCount}${resources.getString(R.string.mission_count)} ")
+                .add("${mission.userCertifiedCounts}${resources.getString(R.string.mission_count)} ")
                 .add(textId = R.string.mission_detail_approve)
                 .build()
 
@@ -117,7 +118,7 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
         {
             if(it == 0) {
                 mission.isLiked = !mission.isLiked
-                binding.item = mission
+                viewModel.setMission(mission)
             }
         }
     }
@@ -127,11 +128,11 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
     }
 
     fun startClick() {
-        val mission = binding.item ?: return
+        val mission = viewModel.mission.value ?: return
         if (mission.participation.status == ParticipateStatus.READY) {
             MissionCertFragment.startMissionCert(this, MissionDetailFragmentDirections.actionMissionDetailFragmentToMissionCertFragment())
         } else {
-            viewModel.startParticipate(mission.id) {
+            viewModel.startParticipate(mission) {
                 findNavController().navigate(MissionDetailFragmentDirections.actionMissionDetailFragmentToMissionApproveFragment())
             }
         }

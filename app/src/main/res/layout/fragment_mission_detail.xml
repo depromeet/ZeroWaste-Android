@@ -5,14 +5,14 @@
 
     <data>
         <variable
-            name="item"
-            type="com.depromeet.zerowaste.data.mission.Mission" />
+            name="vm"
+            type="com.depromeet.zerowaste.feature.mission.detail.MissionDetailViewModel" />
         <variable
             name="fragment"
             type="com.depromeet.zerowaste.feature.mission.detail.MissionDetailFragment" />
         <variable
-            name="layoutParam"
-            type="android.view.ViewGroup.LayoutParams" />
+            name="view"
+            type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout
@@ -47,7 +47,7 @@
             android:textSize="22sp"
             android:fontFamily="@font/kotra_bold"
             android:layout_marginTop="10dp"
-            android:text="@{item.name}"
+            android:text="@{vm.mission.name}"
             app:layout_constraintEnd_toStartOf="@id/mission_detail_is_like"
             app:layout_constraintStart_toStartOf="@id/mission_detail_approve_cnt"
             app:layout_constraintTop_toBottomOf="@id/mission_detail_approve_cnt"
@@ -57,9 +57,9 @@
             android:id="@+id/mission_detail_is_like"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:onClick="@{() -> fragment.likeClick(item)}"
+            android:onClick="@{() -> fragment.likeClick(vm.mission)}"
             android:scaleType="center"
-            android:src="@{item.isLiked ? @drawable/ic_heart_on : @drawable/ic_heart_off}"
+            android:src="@{vm.mission.isLiked ? @drawable/ic_heart_on : @drawable/ic_heart_off}"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/mission_detail_title"
@@ -144,7 +144,7 @@
                         android:layout_height="46dp"
                         android:scaleType="center"
                         android:layout_marginStart="12dp"
-                        app:loadImageMissionDifficulty="@{item.difficulty}"
+                        app:loadImageMissionDifficulty="@{vm.mission.difficulty}"
                         app:layout_constraintStart_toStartOf="@id/mission_detail_level_guide_back"
                         app:layout_constraintTop_toTopOf="@id/mission_detail_level_guide_back"
                         app:layout_constraintBottom_toBottomOf="@id/mission_detail_level_guide_back"
@@ -160,6 +160,7 @@
                         android:textColor="@color/black"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="15dp"
+                        app:loadDescriptionMissionDifficulty="@{vm.mission.difficulty}"
                         app:layout_constraintStart_toEndOf="@id/mission_detail_level"
                         app:layout_constraintTop_toTopOf="@id/mission_detail_level_guide_back"
                         tools:text="@string/mission_detail_level_1"/>
@@ -171,7 +172,7 @@
                         android:textColor="@color/gray_1"
                         android:textSize="13sp"
                         android:layout_marginTop="2dp"
-                        android:text="@{item.successfulCount + @string/mission_detail_approve_cnt}"
+                        android:text="@{vm.mission.successfulCount + @string/mission_detail_approve_cnt}"
                         app:layout_constraintStart_toStartOf="@id/mission_detail_level_title"
                         app:layout_constraintTop_toBottomOf="@id/mission_detail_level_title"
                         tools:text="@string/mission_detail_approve_cnt"/>
@@ -195,8 +196,9 @@
                         android:layout_marginStart="18dp"
                         android:layout_marginEnd="18dp"
                         android:layout_marginTop="16dp"
-                        app:loadImage="@{item.bannerImgUrls[0]}"
+                        app:loadImage="@{vm.mission.bannerImgUrls[0]}"
                         app:imageRadius="@{16}"
+                        app:layout_constraintHeight_max="200dp"
                         app:layout_constraintTop_toBottomOf="@id/mission_detail_how_to"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -209,7 +211,7 @@
                         android:maxLines="4"
                         android:textColor="@color/gray_0.5"
                         android:textSize="15sp"
-                        android:text="@{item.content}"
+                        android:text="@{vm.mission.content}"
                         android:layout_marginTop="14dp"
                         app:layout_constraintTop_toBottomOf="@id/mission_detail_how_to_img"
                         app:layout_constraintStart_toStartOf="@id/mission_detail_how_to_img"
@@ -242,14 +244,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:maxLines="3"
-                        android:text="@{item.sentenceForCheer}"
+                        android:text="@{vm.mission.sentenceForCheer}"
                         android:layout_marginTop="18dp"
                         android:background="@drawable/ic_user_comment"
                         android:paddingTop="22dp"
                         android:paddingBottom="12dp"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        app:customHeightDP="@{item.sentenceForCheer == null || item.sentenceForCheer.empty ? 0 : layoutParam.WRAP_CONTENT }"
+                        android:visibility="@{ vm.mission.sentenceForCheer == null || vm.mission.sentenceForCheer.empty ? view.GONE : view.VISIBLE }"
                         app:layout_constraintStart_toStartOf="@id/mission_detail_how_to_img"
                         app:layout_constraintEnd_toEndOf="@id/mission_detail_how_to_img"
                         app:layout_constraintTop_toBottomOf="@id/mission_detail_make_user"/>

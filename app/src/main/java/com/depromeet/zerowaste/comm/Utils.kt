@@ -30,6 +30,7 @@ import com.depromeet.zerowaste.data.Difficulty
 import com.depromeet.zerowaste.data.Theme
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import java.io.IOException
 
 
 fun getPreference(context: Context): SharedPreferences {
@@ -65,6 +66,10 @@ fun ViewGroup.inflate(@LayoutRes resource: Int, attachToRoot: Boolean = true): V
 fun ViewGroup.inflater(): LayoutInflater {
     return LayoutInflater.from(context)
 }
+
+@Throws(IOException::class)
+fun readBytes(context: Context, uri: Uri): ByteArray? =
+    context.contentResolver.openInputStream(uri)?.buffered()?.use { it.readBytes() }
 
 fun dpToPx(context: Context, dp: Float): Float {
     return TypedValue.applyDimension(
@@ -218,6 +223,18 @@ fun loadTxtMissionDifficulty(view: TextView, difficulty: Difficulty?) {
         2 -> view.resources.getText(R.string.mission_level_2_txt)
         3 -> view.resources.getText(R.string.mission_level_3_txt)
         4 -> view.resources.getText(R.string.mission_level_4_txt)
+        else -> ""
+    }
+}
+
+@BindingAdapter("loadDescriptionMissionDifficulty")
+fun loadDescriptionMissionDifficulty(view: TextView, difficulty: Difficulty?) {
+    view.text = when (difficulty?.level) {
+        0 -> view.resources.getText(R.string.mission_detail_level_1)
+        1 -> view.resources.getText(R.string.mission_detail_level_2)
+        2 -> view.resources.getText(R.string.mission_detail_level_3)
+        3 -> view.resources.getText(R.string.mission_detail_level_4)
+        4 -> view.resources.getText(R.string.mission_detail_level_5)
         else -> ""
     }
 }

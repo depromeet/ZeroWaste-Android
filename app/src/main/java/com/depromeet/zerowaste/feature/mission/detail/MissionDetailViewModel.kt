@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.depromeet.zerowaste.api.MissionApi
 import com.depromeet.zerowaste.comm.BaseViewModel
+import com.depromeet.zerowaste.data.ParticipateStatus
 import com.depromeet.zerowaste.data.mission.Mission
+import com.depromeet.zerowaste.data.mission.Participation
 import com.depromeet.zerowaste.data.mission.StartParticipateData
 import kotlin.Exception
 
@@ -23,16 +25,12 @@ class MissionDetailViewModel: BaseViewModel() {
         _mission.value = mission
     }
 
-    fun setMission(finish: (Mission) -> Unit) {
+    fun setMission() {
         execute({
             val id = _missionId.value ?: throw Exception("fail")
             val res = MissionApi.getMission(id)
             res.data ?: throw Exception(res.message)
-        })
-        {
-            _mission.value = it
-            finish(it)
-        }
+        }, _mission)
     }
 
     fun toggleLikeMission(id: Int, isLiked: Boolean, finish: (Int) -> Unit) {
@@ -42,9 +40,15 @@ class MissionDetailViewModel: BaseViewModel() {
         }) { finish(it.errorCode) }
     }
 
-    fun startParticipate(id: Int, finish: () -> Unit) {
+    fun startParticipate(mission: Mission, finish: () -> Unit) {
+        val participate = mission.participation
+        val id = mission.id
         execute({
-            val res = MissionApi.participateMission(id)
+            val res = if(participate.status == ParticipateStatus.NONE)
+                MissionApi.participateMission(id)
+            else {
+                participate.id?.let { MissionApi.participatePatchMission(id, it) } ?: throw Exception("participate id is null")
+            }
             res.data ?: throw Exception(res.message)
         }) {
             _participated.value = it
