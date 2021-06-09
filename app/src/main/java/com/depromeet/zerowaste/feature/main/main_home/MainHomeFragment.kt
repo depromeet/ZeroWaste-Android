@@ -1,7 +1,7 @@
 package com.depromeet.zerowaste.feature.main.main_home
 
 import android.view.View
-import androidx.core.view.updateLayoutParams
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
@@ -15,6 +15,9 @@ import com.depromeet.zerowaste.databinding.FragmentMainHomeBinding
 import com.depromeet.zerowaste.databinding.ItemMainHomeMissionBinding
 import com.depromeet.zerowaste.databinding.ItemMainHomePlaceBinding
 import com.depromeet.zerowaste.databinding.ItemMissionTagBinding
+import com.depromeet.zerowaste.feature.main.MainFragmentDirections
+import com.depromeet.zerowaste.feature.main.MainViewModel
+import com.depromeet.zerowaste.feature.mission.detail.MissionDetailViewModel
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
@@ -23,10 +26,13 @@ import kotlin.math.abs
 class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment_main_home) {
 
     private val viewModel: MainHomeViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private val missionDetailViewModel: MissionDetailViewModel by activityViewModels()
 
     private val missionAdapter =
         BaseRecycleAdapter(R.layout.item_main_home_mission) { item: Mission, bind: ItemMainHomeMissionBinding, position: Int ->
             bind.mission = item
+            bind.root.setOnClickListener { missionCardClick(item) }
             bind.mainHomeMissionIvRecommend.setOnClickListener {
                 viewModel.toggleLikeMission(item.id, item.isLiked)
                 {
@@ -36,9 +42,13 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
                     }
                 }
             }
-            val tagAdapter = BaseRecycleAdapter(R.layout.item_mission_tag){ i: Theme, b: ItemMissionTagBinding, _ -> b.item = i }
+            val tagAdapter =
+                BaseRecycleAdapter(R.layout.item_mission_tag) { i: Theme, b: ItemMissionTagBinding, _ ->
+                    b.item = i
+                }
             tagAdapter.setData(item.theme)
-            bind.itemMainHomeListTags.layoutManager = genLayoutManager(requireContext(), isVertical = false)
+            bind.itemMainHomeListTags.layoutManager =
+                genLayoutManager(requireContext(), isVertical = false)
             bind.itemMainHomeListTags.adapter = tagAdapter
         }
 
@@ -113,6 +123,14 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
         binding.mainHomeRvRecommendMissions.adapter = missionAdapter
         // viewModel.getMyMissionList()
         viewModel.getMockMyMissionList()
+    }
+
+    /*
+    * 이벤트 세팅
+    * */
+    private fun missionCardClick(mission: Mission) {
+        missionDetailViewModel.setMission(mission)
+        mainViewModel.navigate(MainFragmentDirections.actionMainFragmentToMissionDetailFragment())
     }
 
 

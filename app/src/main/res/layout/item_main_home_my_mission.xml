@@ -109,6 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:fontFamily="@font/apple_sd_gothic_neo_r"
+                    android:text="@{String.valueOf(mission.inProgressCount)}"
                     android:textColor="@color/white"
                     android:textSize="13sp"
                     app:fontFamily="@font/apple_sd_gothic_neo_r"
