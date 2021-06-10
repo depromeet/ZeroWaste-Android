@@ -10,8 +10,8 @@ import com.depromeet.zerowaste.databinding.FragmentMissionSuggestDoneBinding
 
 class SuggestDoneFragment: BaseFragment<FragmentMissionSuggestDoneBinding>(R.layout.fragment_mission_suggest_done) {
 
-    val viewModel: SuggestViewModel by viewModels()
-    val args: SuggestDoneFragmentArgs by navArgs()
+    private val viewModel: SuggestViewModel by viewModels()
+    private val args: SuggestDoneFragmentArgs by navArgs()
 
     override fun init() {
         binding.missionSuggestCheerTxt.text = SpanStrBuilder(requireContext())
@@ -21,8 +21,9 @@ class SuggestDoneFragment: BaseFragment<FragmentMissionSuggestDoneBinding>(R.lay
         binding.missionSuggestDoneHome.setOnClickListener {
             val cheerSentence = binding.missionSuggestCheerEdit.text.toString()
             if(cheerSentence.isNotEmpty()) {
-                viewModel.updateCheerUp(args.missionId, cheerSentence)
-                findNavController().popBackStack()
+                viewModel.updateCheerUp(args.missionId, cheerSentence) {
+                    findNavController().popBackStack()
+                }
             }
         }
     }

@@ -14,6 +14,9 @@ class LoginViewModel: BaseViewModel() {
     private val _isSuccess = MutableLiveData<Boolean>()
     val isSuccess: LiveData<Boolean> get() = _isSuccess
 
+    private val _isNewUser = MutableLiveData<Boolean>()
+    val isNewUser: LiveData<Boolean> get() = _isNewUser
+
     fun refreshToken() {
         execute({
             val userAuth = AuthApi.refreshServerToken(Refresh(Share.authToken)).data ?: return@execute false
@@ -28,7 +31,7 @@ class LoginViewModel: BaseViewModel() {
         execute({
             val userAuth = AuthApi.getServerTokenWithKakao(KakaoAuth(kakaoToken)).data ?: return@execute false
             Share.authToken = userAuth.token
-            Share.isNewUser = userAuth.isNewUser ?: false
+            _isNewUser.postValue(userAuth.isNewUser)
             val user = UserApi.getUserInfo(userAuth.id).data ?: return@execute false
             Share.user = user
             return@execute true

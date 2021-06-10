@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
@@ -17,14 +18,15 @@ class PledgeFragment : BaseFragment<FragmentPledgeBinding>(R.layout.fragment_ple
     override var isLightStatusBar = true
 
     private val viewModel: PledgeViewModel by viewModels()
+    private val args: PledgeFragmentArgs by navArgs()
 
-    private val isNeedPledge: Boolean = Share.isNewUser
+    private val isNeedPledge: Boolean by lazy { args.isNewUser }
     private var isCanStart = false
 
     override fun init() {
         binding.fragment = this
 
-        binding.pledgeVpViewpager.adapter = PledgeAdapter(this, true)
+        binding.pledgeVpViewpager.adapter = PledgeAdapter(this, isNeedPledge)
         binding.dotsIndicator.setViewPager2(binding.pledgeVpViewpager)
         if(isNeedPledge) {
             var position = 0
@@ -86,7 +88,6 @@ class PledgeFragment : BaseFragment<FragmentPledgeBinding>(R.layout.fragment_ple
         editor.putString(Constants.AUTH_TOKEN, Share.authToken)
         editor.putBoolean(Constants.IS_FIRST_APP_OPEN, false)
         editor.apply()
-        Share.isNewUser = false
         findNavController().navigate(PledgeFragmentDirections.actionPledgeFragmentToMainFragment())
     }
 }

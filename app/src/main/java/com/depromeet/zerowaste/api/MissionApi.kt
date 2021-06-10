@@ -1,15 +1,11 @@
 package com.depromeet.zerowaste.api
 
 import com.depromeet.zerowaste.data.*
-import com.depromeet.zerowaste.data.comn.SignedUrlList
+import com.depromeet.zerowaste.data.comn.SignedUrlListAndId
 import com.depromeet.zerowaste.data.mission.CheerSentence
 import com.depromeet.zerowaste.data.mission.Mission
 import com.depromeet.zerowaste.data.mission.StartParticipateData
 import com.depromeet.zerowaste.data.mission.SuggestMission
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.Request
-import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.Response
 import retrofit2.http.*
 
 class MissionApi {
@@ -33,7 +29,7 @@ class MissionApi {
         @POST("/api/missions/")
         suspend fun suggestNewMission(
             @Body suggestMission: SuggestMission
-        ): Res<SignedUrlList>
+        ): Res<SignedUrlListAndId>
 
         @PATCH("/api/missions/{id}/")
         suspend fun addCheerSentence(
@@ -75,14 +71,6 @@ class MissionApi {
         suspend fun suggestNewMission(suggestMission: SuggestMission) = client.suggestNewMission(suggestMission)
         suspend fun addCheerSentence(missionId: Int, cheerSentence: CheerSentence) = client.addCheerSentence(missionId, cheerSentence)
 
-        fun uploadImage(url: String, byteArray: ByteArray): Response {
-            val client = RetrofitClient.uploadClient
-            val request = Request.Builder()
-                .url(url)
-                .put(byteArray.toRequestBody("application/offset+octet-stream".toMediaTypeOrNull()))
-                .build()
-            return client.newCall(request).execute()
-        }
     }
 
 }

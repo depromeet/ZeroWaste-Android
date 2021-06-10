@@ -13,8 +13,7 @@
         <Constraint
             android:id="@+id/main_mission_icon"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxHeight="240dp"
+            android:layout_height="260dp"
             android:alpha="1"
             motion:layout_constraintTop_toBottomOf="@id/main_mission_tab" />
         <Constraint
@@ -22,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="21dp"
-            android:layout_marginTop="210dp"
+            android:layout_marginTop="224dp"
             android:alpha="1"
             motion:layout_constraintTop_toBottomOf="@id/main_mission_tab"
             motion:layout_constraintStart_toStartOf="parent" />
@@ -37,7 +36,7 @@
             android:id="@+id/main_mission_list_back"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="22dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/main_mission_ranker"/>
     </ConstraintSet>
@@ -45,8 +44,7 @@
         <Constraint
             android:id="@+id/main_mission_icon"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxHeight="240dp"
+            android:layout_height="260dp"
             android:alpha="0"
             motion:layout_constraintBottom_toTopOf="@id/main_mission_tab" />
         <Constraint

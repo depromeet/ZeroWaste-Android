@@ -6,7 +6,10 @@ import com.depromeet.zerowaste.comm.data.Share
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.SerializedName
 import okhttp3.Interceptor
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
@@ -30,8 +33,6 @@ object RetrofitClient {
     }
 
     private val gsonBuilder = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX").create()
-
-    val uploadClient = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
 
     private fun getNoAuthRetrofit(endPoint: String): Retrofit {
         return Retrofit.Builder()
@@ -61,6 +62,15 @@ object RetrofitClient {
 
     fun <T> create(endPoint: String = Constants.API_SERVER, service: Class<T>): T {
         return getRetrofit(endPoint).create(service)
+    }
+
+    fun uploadImage(url: String, byteArray: ByteArray): Response {
+        val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
+        val request = Request.Builder()
+            .url(url)
+            .put(byteArray.toRequestBody("application/offset+octet-stream".toMediaTypeOrNull()))
+            .build()
+        return client.newCall(request).execute()
     }
 
 }

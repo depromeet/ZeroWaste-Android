@@ -49,7 +49,12 @@
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"/>
+            app:popExitAnim="@android:anim/slide_out_right">
+            <argument
+                android:name="missionId"
+                app:argType="integer"
+                app:nullable="false"/>
+        </action>
         <action
             android:id="@+id/action_mainFragment_to_missionSuggestFragment"
             app:destination="@id/missionSuggestFragment"
@@ -70,7 +75,12 @@
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"/>
+            app:popExitAnim="@android:anim/slide_out_right">
+            <argument
+                android:name="missionId"
+                app:argType="integer"
+                app:nullable="false"/>
+        </action>
         <action
             android:id="@+id/action_profileFragment_to_missionSuggestFragment"
             app:destination="@id/missionSuggestFragment"
@@ -98,7 +108,12 @@
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"/>
+            app:popExitAnim="@android:anim/slide_out_right">
+            <argument
+                android:name="missionId"
+                app:argType="integer"
+                app:nullable="false"/>
+        </action>
     </fragment>
 
     <fragment
@@ -114,7 +129,12 @@
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"/>
+            app:popExitAnim="@android:anim/slide_out_right">
+            <argument
+                android:name="missionId"
+                app:argType="integer"
+                app:nullable="false"/>
+        </action>
     </fragment>
 
     <fragment
@@ -122,6 +142,10 @@
         android:name="com.depromeet.zerowaste.feature.mission.certificate.MissionCertFragment"
         android:label="fragment_mission_cert"
         tools:layout="@layout/fragment_mission_cert">
+        <argument
+            android:name="missionId"
+            app:argType="integer"
+            app:nullable="false"/>
         <action
             android:id="@+id/action_missionCertFragment_to_missionDoneFragment"
             app:destination="@id/missionDoneFragment"
@@ -187,14 +211,23 @@
             app:destination="@id/pledgeFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true">
+            <argument
+                android:name="isNewUser"
+                app:argType="boolean"
+                app:nullable="false"/>
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/pledgeFragment"
         android:name="com.depromeet.zerowaste.feature.pledge.PledgeFragment"
         android:label="fragment_pledge"
-        tools:layout="@layout/fragment_pledge" >
+        tools:layout="@layout/fragment_pledge">
+        <argument
+            android:name="isNewUser"
+            app:argType="boolean"
+            android:defaultValue="false"/>
         <action
             android:id="@+id/action_pledgeFragment_to_mainFragment"
             app:destination="@id/mainFragment"

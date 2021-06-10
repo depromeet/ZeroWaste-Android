@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
+import com.depromeet.zerowaste.comm.loadImageRadius
 import com.depromeet.zerowaste.databinding.FragmentMissionSuggestPhase3Binding
 import com.depromeet.zerowaste.feature.mission.certificate.MissionCertFragment
 import gun0912.tedimagepicker.builder.TedImagePicker
@@ -77,6 +78,7 @@ class SuggestPhase3Fragment: BaseFragment<FragmentMissionSuggestPhase3Binding>(R
             }
             .start {
                 viewModel.setImgUri(it)
+                loadImageRadius(binding.missionSuggestPhase3PhotoPreview, it, 8f)
             }
     }
 }

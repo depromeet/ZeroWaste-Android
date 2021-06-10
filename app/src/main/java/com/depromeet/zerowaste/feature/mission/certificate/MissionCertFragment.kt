@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.*
 import com.depromeet.zerowaste.data.Difficulty
@@ -52,7 +53,7 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
             }
         }
 
-        private fun getPhotos(fragment: BaseFragment<*>, navDirections: NavDirections) {
+        private fun getPhotos(fragment: BaseFragment<*>, navDirections: NavDirections? = null) {
             TedImagePicker.with(fragment.requireContext())
                 .mediaType(MediaType.IMAGE)
                 .max(3, fragment.getString(R.string.mission_cert_max_img, "3"))
@@ -64,12 +65,15 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
                 }
                 .startMultiImage {
                     certUriList = it
-                    fragment.findNavController().navigate(navDirections)
+                    navDirections?.also {
+                        fragment.findNavController().navigate(navDirections)
+                    }
                 }
         }
     }
 
     private val viewModel: MissionCertViewModel by viewModels()
+    private val args: MissionCertFragmentArgs by navArgs()
 
     private val imageListAdapter =  BaseRecycleAdapter(R.layout.item_mission_cert_img) { item: Uri, bind: ItemMissionCertImgBinding, _ -> bind.uri = item }
     private val levelAdapter = BaseRecycleAdapter(R.layout.item_mission_cert_level)
@@ -83,6 +87,11 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
             bind.itemMissionCertLevelTxt.setTextColor(ResourcesCompat.getColor(resources, R.color.gray_2, null))
         }
         bind.root.setOnClickListener { levelClick(position) }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        imageListAdapter.setData(certUriList)
     }
 
     override fun init() {
@@ -118,7 +127,6 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
             page.translationX = position * -offsetPx
         }
 
-        imageListAdapter.setData(certUriList)
         binding.missionCertImgs.adapter = imageListAdapter
         binding.missionCertIndicator.setViewPager2(binding.missionCertImgs)
     }
@@ -163,7 +171,8 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
         })
 
         viewModel.selectedDifficulty.observe(this) {
-            if(viewModel.editedTxt.value.isNullOrEmpty()) {
+            val editText = viewModel.editedTxt.value
+            if(editText.isNullOrEmpty() || editText.length < 10) {
                 binding.missionCertNext.isEnabled = false
                 binding.missionCertNext.setTextColor(ResourcesCompat.getColor(resources, R.color.gray_2, null))
             } else {
@@ -172,7 +181,7 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
             }
         }
         viewModel.editedTxt.observe(this) {
-            if(viewModel.selectedDifficulty.value == null || it.isEmpty()) {
+            if(viewModel.selectedDifficulty.value == null || it.length < 10) {
                 binding.missionCertNext.isEnabled = false
                 binding.missionCertNext.setTextColor(ResourcesCompat.getColor(resources, R.color.gray_2, null))
             } else {
@@ -193,7 +202,14 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
     }
 
     fun nextClick() {
-        findNavController().navigate(MissionCertFragmentDirections.actionMissionCertFragmentToMissionDoneFragment())
+        val imgBytes = ArrayList<ByteArray>()
+        certUriList.forEach {
+            val byteArray = readBytes(requireContext(), it) ?: return@forEach showToast("uri to img fail")
+            imgBytes.add(byteArray)
+        }
+        viewModel.certificate(args.missionId, imgBytes) {
+            findNavController().navigate(MissionCertFragmentDirections.actionMissionCertFragmentToMissionDoneFragment())
+        }
     }
 
     fun backClick() {

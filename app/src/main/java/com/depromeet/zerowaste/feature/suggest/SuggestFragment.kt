@@ -49,32 +49,47 @@ class SuggestFragment: BaseFragment<FragmentMissionSuggestBinding>(R.layout.frag
                         binding.missionSuggestProgress2.background = circleGray
                         binding.missionSuggestProgress3.background = circleGray
                         binding.missionSuggestProgress4.background = circleGray
+                        binding.missionSuggestProgress5.background = circleGray
                     }
                     1 -> {
                         binding.missionSuggestProgress2.background = circleEnable
                         binding.missionSuggestProgress3.background = circleGray
                         binding.missionSuggestProgress4.background = circleGray
+                        binding.missionSuggestProgress5.background = circleGray
                     }
                     2 -> {
                         binding.missionSuggestProgress2.background = circleEnable
                         binding.missionSuggestProgress3.background = circleEnable
                         binding.missionSuggestProgress4.background = circleGray
+                        binding.missionSuggestProgress5.background = circleGray
                     }
                     3 -> {
                         binding.missionSuggestProgress2.background = circleEnable
                         binding.missionSuggestProgress3.background = circleEnable
                         binding.missionSuggestProgress4.background = circleEnable
+                        binding.missionSuggestProgress5.background = circleGray
                     }
                     4 -> {
                         binding.missionSuggestProgress2.background = circleEnable
                         binding.missionSuggestProgress3.background = circleEnable
                         binding.missionSuggestProgress4.background = circleEnable
+                        binding.missionSuggestProgress5.background = circleGray
+                    }
+                    5 -> {
+                        binding.missionSuggestProgress2.background = circleEnable
+                        binding.missionSuggestProgress3.background = circleEnable
+                        binding.missionSuggestProgress4.background = circleEnable
+                        binding.missionSuggestProgress5.background = circleEnable
                     }
                 }
                 binding.missionSuggestProgressMotion.progress = coefficient * (position + positionOffset)
             }
             override fun onPageSelected(position: Int) {
                 viewModel.checkCanDoNext(position)
+                when(position) {
+                    0 -> binding.missionSuggestMotion.transitionToStart()
+                    1 -> binding.missionSuggestMotion.transitionToEnd()
+                }
             }
         })
         requireActivity().onBackPressedDispatcher.addCallback(this) {
@@ -99,9 +114,11 @@ class SuggestFragment: BaseFragment<FragmentMissionSuggestBinding>(R.layout.frag
 
     fun backClick() {
         imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
-        if(binding.missionSuggestContents.currentItem == 0) findNavController().popBackStack()
-        else {
-            binding.missionSuggestContents.currentItem--
-        }
+        binding.missionSuggestContents.currentItem--
+    }
+
+    fun closeClick() {
+        imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+        findNavController().popBackStack()
     }
 }

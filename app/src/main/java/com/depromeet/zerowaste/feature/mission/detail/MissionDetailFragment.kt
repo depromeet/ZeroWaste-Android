@@ -10,11 +10,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.depromeet.zerowaste.R
-import com.depromeet.zerowaste.comm.BaseFragment
-import com.depromeet.zerowaste.comm.BaseRecycleAdapter
-import com.depromeet.zerowaste.comm.SpanStrBuilder
+import com.depromeet.zerowaste.comm.*
 import com.depromeet.zerowaste.comm.data.Share
-import com.depromeet.zerowaste.comm.genLayoutManager
 import com.depromeet.zerowaste.data.ParticipateStatus
 import com.depromeet.zerowaste.data.Theme
 import com.depromeet.zerowaste.data.mission.Mission
@@ -63,10 +60,12 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
         })
 
         viewModel.mission.observe(this) { mission ->
-            binding.missionDetailApproveCnt.text = SpanStrBuilder(requireContext())
+            if(mission.userCertifiedCounts > 0) {
+                binding.missionDetailApproveCnt.text = SpanStrBuilder(requireContext())
                 .add("${mission.userCertifiedCounts}${resources.getString(R.string.mission_count)} ")
                 .add(textId = R.string.mission_detail_approve)
                 .build()
+            }
 
             val tagAdapter = BaseRecycleAdapter(R.layout.item_mission_tag){ i: Theme, b: ItemMissionTagBinding, _ -> b.item = i }
             tagAdapter.setData(mission.theme)
@@ -95,14 +94,9 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
             if (mission.participation.status == ParticipateStatus.READY) {
                 binding.missionDetailStartBtn.text = resources.getText(R.string.mission_detail_start_participate)
                 val endTime = mission.participation.endDate?.time ?: return@observe
-                val format = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    SimpleDateFormat("HH:mm:ss", resources.configuration.locales[0])
-                } else {
-                    SimpleDateFormat("HH:mm:ss", resources.configuration.locale)
-                }
                 lifecycleScope.launch {
                     while (true) {
-                        binding.missionDetailStartTxt.text = getString(R.string.mission_detail_limit, format.format(Date(endTime - Date().time)))
+                        binding.missionDetailStartTxt.text = getString(R.string.mission_detail_limit, DifTimeStringConverter.convert(System.currentTimeMillis(), endTime))
                         delay(1000)
                     }
                 }
@@ -130,7 +124,7 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
     fun startClick() {
         val mission = viewModel.mission.value ?: return
         if (mission.participation.status == ParticipateStatus.READY) {
-            MissionCertFragment.startMissionCert(this, MissionDetailFragmentDirections.actionMissionDetailFragmentToMissionCertFragment())
+            MissionCertFragment.startMissionCert(this, MissionDetailFragmentDirections.actionMissionDetailFragmentToMissionCertFragment(mission.id))
         } else {
             viewModel.startParticipate(mission) {
                 findNavController().navigate(MissionDetailFragmentDirections.actionMissionDetailFragmentToMissionApproveFragment())

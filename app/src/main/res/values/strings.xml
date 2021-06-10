@@ -31,6 +31,7 @@
     <string name="main_community_list_mission_complete_cnt">번 인증완료</string>
 
     <string name="mission_how_to">인증 방법</string>
+    <string name="mission_do_level">레벨</string>
     <string name="mission_do_type">미션 유형</string>
     <string name="mission_do_place">수행 장소</string>
     <string name="mission_title">미션 제목</string>
@@ -74,6 +75,12 @@
     <string name="mission_level_3_txt">어려움</string>
     <string name="mission_level_4_txt">매우 어려움</string>
 
+    <string name="mission_level_0_script">왕초보자 (1일 내 수행)</string>
+    <string name="mission_level_1_script">초보자 (3일 내 수행)</string>
+    <string name="mission_level_2_script">초중급자 (5일 내 수행)</string>
+    <string name="mission_level_3_script">중급자 (7일 내 수행)</string>
+    <string name="mission_level_4_script">상급자 (14일 내 수행)</string>
+
     <string name="mission_suggest_phase1_title">어디서 할 수 있는 미션인가요?</string>
     <string name="mission_suggest_phase1_sub_title">미션을 수행할 수 있는 장소를 선택해 주세요.</string>
     <string name="mission_suggest_phase2_title">어떤 미션인가요?</string>
@@ -83,9 +90,11 @@
     <string name="mission_suggest_phase3_photo">앨범 가져오기/사진 찍기</string>
     <string name="mission_suggest_phase3_photo_noti">* 미션 방법을 잘 나타내는 사진 1장만 첨부할 수 있습니다.\n* 미션 내용과 관련 없는 사진은 삭제될 수 있습니다.</string>
     <string name="mission_suggest_phase3_how_to">인증 방법 입력</string>
-    <string name="mission_suggest_phase4_title">5R 종류를 선택해 주세요</string>
-    <string name="mission_suggest_phase4_sub_title">최대 3개까지 선택할 수 있어요.</string>
-    <string name="mission_suggest_phase5_title">거의 다 왔어요! 마지막으로\n작성하신 내용을 확인해 주세요</string>
+    <string name="mission_suggest_phase4_title">미션 난이도를 선택해 주세요</string>
+    <string name="mission_suggest_phase4_sub_title">미션 난이도에 따라 수행 기간이 다를 수 있어요.</string>
+    <string name="mission_suggest_phase5_title">5R 종류를 선택해 주세요</string>
+    <string name="mission_suggest_phase5_sub_title">최대 3개까지 선택할 수 있어요.</string>
+    <string name="mission_suggest_phase6_title">거의 다 왔어요! 마지막으로\n작성하신 내용을 확인해 주세요</string>
     <string name="mission_suggest_done">미션 제안 완료!</string>
     <string name="mission_suggest_cheer">응원의 한마디</string>
     <string name="mission_suggest_cheer_hint">우쥬용사들에게 응원의 한마디를 남겨보세요</string>
@@ -96,6 +105,7 @@
     <string name="month">월</string>
     <string name="date">일</string>
     <string name="choice">선택</string>
+    <string name="before">이전</string>
 
     <string name="theme_refuse">거절하기</string>
     <string name="theme_reduce">줄이기</string>

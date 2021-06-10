@@ -6,6 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
+import com.depromeet.zerowaste.comm.DifTimeStringConverter
 import com.depromeet.zerowaste.databinding.FragmentMissionApproveBinding
 import com.depromeet.zerowaste.feature.mission.certificate.MissionCertFragment
 import com.depromeet.zerowaste.feature.mission.detail.MissionDetailViewModel
@@ -29,23 +30,17 @@ class MissionApproveFragment: BaseFragment<FragmentMissionApproveBinding>(R.layo
     private fun initCnt() {
         val startData = viewModel.participated.value ?: return
         val endTime = startData.endDate.time
-        val format = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            SimpleDateFormat("HH:mm:ss", resources.configuration.locales[0])
-        } else {
-            SimpleDateFormat("HH:mm:ss", resources.configuration.locale)
-        }
         lifecycleScope.launch {
             while (true) {
-                binding.missionApproveCnt.text = getString(R.string.mission_detail_limit, format.format(
-                    Date(endTime - System.currentTimeMillis())
-                ))
+                binding.missionApproveCnt.text = getString(R.string.mission_detail_limit, DifTimeStringConverter.convert(System.currentTimeMillis(), endTime))
                 delay(1000)
             }
         }
     }
 
     fun clickNow() {
-        MissionCertFragment.startMissionCert(this, MissionApproveFragmentDirections.actionMissionApproveFragmentToMissionCertFragment())
+        val missionId = viewModel.mission.value?.id ?: return showToast("missionId is null")
+        MissionCertFragment.startMissionCert(this, MissionApproveFragmentDirections.actionMissionApproveFragmentToMissionCertFragment(missionId))
     }
 
     fun clickNextTime() {

@@ -11,6 +11,7 @@ import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.KeepStateNavigator
 import com.depromeet.zerowaste.databinding.FragmentMainBinding
+import com.depromeet.zerowaste.feature.mission.certificate.MissionCertFragment
 
 class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
@@ -29,6 +30,10 @@ class MainFragment: BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
         viewModel.navDirection.observe(this) {
             findNavController().navigate(it)
+        }
+
+        viewModel.certMissionId.observe(this) {
+            MissionCertFragment.startMissionCert(this, MainFragmentDirections.actionMainFragmentToMissionCertFragment(it))
         }
 
         var lastPressedTime = 0L

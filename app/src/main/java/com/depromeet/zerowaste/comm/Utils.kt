@@ -31,6 +31,7 @@ import com.depromeet.zerowaste.data.Theme
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import java.io.IOException
+import java.util.*
 
 
 fun getPreference(context: Context): SharedPreferences {
@@ -70,6 +71,18 @@ fun ViewGroup.inflater(): LayoutInflater {
 @Throws(IOException::class)
 fun readBytes(context: Context, uri: Uri): ByteArray? =
     context.contentResolver.openInputStream(uri)?.buffered()?.use { it.readBytes() }
+
+fun difTimeToString(start: Long, end: Long): String {
+    val stringBuilder = StringBuilder()
+    val s = 1000
+    val m = 60 * s
+    val h = 60 * m
+    val d = 24 * h
+    val dif = end - start
+
+
+    return stringBuilder.toString()
+}
 
 fun dpToPx(context: Context, dp: Float): Float {
     return TypedValue.applyDimension(
@@ -223,6 +236,18 @@ fun loadTxtMissionDifficulty(view: TextView, difficulty: Difficulty?) {
         2 -> view.resources.getText(R.string.mission_level_2_txt)
         3 -> view.resources.getText(R.string.mission_level_3_txt)
         4 -> view.resources.getText(R.string.mission_level_4_txt)
+        else -> ""
+    }
+}
+
+@BindingAdapter("loadTxtMissionDifficulty")
+fun loadScriptMissionDifficulty(view: TextView, difficulty: Difficulty?) {
+    view.text = when (difficulty?.level) {
+        0 -> view.resources.getText(R.string.mission_level_0_script)
+        1 -> view.resources.getText(R.string.mission_level_1_script)
+        2 -> view.resources.getText(R.string.mission_level_2_script)
+        3 -> view.resources.getText(R.string.mission_level_3_script)
+        4 -> view.resources.getText(R.string.mission_level_4_script)
         else -> ""
     }
 }

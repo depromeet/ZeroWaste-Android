@@ -5,6 +5,9 @@ import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
+import androidx.core.animation.addListener
+import androidx.core.animation.doOnEnd
+import androidx.core.animation.doOnStart
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +24,7 @@ import com.depromeet.zerowaste.feature.main.MainFragmentDirections
 import com.depromeet.zerowaste.feature.main.MainViewModel
 import com.depromeet.zerowaste.feature.mission.detail.MissionDetailViewModel
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -57,6 +61,17 @@ class MainMissionFragment :
         tagAdapter.setData(item.theme)
         bind.itemMainMissionListTags.layoutManager = genLayoutManager(requireContext(), isVertical = false)
         bind.itemMainMissionListTags.adapter = tagAdapter
+    }
+    private val iconAdapter = BaseRecycleAdapter(R.layout.item_mission_logo) { item: Place, bind: ItemMissionLogoBinding, _ ->
+        when (item) {
+            Place.ALL -> bind.itemMissionLogo.setImageResource(R.drawable.ic_mission_all_logo)
+            Place.BATHROOM -> bind.itemMissionLogo.setImageResource(R.drawable.ic_mission_bathroom_logo)
+            Place.CAFE -> bind.itemMissionLogo.setImageResource(R.drawable.ic_mission_cafe_logo)
+            Place.ETC -> bind.itemMissionLogo.setImageResource(R.drawable.ic_mission_etc_logo)
+            Place.KITCHEN -> bind.itemMissionLogo.setImageResource(R.drawable.ic_mission_kitchen_logo)
+            Place.RESTAURANT -> bind.itemMissionLogo.setImageResource(R.drawable.ic_mission_restaurant_logo)
+            Place.OUTSIDE -> bind.itemMissionLogo.setImageResource(R.drawable.ic_mission_outside_logo)
+        }
     }
 
     override fun onResume() {
@@ -132,19 +147,20 @@ class MainMissionFragment :
 
     private fun initPlaces() {
         viewModel.placeList.observe(this) { list ->
-            binding.mainMissionTab.removeAllTabs()
-            binding.mainMissionTab.clearOnTabSelectedListeners()
             list.forEach { place ->
-                val tab = binding.mainMissionTab.newTab()
-                tab.text = resources.getString(place.textId)
-                binding.mainMissionTab.addTab(tab)
+                iconAdapter.addData(place)
             }
-            binding.mainMissionTab.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab) { tabSelected(tab.position) }
-                override fun onTabUnselected(tab: TabLayout.Tab) {}
-                override fun onTabReselected(tab: TabLayout.Tab) {}
-            })
         }
+        binding.mainMissionIcon.isUserInputEnabled = false
+        binding.mainMissionIcon.adapter = iconAdapter
+        binding.mainMissionTab.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) { tabSelected(tab.position) }
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
+        TabLayoutMediator(binding.mainMissionTab, binding.mainMissionIcon) { tab, position ->
+            tab.text = resources.getString(iconAdapter.getItem(position)?.textId ?: Place.ALL.textId)
+        }.attach()
         viewModel.initPlaceList()
         tabSelected(0)
     }
@@ -201,10 +217,10 @@ class MainMissionFragment :
         chipAdapter.notifyDataSetChanged()
         if(binding.mainMissionMotion.progress != 0f) binding.mainMissionMotion.transitionToStart()
         binding.mainMissionList.scrollTo(0, 0)
-        viewModel.changePlace(place)
-        {
+        viewModel.changePlace(place) {
             viewModel.refreshRankerList()
         }
     }
+
 
 }

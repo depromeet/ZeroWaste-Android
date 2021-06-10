@@ -11,15 +11,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp">
+        android:layout_height="128dp">
         <FrameLayout
             android:id="@+id/item_main_mission_rank_back"
-            android:layout_width="106dp"
-            android:layout_height="106dp"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
             android:padding="3dp"
             android:layout_marginBottom="9dp"
-            app:customHeightDP="@{item.rank == 1 ? 106 : 88}"
-            app:customWidthDP="@{item.rank == 1 ? 106 : 88}"
+            app:customHeightDP="@{item.rank == 1 ? 91 : 91}"
+            app:customWidthDP="@{item.rank == 1 ? 91 : 91}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/item_main_mission_rank_user_txt"
@@ -58,7 +58,8 @@
             app:layout_constraintTop_toTopOf="@id/item_main_mission_rank_back"
             app:layout_constraintStart_toStartOf="@id/item_main_mission_rank_back"
             app:layout_constraintEnd_toEndOf="@id/item_main_mission_rank_back"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_rank_1"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

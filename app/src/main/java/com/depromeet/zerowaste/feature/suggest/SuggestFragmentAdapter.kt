@@ -11,9 +11,10 @@ class SuggestFragmentAdapter(fragment: Fragment): FragmentStateAdapter(fragment)
             2 -> SuggestPhase3Fragment()
             3 -> SuggestPhase4Fragment()
             4 -> SuggestPhase5Fragment()
+            5 -> SuggestPhase6Fragment()
             else -> Fragment()
         }
     }
 
-    override fun getItemCount(): Int = 5
+    override fun getItemCount(): Int = 6
 }

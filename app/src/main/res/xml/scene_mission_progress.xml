@@ -4,48 +4,10 @@
     <Transition
         motion:constraintSetStart="@+id/start"
         motion:constraintSetEnd="@+id/end"
-        motion:motionInterpolator="linear"
-        motion:duration="500">
+        motion:motionInterpolator="linear">
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
-        <Constraint
-            android:id="@+id/mission_suggest_progress_2"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginStart="16dp"
-            motion:layout_constraintStart_toEndOf="@id/mission_suggest_progress_1"
-            motion:layout_constraintEnd_toStartOf="@id/mission_suggest_progress_3"
-            motion:layout_constraintTop_toTopOf="@id/mission_suggest_progress"
-            motion:layout_constraintBottom_toBottomOf="@id/mission_suggest_progress"/>
-        <Constraint
-            android:id="@+id/mission_suggest_progress_3"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginStart="16dp"
-            motion:layout_constraintStart_toEndOf="@id/mission_suggest_progress_2"
-            motion:layout_constraintEnd_toStartOf="@id/mission_suggest_progress_4"
-            motion:layout_constraintTop_toTopOf="@id/mission_suggest_progress"
-            motion:layout_constraintBottom_toBottomOf="@id/mission_suggest_progress"/>
-        <Constraint
-            android:id="@+id/mission_suggest_progress_4"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginStart="16dp"
-            motion:layout_constraintStart_toEndOf="@id/mission_suggest_progress_3"
-            motion:layout_constraintEnd_toStartOf="@id/mission_suggest_progress_5"
-            motion:layout_constraintTop_toTopOf="@id/mission_suggest_progress"
-            motion:layout_constraintBottom_toBottomOf="@id/mission_suggest_progress"/>
-        <Constraint
-            android:id="@+id/mission_suggest_progress_5"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="6dp"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@id/mission_suggest_progress_4"
-            motion:layout_constraintTop_toTopOf="@id/mission_suggest_progress"
-            motion:layout_constraintBottom_toBottomOf="@id/mission_suggest_progress"/>
         <Constraint
             android:id="@+id/mission_suggest_progress"
             android:layout_width="20dp"
@@ -56,48 +18,11 @@
     </ConstraintSet>
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@+id/mission_suggest_progress_2"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginStart="16dp"
-            motion:layout_constraintStart_toEndOf="@id/mission_suggest_progress_1"
-            motion:layout_constraintEnd_toStartOf="@id/mission_suggest_progress_3"
-            motion:layout_constraintTop_toTopOf="@id/mission_suggest_progress"
-            motion:layout_constraintBottom_toBottomOf="@id/mission_suggest_progress"/>
-        <Constraint
-            android:id="@+id/mission_suggest_progress_3"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginStart="16dp"
-            motion:layout_constraintStart_toEndOf="@id/mission_suggest_progress_2"
-            motion:layout_constraintEnd_toStartOf="@id/mission_suggest_progress_4"
-            motion:layout_constraintTop_toTopOf="@id/mission_suggest_progress"
-            motion:layout_constraintBottom_toBottomOf="@id/mission_suggest_progress"/>
-        <Constraint
-            android:id="@+id/mission_suggest_progress_4"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginStart="16dp"
-            motion:layout_constraintStart_toEndOf="@id/mission_suggest_progress_3"
-            motion:layout_constraintEnd_toStartOf="@id/mission_suggest_progress_5"
-            motion:layout_constraintTop_toTopOf="@id/mission_suggest_progress"
-            motion:layout_constraintBottom_toBottomOf="@id/mission_suggest_progress"/>
-        <Constraint
-            android:id="@+id/mission_suggest_progress_5"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="6dp"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@id/mission_suggest_progress_4"
-            motion:layout_constraintTop_toTopOf="@id/mission_suggest_progress"
-            motion:layout_constraintBottom_toBottomOf="@id/mission_suggest_progress"/>
-        <Constraint
             android:id="@+id/mission_suggest_progress"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            motion:layout_constraintStart_toStartOf="@id/mission_suggest_progress_5"
-            motion:layout_constraintEnd_toEndOf="@id/mission_suggest_progress_5"
+            motion:layout_constraintStart_toStartOf="@id/mission_suggest_progress_6"
+            motion:layout_constraintEnd_toEndOf="@id/mission_suggest_progress_6"
             motion:layout_constraintTop_toTopOf="parent" />
     </ConstraintSet>
 </MotionScene>

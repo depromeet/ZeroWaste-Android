@@ -50,8 +50,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     private fun goNextFragment() {
         val isFirstAppOpen = preference.getBoolean(Constants.IS_FIRST_APP_OPEN, true)
-        if(isFirstAppOpen || Share.isNewUser) {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToPledgeFragment())
+        val isNewUser = viewModel.isNewUser.value ?: false
+        if(isFirstAppOpen || isNewUser) {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToPledgeFragment(isNewUser))
         } else {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
         }

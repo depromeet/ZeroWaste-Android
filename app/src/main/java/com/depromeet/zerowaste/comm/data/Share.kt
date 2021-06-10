@@ -7,5 +7,4 @@ import com.depromeet.zerowaste.data.user.User
 object Share {
     var authToken = ""                                      // 현재 유저 jwt
     var user: User? = null                                  // 현재 유저 정보
-    var isNewUser: Boolean = false                          // 신규 유저 여부
 }
