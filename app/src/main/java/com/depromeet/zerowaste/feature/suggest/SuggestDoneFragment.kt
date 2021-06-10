@@ -24,6 +24,8 @@ class SuggestDoneFragment: BaseFragment<FragmentMissionSuggestDoneBinding>(R.lay
                 viewModel.updateCheerUp(args.missionId, cheerSentence) {
                     findNavController().popBackStack()
                 }
+            } else {
+                findNavController().popBackStack()
             }
         }
     }

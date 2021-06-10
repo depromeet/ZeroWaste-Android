@@ -80,7 +80,6 @@ class MainMissionFragment :
     }
 
     override fun init() {
-        binding.vm = viewModel
         viewModel.error.observe(this) {
             showToast(it.message.toString())
         }

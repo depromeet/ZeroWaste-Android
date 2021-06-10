@@ -73,7 +73,7 @@ class SuggestFragment: BaseFragment<FragmentMissionSuggestBinding>(R.layout.frag
                         binding.missionSuggestProgress2.background = circleEnable
                         binding.missionSuggestProgress3.background = circleEnable
                         binding.missionSuggestProgress4.background = circleEnable
-                        binding.missionSuggestProgress5.background = circleGray
+                        binding.missionSuggestProgress5.background = circleEnable
                     }
                     5 -> {
                         binding.missionSuggestProgress2.background = circleEnable
@@ -93,7 +93,8 @@ class SuggestFragment: BaseFragment<FragmentMissionSuggestBinding>(R.layout.frag
             }
         })
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            backClick()
+            if(binding.missionSuggestContents.currentItem > 0) backClick()
+            else closeClick()
         }
     }
 

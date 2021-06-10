@@ -3,24 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="vm"
-            type="com.depromeet.zerowaste.feature.main.main_mission.MainMissionViewModel" />
-    </data>
-
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/main_mission_motion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
         app:layoutDescription="@xml/scene_main_mission">
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/main_mission_icon"
-            android:layout_width="match_parent"
-            android:layout_height="260dp"
-            app:layout_constraintTop_toBottomOf="@id/main_mission_tab" />
 
         <ImageView
             android:id="@+id/main_mission_icon_back"
@@ -33,6 +21,12 @@
             app:layout_constraintTop_toTopOf="@id/main_mission_icon"
             app:layout_constraintBottom_toBottomOf="@id/main_mission_icon"
             tools:ignore="ContentDescription" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/main_mission_icon"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            app:layout_constraintTop_toBottomOf="@id/main_mission_tab" />
 
         <TextView
             android:id="@+id/main_mission_suggest_txt"
