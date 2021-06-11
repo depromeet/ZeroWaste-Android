@@ -2,10 +2,7 @@ package com.depromeet.zerowaste.comm
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.os.Build
-import android.graphics.Color
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -217,14 +214,25 @@ fun loadImageMissionDifficulty(view: ImageView, difficulty: Difficulty) {
     }
 }
 
-@BindingAdapter("loadImageMissionDifficultyOff")
-fun loadImageMissionDifficultyOff(view: ImageView, difficulty: Difficulty?) {
+@BindingAdapter("loadImageMissionDifficultyCharOn")
+fun loadImageMissionDifficultyCharOn(view: ImageView, difficulty: Difficulty?) {
     when (difficulty?.level) {
-        0 -> view.setImageResource(R.drawable.ic_level_0_off)
-        1 -> view.setImageResource(R.drawable.ic_level_1_off)
-        2 -> view.setImageResource(R.drawable.ic_level_2_off)
-        3 -> view.setImageResource(R.drawable.ic_level_3_off)
-        4 -> view.setImageResource(R.drawable.ic_level_4_off)
+        0 -> view.setImageResource(R.drawable.ic_level_0_char)
+        1 -> view.setImageResource(R.drawable.ic_level_1_char)
+        2 -> view.setImageResource(R.drawable.ic_level_2_char)
+        3 -> view.setImageResource(R.drawable.ic_level_3_char)
+        4 -> view.setImageResource(R.drawable.ic_level_4_char)
+    }
+}
+
+@BindingAdapter("loadImageMissionDifficultyCharOff")
+fun loadImageMissionDifficultyCharOff(view: ImageView, difficulty: Difficulty?) {
+    when (difficulty?.level) {
+        0 -> view.setImageResource(R.drawable.ic_level_0_char_off)
+        1 -> view.setImageResource(R.drawable.ic_level_1_char_off)
+        2 -> view.setImageResource(R.drawable.ic_level_2_char_off)
+        3 -> view.setImageResource(R.drawable.ic_level_3_char_off)
+        4 -> view.setImageResource(R.drawable.ic_level_4_char_off)
     }
 }
 

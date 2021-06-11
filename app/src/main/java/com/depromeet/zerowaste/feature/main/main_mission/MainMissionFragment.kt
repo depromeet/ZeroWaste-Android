@@ -38,7 +38,15 @@ class MainMissionFragment :
     private val mainViewModel: MainViewModel by activityViewModels()
     private val missionDetailViewModel: MissionDetailViewModel by activityViewModels()
 
-    private val rankerAdapter = BaseRecycleAdapter(R.layout.item_main_mission_ranker) { item: Rank, bind: ItemMainMissionRankerBinding, _ -> bind.item = item }
+    private val rankerAdapter = BaseRecycleAdapter(R.layout.item_main_mission_ranker)
+    { item: Rank, bind: ItemMainMissionRankerBinding, _ ->
+        bind.item = item
+        bind.itemMainMissionRankUserTxt.text = SpanStrBuilder(requireContext())
+            .add(item.rank.toString(), colorRes = R.color.main_enabled)
+            .add(textId = R.string.rank, colorRes = R.color.main_enabled)
+            .add(" ${item.name}")
+            .build()
+    }
     private val chipAdapter = BaseRecycleAdapter(R.layout.item_main_mission_chip)
     { item: MissionTag, bind: ItemMainMissionChipBinding, position ->
         bind.itemMainMissionChip.setOnClickListener { missionChipClick(position) }
@@ -173,7 +181,7 @@ class MainMissionFragment :
         viewModel.selectedOrder.observe(this) { order ->
             binding.mainMissionSort.setText(order.textId)
         }
-        binding.mainMissionSort.setOnClickListener {
+        val sortClick: (View) -> Unit = {
             bottomSheet(resources.getString(R.string.sort),
                 sortKinds,
                 viewModel.selectedOrder.value
@@ -182,6 +190,8 @@ class MainMissionFragment :
                 if(binding.mainMissionMotion.progress != 1f) binding.mainMissionMotion.transitionToEnd()
             }
         }
+        binding.mainMissionSort.setOnClickListener(sortClick)
+        binding.mainMissionSortDownArrow.setOnClickListener(sortClick)
     }
 
     /*

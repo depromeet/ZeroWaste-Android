@@ -11,15 +11,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="128dp">
+        android:layout_height="wrap_content">
         <FrameLayout
             android:id="@+id/item_main_mission_rank_back"
-            android:layout_width="91dp"
-            android:layout_height="91dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:padding="3dp"
-            android:layout_marginBottom="9dp"
-            app:customHeightDP="@{item.rank == 1 ? 91 : 91}"
-            app:customWidthDP="@{item.rank == 1 ? 91 : 91}"
+            android:layout_marginBottom="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/item_main_mission_rank_user_txt"
@@ -44,22 +42,21 @@
             android:textColor="@color/white"
             android:textSize="13sp"
             android:fontFamily="@font/apple_sd_gothic_neo_b"
-            android:text="@{item.name+`님`}"
             app:layout_constraintStart_toStartOf="@id/item_main_mission_rank_back"
             app:layout_constraintEnd_toEndOf="@id/item_main_mission_rank_back"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="김종훈님"/>
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:scaleType="centerCrop"
-            android:translationY="-9dp"
-            app:loadImageRank="@{item.rank}"
-            app:layout_constraintTop_toTopOf="@id/item_main_mission_rank_back"
-            app:layout_constraintStart_toStartOf="@id/item_main_mission_rank_back"
-            app:layout_constraintEnd_toEndOf="@id/item_main_mission_rank_back"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/ic_rank_1"/>
+<!--        <ImageView-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:translationY="-9dp"-->
+<!--            app:loadImageRank="@{item.rank}"-->
+<!--            app:layout_constraintTop_toTopOf="@id/item_main_mission_rank_back"-->
+<!--            app:layout_constraintStart_toStartOf="@id/item_main_mission_rank_back"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/item_main_mission_rank_back"-->
+<!--            tools:ignore="ContentDescription"-->
+<!--            tools:src="@drawable/ic_rank_1"/>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

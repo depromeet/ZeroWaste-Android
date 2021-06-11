@@ -11,7 +11,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="126dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="18dp"
@@ -19,7 +19,7 @@
         app:cardElevation="12dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/item_main_mission_list_level"
@@ -39,25 +39,30 @@
 
             <TextView
                 android:id="@+id/item_main_mission_list_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:text="@{item.name}"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/apple_sd_gothic_neo_b"
                 android:layout_marginStart="9dp"
+                android:layout_marginEnd="41dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/item_main_mission_list_level"
                 app:layout_constraintTop_toTopOf="@id/item_main_mission_list_level"
-                tools:text="수돗물 끓여 마시기"/>
+                tools:text="수돗물 끓여 마시기수돗물 끓여 마시기수돗물 끓여 마시기수돗물 끓여 마시기수돗물 끓여 마시기수돗물 끓여 마시기"/>
 
             <View
                 android:id="@+id/item_main_mission_list_ic_loca"
-                android:layout_width="9dp"
+                android:layout_width="10dp"
                 android:layout_height="12dp"
                 android:background="@drawable/ic_location"
                 android:layout_marginStart="9dp"
+                android:layout_marginTop="6dp"
                 app:layout_constraintStart_toEndOf="@id/item_main_mission_list_level"
-                app:layout_constraintBottom_toBottomOf="@id/item_main_mission_list_level" />
+                app:layout_constraintTop_toBottomOf="@id/item_main_mission_list_title" />
 
             <TextView
                 android:id="@+id/item_main_mission_list_loca_txt"
@@ -65,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{item.place.textId}"
                 android:layout_marginStart="6dp"
-                android:textColor="@color/black"
+                android:textColor="@color/gray_1"
                 android:textSize="13sp"
                 android:fontFamily="@font/apple_sd_gothic_neo_r"
                 app:layout_constraintStart_toEndOf="@id/item_main_mission_list_ic_loca"
@@ -75,12 +80,13 @@
 
             <View
                 android:id="@+id/item_main_mission_list_ic_man"
-                android:layout_width="10dp"
-                android:layout_height="11dp"
+                android:layout_width="13dp"
+                android:layout_height="12dp"
                 android:background="@drawable/ic_small_people"
                 android:layout_marginStart="12dp"
                 app:layout_constraintStart_toEndOf="@id/item_main_mission_list_loca_txt"
-                app:layout_constraintBottom_toBottomOf="@id/item_main_mission_list_level" />
+                app:layout_constraintTop_toTopOf="@id/item_main_mission_list_ic_loca"
+                app:layout_constraintBottom_toBottomOf="@id/item_main_mission_list_ic_loca" />
 
             <TextView
                 android:id="@+id/item_main_mission_list_user_count"
@@ -88,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{item.inProgressCount + @string/mission_participate_count}"
                 android:layout_marginStart="6dp"
-                android:textColor="@color/black"
+                android:textColor="@color/gray_1"
                 android:textSize="13sp"
                 android:fontFamily="@font/apple_sd_gothic_neo_r"
                 app:layout_constraintStart_toEndOf="@id/item_main_mission_list_ic_man"
@@ -100,13 +106,16 @@
                 android:id="@+id/item_main_mission_list_like"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@{item.isLiked ? @drawable/ic_heart_on : @drawable/ic_heart_off}"
+                android:src="@{item.isLiked ? @drawable/ic_heart_on : @drawable/ic_heart_off_gray}"
                 android:scaleType="center"
                 android:layout_marginBottom="13dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_main_mission_list_ic_loca"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/ic_heart_off_gray"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/item_main_mission_list_tags"

@@ -106,6 +106,7 @@
     <string name="date">일</string>
     <string name="choice">선택</string>
     <string name="before">이전</string>
+    <string name="rank">등</string>
 
     <string name="theme_refuse">거절하기</string>
     <string name="theme_reduce">줄이기</string>

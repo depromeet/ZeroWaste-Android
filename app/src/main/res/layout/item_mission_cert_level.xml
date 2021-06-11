@@ -14,7 +14,7 @@
             android:scaleType="center"
             android:paddingTop="10dp"
             tools:ignore="ContentDescription"
-            tools:src="@drawable/ic_level_4_off"/>
+            tools:src="@drawable/ic_level_4_char_off"/>
 
         <TextView
             android:id="@+id/item_mission_cert_level_txt"

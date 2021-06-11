@@ -54,8 +54,8 @@ class MainMissionViewModel @Inject constructor() : BaseViewModel() {
     fun refreshRankerList() {
         execute({
             val rankers = ArrayList<Rank>()
-            rankers.add(Rank(2, "https://live.staticflickr.com/7841/33492970008_d7c8040ca7_n.jpg","방효진"))
             rankers.add(Rank(1, "https://live.staticflickr.com/7841/33492970008_d7c8040ca7_n.jpg","김종훈"))
+            rankers.add(Rank(2, "https://live.staticflickr.com/7841/33492970008_d7c8040ca7_n.jpg","방효진"))
             rankers.add(Rank(3, "https://live.staticflickr.com/7841/33492970008_d7c8040ca7_n.jpg","김민효"))
             rankers
         }, _rankerList, isShowLoad = false)

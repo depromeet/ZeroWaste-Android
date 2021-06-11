@@ -80,10 +80,10 @@ class MissionCertFragment: BaseFragment<FragmentMissionCertBinding>(R.layout.fra
     { item: LevelItem, bind: ItemMissionCertLevelBinding, position: Int ->
         loadTxtMissionDifficulty(bind.itemMissionCertLevelTxt, item.difficulty)
         if(item.selected) {
-            loadImageMissionDifficulty(bind.itemMissionCertLevelImg, item.difficulty)
+            loadImageMissionDifficultyCharOn(bind.itemMissionCertLevelImg, item.difficulty)
             bind.itemMissionCertLevelTxt.setTextColor(ResourcesCompat.getColor(resources, R.color.black, null))
         } else {
-            loadImageMissionDifficultyOff(bind.itemMissionCertLevelImg, item.difficulty)
+            loadImageMissionDifficultyCharOff(bind.itemMissionCertLevelImg, item.difficulty)
             bind.itemMissionCertLevelTxt.setTextColor(ResourcesCompat.getColor(resources, R.color.gray_2, null))
         }
         bind.root.setOnClickListener { levelClick(position) }
