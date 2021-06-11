@@ -1,13 +1,6 @@
 package com.depromeet.zerowaste.feature.main.main_mission
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
-import android.os.Bundle
 import android.view.View
-import android.view.animation.LinearInterpolator
-import androidx.core.animation.addListener
-import androidx.core.animation.doOnEnd
-import androidx.core.animation.doOnStart
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView

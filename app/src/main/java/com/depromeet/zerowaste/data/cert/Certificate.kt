@@ -9,15 +9,15 @@ data class Certificate(
     @SerializedName("name")
     val name: String,
     @SerializedName("owner")
-    val owner: String,
+    val owner: Int,
     @SerializedName("mission_id")
     val missionId: Int,
     @SerializedName("img_urls")
     val imgUrls: List<String>,
     @SerializedName("content")
-    val content: List<String>,
-    @SerializedName("isPublic")
-    val isPublic: List<String>,
+    val content: String,
+    @SerializedName("is_public")
+    val isPublic: Boolean,
     @SerializedName("percieved_difficulty")
     val percievedDifficulty: Difficulty,
 )

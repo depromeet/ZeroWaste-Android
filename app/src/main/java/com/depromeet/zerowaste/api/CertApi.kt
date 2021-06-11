@@ -12,6 +12,11 @@ import retrofit2.http.Path
 class CertApi {
 
     private interface Api {
+        @GET("/api/missions/{id}/certifications/")
+        suspend fun getCertificateMission(
+            @Path("id") missionId: Int
+        ): Res<List<Certificate>>
+
         @POST("/api/missions/{id}/certifications/")
         suspend fun certificateMission(
             @Path("id") missionId: Int,
@@ -22,5 +27,6 @@ class CertApi {
     companion object {
         private val client get() = RetrofitClient.create(Api::class.java)
         suspend fun certificateMission(missionId: Int, certRequest: CertRequest) = client.certificateMission(missionId, certRequest)
+        suspend fun getCertificateMission(missionId: Int) = client.getCertificateMission(missionId)
     }
 }

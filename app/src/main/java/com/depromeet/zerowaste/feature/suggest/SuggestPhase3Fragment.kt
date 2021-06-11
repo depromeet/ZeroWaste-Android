@@ -78,7 +78,7 @@ class SuggestPhase3Fragment: BaseFragment<FragmentMissionSuggestPhase3Binding>(R
             }
             .start {
                 viewModel.setImgUri(it)
-                loadImageRadius(binding.missionSuggestPhase3PhotoPreview, it, 8f)
+                binding.uri = it
             }
     }
 }

@@ -1,7 +1,5 @@
 package com.depromeet.zerowaste.feature.mission.detail
 
-import android.os.Build
-import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.res.ResourcesCompat
@@ -14,26 +12,38 @@ import com.depromeet.zerowaste.comm.*
 import com.depromeet.zerowaste.comm.data.Share
 import com.depromeet.zerowaste.data.ParticipateStatus
 import com.depromeet.zerowaste.data.Theme
+import com.depromeet.zerowaste.data.cert.Certificate
 import com.depromeet.zerowaste.data.mission.Mission
 import com.depromeet.zerowaste.databinding.FragmentMissionDetailBinding
+import com.depromeet.zerowaste.databinding.ItemMissionDetailHeroBinding
+import com.depromeet.zerowaste.databinding.ItemMissionDetailHeroImgBinding
 import com.depromeet.zerowaste.databinding.ItemMissionTagBinding
 import com.depromeet.zerowaste.feature.mission.certificate.MissionCertFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.lang.StringBuilder
-import java.text.SimpleDateFormat
 import java.util.*
 
 class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout.fragment_mission_detail) {
 
     private val viewModel: MissionDetailViewModel by activityViewModels()
 
+    private val heroListAdapter = BaseRecycleAdapter(R.layout.item_mission_detail_hero)
+    { item: Certificate, bind: ItemMissionDetailHeroBinding, _ ->
+        bind.item = item
+        bind.itemMissionDetailHeroImgs.layoutManager = genLayoutManager(requireContext(), isVertical = false)
+        val imgsAdapter = BaseRecycleAdapter(R.layout.item_mission_detail_hero_img) { imgItem: String, imgBind: ItemMissionDetailHeroImgBinding, _ -> imgBind.link = imgItem }
+        imgsAdapter.setData(item.imgUrls)
+        bind.itemMissionDetailHeroImgs.adapter = imgsAdapter
+    }
+
     private var isFirstResume = true
 
     override fun onResume() {
         super.onResume()
-        if(!isFirstResume) viewModel.setMission()
+        if(!isFirstResume) viewModel.setMissionData()
         isFirstResume = false
+        viewModel.setCertData()
     }
 
     override fun init() {
@@ -41,6 +51,7 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
         binding.fragment = this
         initTitle()
         initContent()
+        initHeroList()
     }
 
     private fun initTitle() {
@@ -89,21 +100,36 @@ class MissionDetailFragment: BaseFragment<FragmentMissionDetailBinding>(R.layout
                 .add(textId = R.string.mission_detail_make_user)
                 .build()
 
-            binding.missionDetailCheerUpEdit.visibility = if(mission.creater.id == Share.user?.id) View.VISIBLE else View.GONE
+            binding.missionDetailCheerUpEdit.visibility =
+                if (mission.creater.id == Share.user?.id) View.VISIBLE else View.GONE
 
             if (mission.participation.status == ParticipateStatus.READY) {
-                binding.missionDetailStartBtn.text = resources.getText(R.string.mission_detail_start_participate)
+                binding.missionDetailStartBtn.text =
+                    resources.getText(R.string.mission_detail_start_participate)
                 val endTime = mission.participation.endDate?.time ?: return@observe
                 lifecycleScope.launch {
                     while (true) {
-                        binding.missionDetailStartTxt.text = getString(R.string.mission_detail_limit, DifTimeStringConverter.convert(System.currentTimeMillis(), endTime))
+                        binding.missionDetailStartTxt.text = getString(
+                            R.string.mission_detail_limit,
+                            DifTimeStringConverter.convert(System.currentTimeMillis(), endTime)
+                        )
                         delay(1000)
                     }
                 }
             } else {
-                binding.missionDetailStartBtn.text = resources.getText(R.string.mission_detail_start)
-                binding.missionDetailStartTxt.text = StringBuilder().append(mission.inProgressCount).append(resources.getString(R.string.mission_detail_participate_users)).toString()
+                binding.missionDetailStartBtn.text =
+                    resources.getText(R.string.mission_detail_start)
+                binding.missionDetailStartTxt.text = StringBuilder().append(mission.inProgressCount)
+                    .append(resources.getString(R.string.mission_detail_participate_users))
+                    .toString()
             }
+        }
+    }
+
+    private fun initHeroList() {
+        binding.missionDetailHeroList.adapter = heroListAdapter
+        viewModel.certificates.observe(this) {
+            heroListAdapter.setData(it.subList(0, if(it.size > 3) 2 else it.size - 1))
         }
     }
 
