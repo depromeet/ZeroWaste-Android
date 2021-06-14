@@ -93,7 +93,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="68dp"
+                    android:layout_height="89dp"
                     app:layout_collapseMode="parallax">
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
