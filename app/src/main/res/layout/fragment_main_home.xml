@@ -64,7 +64,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_sample_24dp" />
+                            app:srcCompat="@drawable/ic_main_home_profile" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/main_home_tv_home"
@@ -87,7 +87,7 @@
                             app:layout_constraintBottom_toBottomOf="@id/main_home_iv_logo"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/main_home_iv_logo"
-                            app:srcCompat="@drawable/ic_sample_24dp" />
+                            app:srcCompat="@drawable/ic_bell_alarm_off" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.appcompat.widget.Toolbar>
 
