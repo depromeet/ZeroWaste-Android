@@ -24,6 +24,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.depromeet.zerowaste.BuildConfig
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.data.Difficulty
+import com.depromeet.zerowaste.data.Place
 import com.depromeet.zerowaste.data.Theme
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -120,8 +121,8 @@ fun spToDp(context: Context, sp: Float): Float {
 @BindingAdapter("customWidthDP")
 fun customWidthDP(view: View, width: Number) {
     val param = view.layoutParams
-    param.width = if(width is Int) {
-        if(width == ViewGroup.LayoutParams.WRAP_CONTENT || width == ViewGroup.LayoutParams.MATCH_PARENT) {
+    param.width = if (width is Int) {
+        if (width == ViewGroup.LayoutParams.WRAP_CONTENT || width == ViewGroup.LayoutParams.MATCH_PARENT) {
             width
         } else {
             dpToPx(view.context, width.toFloat()).toInt()
@@ -135,9 +136,9 @@ fun customWidthDP(view: View, width: Number) {
 @BindingAdapter("customHeightDP")
 fun customHeightDP(view: View, height: Number) {
     val param = view.layoutParams
-    param.height = if(height is Int) {
-        if(height == ViewGroup.LayoutParams.WRAP_CONTENT || height == ViewGroup.LayoutParams.MATCH_PARENT) {
-             height
+    param.height = if (height is Int) {
+        if (height == ViewGroup.LayoutParams.WRAP_CONTENT || height == ViewGroup.LayoutParams.MATCH_PARENT) {
+            height
         } else {
             dpToPx(view.context, height.toFloat()).toInt()
         }
@@ -176,12 +177,14 @@ fun loadImage(view: ImageView, loadImage: Uri?) {
 
 @BindingAdapter("loadImage", "imageRadius", requireAll = true)
 fun loadImageRadius(view: ImageView, loadImage: String?, imageRadius: Float) {
-    Glide.with(view).load(loadImage).transform(RoundedCorners(dpToPx(view.context,imageRadius).toInt())).into(view)
+    Glide.with(view).load(loadImage)
+        .transform(RoundedCorners(dpToPx(view.context, imageRadius).toInt())).into(view)
 }
 
 @BindingAdapter("loadImage", "imageRadius", requireAll = true)
 fun loadImageRadius(view: ImageView, loadImage: Uri?, imageRadius: Float) {
-    Glide.with(view).load(loadImage).transform(RoundedCorners(dpToPx(view.context,imageRadius).toInt())).into(view)
+    Glide.with(view).load(loadImage)
+        .transform(RoundedCorners(dpToPx(view.context, imageRadius).toInt())).into(view)
 }
 
 @BindingAdapter("loadImageRank")
@@ -281,11 +284,25 @@ fun setChips(view: ChipGroup, themes: List<Theme>) {
             setChipBackgroundColorResource(R.color.gray_5)
             setTextColor(view.resources.getColor(R.color.black))
             textSize = 13f
-            chipCornerRadius =4f
-            chipEndPadding =  4f
-            chipStartPadding =  4f
-            chipMinHeight =  24f
+            chipCornerRadius = 4f
+            chipEndPadding = 4f
+            chipStartPadding = 4f
+            chipMinHeight = 24f
             view.addView(this)
         }
     }
+}
+
+@BindingAdapter("loadPlaceCircleImage")
+fun loadPlaceCircleImage(view: ImageView, place: Place) {
+    val image = when (place) {
+        Place.ALL -> R.drawable.ic_mission_cafe_logo
+        Place.KITCHEN -> R.drawable.ic_mission_kitchen_logo
+        Place.BATHROOM -> R.drawable.ic_mission_bathroom_logo
+        Place.CAFE -> R.drawable.ic_mission_cafe_logo
+        Place.RESTAURANT -> R.drawable.ic_mission_restaurant_logo
+        Place.OUTSIDE -> R.drawable.ic_mission_outside_logo
+        Place.ETC -> R.drawable.ic_mission_etc_logo
+    }
+    Glide.with(view).load(image).circleCrop().into(view)
 }
