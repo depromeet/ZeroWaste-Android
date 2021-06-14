@@ -123,8 +123,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
             myMissionPagerAdapter.addItems(data)
         })
         binding.mainHomeRvRecommendMissions.adapter = missionAdapter
-        // viewModel.getMyMissionList()
-        viewModel.getMockMyMissionList()
+        viewModel.getMyMissionList()
     }
 
     /*

@@ -4,10 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.depromeet.zerowaste.api.MissionApi
 import com.depromeet.zerowaste.comm.BaseViewModel
-import com.depromeet.zerowaste.comm.data.Share
 import com.depromeet.zerowaste.data.Place
 import com.depromeet.zerowaste.data.mission.Mission
-import com.depromeet.zerowaste.data.user.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -54,20 +52,7 @@ class MainHomeViewModel @Inject constructor() : BaseViewModel() {
             res.data ?: throw Exception(res.message)
         })
         { missions ->
-            _myMissionList.value = missions.filter { it.creater.id == Share.user?.id ?: -1 }
-        }
-    }
-
-    fun getMockMyMissionList() {
-        execute({
-            val res = MissionApi.getMissions()
-            res.data ?: throw Exception(res.message)
-        })
-        { missions ->
-//            missions[0].creater.id = Share.user!!.id
-//            missions[1].creater.id = Share.user!!.id
-//            _myMissionList.value = missions.filter { it.creater.id == Share.user?.id ?: -1 }
-            _myMissionList.value = missions
+            _myMissionList.value = missions.filter { it.participation.status.value == "ready" }
         }
     }
 
