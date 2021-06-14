@@ -9,7 +9,7 @@ import com.depromeet.zerowaste.data.mission.Mission
 import com.depromeet.zerowaste.databinding.ItemMainHomeMyMissionBinding
 
 
-class MainHomePagerAdapter(vm: MainHomeViewModel) :
+class MainHomePagerAdapter(val missionAuthClick: (mission: Mission) -> Unit) :
     RecyclerView.Adapter<MainHomePagerAdapter.ViewHolder>() {
     private val items = ArrayList<Mission>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,7 +23,7 @@ class MainHomePagerAdapter(vm: MainHomeViewModel) :
             binding.itemMainHomeMyMissionBtnAuth.setOnClickListener { view ->
                 val position = bindingAdapterPosition.takeIf { it != RecyclerView.NO_POSITION }
                     ?: return@setOnClickListener
-                //vm.request(items{position])
+                missionAuthClick(items[position])
             }
         }
     }

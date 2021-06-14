@@ -112,7 +112,9 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
 
     private fun initMyMissionList() {
         // 뷰페이저2 세팅
-        val myMissionPagerAdapter = MainHomePagerAdapter(viewModel)
+        val myMissionPagerAdapter = MainHomePagerAdapter(missionAuthClick = {
+            mainViewModel.startCertificate(it.id)
+        })
         binding.mainHomeVpMyMissions.adapter = myMissionPagerAdapter
         binding.mainHomeRvMyMissionsIndicator.setViewPager2(binding.mainHomeVpMyMissions)
         // 데이터 로드
