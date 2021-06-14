@@ -31,7 +31,6 @@ class MainHomeViewModel @Inject constructor() : BaseViewModel() {
     fun getPlaceList() {
         execute({
             val places = ArrayList<Place>()
-            places.add(Place.ALL)
             Place.values().forEach {
                 places.add(it)
             }
