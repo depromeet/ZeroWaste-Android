@@ -3,6 +3,7 @@ package com.depromeet.zerowaste.feature.main.main_home
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.depromeet.zerowaste.R
 import com.depromeet.zerowaste.comm.BaseFragment
 import com.depromeet.zerowaste.comm.BaseRecycleAdapter
@@ -63,6 +64,15 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding>(R.layout.fragment
         initMissionList()
         initMyMissionList()
         initPlaceList()
+        initViewModelCallback()
+    }
+
+    private fun initViewModelCallback() {
+        with(viewModel) {
+            onClickProfile.observe(this@MainHomeFragment, Observer {
+                mainViewModel.navigate(MainFragmentDirections.actionMainFragmentToProfileFragment())
+            })
+        }
     }
 
     private fun initPlaceList() {

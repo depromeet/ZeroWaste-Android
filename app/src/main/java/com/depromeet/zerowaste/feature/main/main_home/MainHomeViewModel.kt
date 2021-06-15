@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.depromeet.zerowaste.api.MissionApi
 import com.depromeet.zerowaste.comm.BaseViewModel
+import com.depromeet.zerowaste.comm.SingleLiveEvent
 import com.depromeet.zerowaste.data.Place
 import com.depromeet.zerowaste.data.mission.Mission
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,11 +12,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainHomeViewModel @Inject constructor() : BaseViewModel() {
-    private val photosUrls = arrayOf(
-        "https://live.staticflickr.com/4365/37082384235_af5b13a824_h.jpg",
-        "https://live.staticflickr.com/7841/33492970008_d7c8040ca7_n.jpg",
-        "https://live.staticflickr.com/4193/33773666174_b8f26fcbf1_n.jpg"
-    )
 
     private val _missionList = MutableLiveData<List<Mission>>()
     val missionList: LiveData<List<Mission>> get() = _missionList
@@ -25,6 +21,9 @@ class MainHomeViewModel @Inject constructor() : BaseViewModel() {
 
     private val _placeList = MutableLiveData<List<Place>>()
     val placeList: LiveData<List<Place>> get() = _placeList
+
+    private val _onClickProfile = SingleLiveEvent<Unit>()
+    val onClickProfile: LiveData<Unit> get() = _onClickProfile
 
     fun getPlaceList() {
         execute({
@@ -61,5 +60,9 @@ class MainHomeViewModel @Inject constructor() : BaseViewModel() {
             if (isLiked) MissionApi.dislikeMission(id)
             else MissionApi.likeMission(id)
         }) { finish(it.errorCode) }
+    }
+
+    fun goProfile() {
+        _onClickProfile.call()
     }
 }
